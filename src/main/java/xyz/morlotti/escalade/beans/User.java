@@ -1,15 +1,16 @@
 package xyz.morlotti.escalade.beans;
 
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.*;
+import java.util.*;
+
+import javax.persistence.*;
+
+import javax.validation.constraints.*;
 
 import xyz.morlotti.escalade.exceptions.BeanException;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
-
+@Entity
+@Table(name = "USER")
 public class User
 {
 	/*----------------------------------------------------------------------------------------------------------------*/
@@ -86,13 +87,16 @@ public class User
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String m_id;
 
 	@Size(min = 1, max = 128, message = "Lastname must be between 1 and 128 characters")
-	private String m_nom;
+	private String m_lastName;
 
 	@Size(min = 1, max = 128, message = "Firstname must be between 1 and 128 characters")
-	private String m_prenom;
+	private String m_firstName;
 
 	@Size(min = 4, max = 128, message = "Login must be between 4 and 128 characters")
 	private String m_login;
@@ -100,20 +104,20 @@ public class User
 	@Size(min = 6, max = 128, message = "Password must be between 4 and 128 characters")
 	private String m_password;
 
-	private Sex m_sexe;
+	private Sex m_sex;
 
-	@Past(message = "Birth date must be in the past")
-	private Date m_dateDeNaissance;
+	@Past(message = "Birthdate must be in the past")
+	private Date m_birthdate;
 
 	@Size(min = 10, max = 16, message = "Phone number must be between 10 and 16 characters")
-	private String m_telephone;
+	private String m_phone;
 
 	@Email(message = "Email should be valid")
 	private String m_email;
 
 	private Role m_role;
 
-	private String m_divers;
+	private String m_custom;
 
 	private Date m_created;
 
@@ -129,24 +133,24 @@ public class User
 		m_id = id;
 	}
 
-	public String getNom() throws BeanException
+	public String getLastName() throws BeanException
 	{
-		return m_nom;
+		return m_lastName;
 	}
 
-	public void setNom(String nom) throws BeanException
+	public void setLastName(String lastName) throws BeanException
 	{
-		m_nom = nom;
+		m_lastName = lastName;
 	}
 
-	public String getPrenom() throws BeanException
+	public String getFirstName() throws BeanException
 	{
-		return m_prenom;
+		return m_firstName;
 	}
 
-	public void setPrenom(String prenom) throws BeanException
+	public void setFirstName(String firstName) throws BeanException
 	{
-		m_prenom = prenom;
+		m_firstName = firstName;
 	}
 
 	public String getLogin() throws BeanException
@@ -169,30 +173,30 @@ public class User
 		m_password = password;
 	}
 
-	public Sex getSexe()
+	public Sex getSex()
 	{
-		return m_sexe;
+		return m_sex;
 	}
 
-	public void setSexe(Sex sex)
+	public void setSex(Sex sex)
 	{
-		m_sexe = sex;
+		m_sex = sex;
 	}
 
-	public String getDateDeNaissance() throws BeanException
+	public String getBirthdate() throws BeanException
 	{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-		return simpleDateFormat.format(m_dateDeNaissance);
+		return simpleDateFormat.format(m_birthdate);
 	}
 
-	public void setDateDeNaissance(String dateDeNaissance) throws BeanException
+	public void setBirthdate(String birthdate) throws BeanException
 	{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 		try
 		{
-			m_dateDeNaissance = simpleDateFormat.parse(dateDeNaissance);
+			m_birthdate = simpleDateFormat.parse(birthdate);
 		}
 		catch(ParseException e)
 		{
@@ -200,14 +204,14 @@ public class User
 		}
 	}
 
-	public String getTelephone() throws BeanException
+	public String getPhone() throws BeanException
 	{
-		return m_telephone;
+		return m_phone;
 	}
 
-	public void setTelephone(String telephone) throws BeanException
+	public void setPhone(String phone) throws BeanException
 	{
-		m_telephone = telephone;
+		m_phone = phone;
 	}
 
 	public String getEmail() throws BeanException
@@ -230,14 +234,14 @@ public class User
 		m_role = role;
 	}
 
-	public String getDivers()
+	public String getCustom()
 	{
-		return m_divers;
+		return m_custom;
 	}
 
-	public void setDivers(String divers)
+	public void setCustom(String custom)
 	{
-		m_divers = divers;
+		m_custom = custom;
 	}
 
 	public String getCreated() throws BeanException
