@@ -4,13 +4,14 @@ import java.text.*;
 import java.util.*;
 
 import javax.persistence.*;
-
 import javax.validation.constraints.*;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import xyz.morlotti.escalade.exceptions.BeanException;
 
-@Entity
 @Table(name = "USER")
+@Entity(name = "USER")
 public class User
 {
 	/*----------------------------------------------------------------------------------------------------------------*/
@@ -90,45 +91,57 @@ public class User
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String m_id;
+	private int m_id;
 
+	@Column(name = "lastname", unique = false, nullable = false)
 	@Size(min = 1, max = 128, message = "Lastname must be between 1 and 128 characters")
 	private String m_lastName;
 
+	@Column(name = "firstname", unique = false, nullable = false)
 	@Size(min = 1, max = 128, message = "Firstname must be between 1 and 128 characters")
 	private String m_firstName;
 
+	@Column(name = "login", unique = true, nullable = false)
 	@Size(min = 4, max = 128, message = "Login must be between 4 and 128 characters")
 	private String m_login;
 
+	@Column(name = "password", unique = false, nullable = false)
 	@Size(min = 6, max = 128, message = "Password must be between 4 and 128 characters")
 	private String m_password;
 
+	@Column(name = "sex", unique = false, nullable = false)
 	private Sex m_sex;
 
+	@Column(name = "birthdate", unique = false, nullable = false)
 	@Past(message = "Birthdate must be in the past")
 	private Date m_birthdate;
 
+	@Column(name = "phone", unique = false, nullable = false)
 	@Size(min = 10, max = 16, message = "Phone number must be between 10 and 16 characters")
 	private String m_phone;
 
+	@Column(name = "email", unique = true, nullable = false)
 	@Email(message = "Email should be valid")
 	private String m_email;
 
+	@Column(name = "role", unique = false, nullable = false)
 	private Role m_role;
 
+	@Column(name = "custom", unique = false, nullable = true)
 	private String m_custom;
 
+	@CreationTimestamp
+	@Column(name = "created", unique = false, nullable = false)
 	private Date m_created;
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
-	public String getId()
+	public int getId()
 	{
 		return m_id;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		m_id = id;
 	}

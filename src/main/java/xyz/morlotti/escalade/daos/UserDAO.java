@@ -2,13 +2,19 @@ package xyz.morlotti.escalade.daos;
 
 import java.util.*;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+
+import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import xyz.morlotti.escalade.beans.User;
 
+@Repository
+@Transactional
 public class UserDAO
 {
     @Autowired
@@ -44,8 +50,10 @@ public class UserDAO
         return currentSession.find(User.class, id);
     }
 
-    public List<User> list()
+    public List<User> list() throws Exception
     {
+        if(sessionFactory == null) throw new Exception("toto");
+
         Session currentSession = sessionFactory.getCurrentSession();
 
         Query query = currentSession.createQuery("FROM USER");

@@ -4,7 +4,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    A
+                    Escalade
                 </div>
                 <div class="col-md-4">
                     B
