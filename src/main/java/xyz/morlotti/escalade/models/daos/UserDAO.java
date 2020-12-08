@@ -1,4 +1,4 @@
-package xyz.morlotti.escalade.daos;
+package xyz.morlotti.escalade.models.daos;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import xyz.morlotti.escalade.beans.User;
+import xyz.morlotti.escalade.models.beans.User;
 
 @Repository
 @Transactional

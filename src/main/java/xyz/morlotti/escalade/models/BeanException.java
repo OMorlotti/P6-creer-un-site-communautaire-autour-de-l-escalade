@@ -1,4 +1,4 @@
-package xyz.morlotti.escalade.exceptions;
+package xyz.morlotti.escalade.models;
 
 public class BeanException extends Exception
 {

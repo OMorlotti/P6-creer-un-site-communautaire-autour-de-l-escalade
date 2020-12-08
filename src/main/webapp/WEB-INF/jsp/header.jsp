@@ -20,7 +20,7 @@
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/Escalade">
                 Escalade
             </a>
 

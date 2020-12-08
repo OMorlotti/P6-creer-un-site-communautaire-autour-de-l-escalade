@@ -11,7 +11,7 @@
 
         <property name="dataSource" ref="dataSource" />
 
-        <property name="packagesToScan" value="xyz.morlotti.escalade.beans" />
+        <property name="packagesToScan" value="xyz.morlotti.escalade.models.beans" />
 
         <property name="hibernateProperties">
             <props>

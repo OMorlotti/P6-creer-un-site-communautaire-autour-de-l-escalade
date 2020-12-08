@@ -4,3 +4,9 @@ all:
 	rm -fr /~/workspace/tomcat/webapps/Escalade ~/workspace/tomcat/webapps/Escalade.war
 	cp target/escalade-*.war ~/workspace/tomcat/webapps/Escalade.war
 	~/workspace/tomcat/bin/catalina.sh start
+
+start:
+	~/workspace/tomcat/bin/catalina.sh start
+
+stop:
+	~/workspace/tomcat/bin/catalina.sh stop
