@@ -2,7 +2,9 @@
 
 <%@ include file="../jsp/header.jsp" %>
 
-<form method="POST" action="/Escalade/user">
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#userform">Ajouter un utilisateur</button>
+
+<form class="collapse" method="POST" action="/Escalade/user" id="userform">
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="lastname">Nom :</label>
