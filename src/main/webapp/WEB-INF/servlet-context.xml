@@ -12,7 +12,9 @@
 
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp" />
 	</mvc:view-resolvers>

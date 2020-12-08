@@ -5,8 +5,8 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement
-@ImportResource({"classpath:hibernate.xml"})
+@EnableTransactionManagement // Pour gérer les @Transactional dans les DAO ???
+@ImportResource({"classpath:hibernateConf.xml"})
 public class HibernateConf
 {
 }

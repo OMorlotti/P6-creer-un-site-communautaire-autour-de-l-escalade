@@ -18,7 +18,7 @@ public class UserController
 	@RequestMapping(path = "/users", method = RequestMethod.GET)
 	public String showUsers(Model model) throws Exception
 	{
-		model.addAttribute("title", String.valueOf(m_userDAO.list().size()));
+		model.addAttribute("title", "Utilisateurs");
 
 		model.addAttribute("users", m_userDAO.list());
 
@@ -28,7 +28,7 @@ public class UserController
 	@RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
 	public String showUser(@PathVariable(value = "id") final int id, Model model)
 	{
-		model.addAttribute("title", "Users");
+		model.addAttribute("title", "Utilisateur");
 
 		model.addAttribute("user", m_userDAO.get(id));
 
