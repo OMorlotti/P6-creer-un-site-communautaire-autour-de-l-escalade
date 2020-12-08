@@ -1,5 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-
 <%@ include file="../jsp/header.jsp" %>
 
 <p>Félicitations, le nouvel utilisateur <spring:out value="${ login }" /> a été ajouté !</p>

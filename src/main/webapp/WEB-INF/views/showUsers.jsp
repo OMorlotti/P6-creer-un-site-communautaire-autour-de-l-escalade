@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%@ include file="../jsp/header.jsp" %>
 
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#userform">Ajouter un utilisateur</button>

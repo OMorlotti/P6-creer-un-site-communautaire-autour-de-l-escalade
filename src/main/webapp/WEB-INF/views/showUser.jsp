@@ -1,5 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-
 <%@ include file="../jsp/header.jsp" %>
 
 <form method="POST" action="/Escalade/user/update/<spring:out value="${ user.id }" />">
