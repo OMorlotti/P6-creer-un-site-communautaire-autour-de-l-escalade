@@ -146,42 +146,42 @@ public class User
 		m_id = id;
 	}
 
-	public String getLastName() throws BeanException
+	public String getLastName()
 	{
 		return m_lastName;
 	}
 
-	public void setLastName(String lastName) throws BeanException
+	public void setLastName(String lastName)
 	{
 		m_lastName = lastName;
 	}
 
-	public String getFirstName() throws BeanException
+	public String getFirstName()
 	{
 		return m_firstName;
 	}
 
-	public void setFirstName(String firstName) throws BeanException
+	public void setFirstName(String firstName)
 	{
 		m_firstName = firstName;
 	}
 
-	public String getLogin() throws BeanException
+	public String getLogin()
 	{
 		return m_login;
 	}
 
-	public void setLogin(String login) throws BeanException
+	public void setLogin(String login)
 	{
 		m_login = login;
 	}
 
-	public String getPassword() throws BeanException
+	public String getPassword()
 	{
 		return m_password;
 	}
 
-	public void setPassword(String password) throws BeanException
+	public void setPassword(String password)
 	{
 		m_password = password;
 	}
@@ -196,16 +196,16 @@ public class User
 		m_sex = sex;
 	}
 
-	public String getBirthdate() throws BeanException
+	public String getBirthdate()
 	{
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		return simpleDateFormat.format(m_birthdate);
 	}
 
 	public void setBirthdate(String birthdate) throws BeanException
 	{
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		try
 		{
@@ -217,22 +217,22 @@ public class User
 		}
 	}
 
-	public String getPhone() throws BeanException
+	public String getPhone()
 	{
 		return m_phone;
 	}
 
-	public void setPhone(String phone) throws BeanException
+	public void setPhone(String phone)
 	{
 		m_phone = phone;
 	}
 
-	public String getEmail() throws BeanException
+	public String getEmail()
 	{
 		return m_email;
 	}
 
-	public void setEmail(String email) throws BeanException
+	public void setEmail(String email)
 	{
 		m_email = email;
 	}

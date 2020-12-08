@@ -24,7 +24,7 @@ public class UserDAO
     {
         Session currentSession = sessionFactory.getCurrentSession();
 
-        currentSession.persist(user);
+        currentSession.save(user);
     }
 
     public void update(User user)
@@ -52,11 +52,9 @@ public class UserDAO
 
     public List<User> list() throws Exception
     {
-        if(sessionFactory == null) throw new Exception("toto");
-
         Session currentSession = sessionFactory.getCurrentSession();
 
-        Query query = currentSession.createQuery("FROM USER");
+        Query query = currentSession.createQuery("SELECT u FROM USER u");
 
         return query.list();
     }
