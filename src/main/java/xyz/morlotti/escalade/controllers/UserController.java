@@ -1,15 +1,13 @@
 package xyz.morlotti.escalade.controllers;
 
-import javax.validation.*;
-
 import org.springframework.ui.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import xyz.morlotti.escalade.beans.User;
-import xyz.morlotti.escalade.daos.UserDAO;
-import xyz.morlotti.escalade.exceptions.BeanException;
+import xyz.morlotti.escalade.models.beans.User;
+import xyz.morlotti.escalade.models.daos.UserDAO;
+import xyz.morlotti.escalade.models.BeanException;
 
 @Controller
 public class UserController

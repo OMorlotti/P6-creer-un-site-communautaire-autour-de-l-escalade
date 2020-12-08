@@ -1,4 +1,4 @@
-package xyz.morlotti.escalade.beans;
+package xyz.morlotti.escalade.models.beans;
 
 import java.text.*;
 import java.util.*;
@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import xyz.morlotti.escalade.exceptions.BeanException;
+import xyz.morlotti.escalade.models.BeanException;
 
 @Table(name = "USER")
 @Entity(name = "USER")
