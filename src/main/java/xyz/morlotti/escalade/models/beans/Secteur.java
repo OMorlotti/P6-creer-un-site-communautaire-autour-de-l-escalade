@@ -19,8 +19,8 @@ public class Secteur
 	@Size(min = 1, max = 128, message = "Le nom du secteur doit être compris entre 1 et 128 caractères")
 	private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "spotfk", nullable = false)
+	@OneToMany
+	@JoinColumn(name = "spotfk", table = "SPOT")
 	private String spotFK;
 
 

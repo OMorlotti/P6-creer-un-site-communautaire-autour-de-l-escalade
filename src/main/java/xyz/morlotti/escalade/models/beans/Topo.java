@@ -20,29 +20,29 @@ public class Topo
 
 	@Column(name = "name", unique = false, nullable = false)
 	@Size(min = 1, max = 128, message = "Le nom du Topo doit contenir entre 1 et 128 caractères")
-	private String nom;
+	private String name;
 
 	@Column(name = "description", unique = false, nullable = false)
 	@Size(min = 1, max = 512, message = "La description doit contenir entre 1 et 512 caractères")
 	private String description;
 
-	@Column(name = "ville", unique = false, nullable = false)
+	@Column(name = "city", unique = false, nullable = false)
 	@Size(min = 1, max = 128, message = "La ville ne doit pas excéder 128 caractères")
-	private String ville;
+	private String city;
 
-	@Column(name = "codepostal", unique = false, nullable = false)
+	@Column(name = "postalCode", unique = false, nullable = false)
 	@Size(min = 2, max = 11, message = "Le code postal ne doit pas excéder 11 caractères")
-	private String codePostal;
+	private String postalCode;
 
 	@CreationTimestamp
 	@Column(name = "dateparution", nullable = false)
-	private Date dateParution;
+	private Date releaseDate;
 
-	@Column(name = "isdisponible", nullable = false)
-	private boolean isDisponible;
+	@Column(name = "isAvailable", nullable = false)
+	private boolean isAvailable;
 
 	@ManyToOne
-	@JoinColumn(name = "userfk", nullable = false)
+	@JoinColumn(name = "userfk", table = "USER")
 	private User userFK;
 
 	public Integer getId()
@@ -55,14 +55,14 @@ public class Topo
 		this.id = id;
 	}
 
-	public String getNom() throws BeanException
+	public String getName() throws BeanException
 	{
-		return nom;
+		return name;
 	}
 
-	public void setNom(String nom) throws BeanException
+	public void setName(String name) throws BeanException
 	{
-		this.nom = nom;
+		this.name = name;
 	}
 
 	public String getDescription() throws BeanException
@@ -75,40 +75,40 @@ public class Topo
 		this.description = description;
 	}
 
-	public String getVille(String ville) throws BeanException
+	public String getCity(String city) throws BeanException
 	{
-		return this.ville;
+		return this.city;
 	}
 
-	public void setVille(String ville) throws BeanException
+	public void setCity(String city) throws BeanException
 	{
-		this.ville = ville;
+		this.city = city;
 	}
 
-	public String getCodePostal() throws BeanException
+	public String getPostalCode() throws BeanException
 	{
-		return codePostal;
+		return postalCode;
 	}
 
-	public void setCodepostal(String codePostal) throws BeanException
+	public void setPostalCode(String postalCode) throws BeanException
 	{
-		this.codePostal = codePostal;
+		this.postalCode = postalCode;
 	}
 
-	public String getDateParution()
+	public String releaseDate()
 	{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-		return simpleDateFormat.format(dateParution);
+		return simpleDateFormat.format(releaseDate);
 	}
 
-	public void setDateParution(String dateParution) throws BeanException
+	public void setReleaseDate(String releaseDate) throws BeanException
 	{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 		try
 		{
-			this.dateParution = simpleDateFormat.parse(dateParution);
+			this.releaseDate = simpleDateFormat.parse(releaseDate);
 		}
 		catch(ParseException e)
 		{
@@ -116,14 +116,14 @@ public class Topo
 		}
 	}
 
-	public boolean getDisponible()
+	public boolean getAvailable()
 	{
-		return isDisponible;
+		return isAvailable;
 	}
 
-	public void setDisponible(boolean isDisponible)
+	public void setAvailable(boolean isAvailable)
 	{
-		this.isDisponible = isDisponible;
+		this.isAvailable = isAvailable;
 	}
 
 	public User getUserFK() throws BeanException

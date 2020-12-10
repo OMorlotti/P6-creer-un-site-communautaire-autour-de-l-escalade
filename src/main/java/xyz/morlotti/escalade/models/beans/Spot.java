@@ -17,14 +17,14 @@ public class Spot<userFK, topoFK>
 
 	@Column(name = "nom", unique = false, nullable = false)
 	@Size(min = 1, max = 128, message = "Le nom du Spot doit être compris entre 1 et 128 caractères")
-	private String nom;
+	private String name;
 
 	@ManyToOne
-	@JoinColumn(name = "userfk", nullable = false)
+	@JoinColumn(name = "userfk", table = "USER")
 	private User userFK;
 
 	@ManyToOne
-	@JoinColumn(name = "topofk", nullable = false)
+	@JoinColumn(name = "topofk", table = "TOPO")
 	private Topo topoFK;
 
 	@Column(name = "departement", unique = false, nullable = false)
@@ -53,14 +53,14 @@ public class Spot<userFK, topoFK>
 	}
 
 
-	public String getNom() throws BeanException
+	public String getName() throws BeanException
 	{
-		return nom;
+		return name;
 	}
 
-	public void setNom(String nom) throws BeanException
+	public void setName(String name) throws BeanException
 	{
-		this.nom = nom;
+		this.name = name;
 	}
 
 	public User getUserFK() throws BeanException
