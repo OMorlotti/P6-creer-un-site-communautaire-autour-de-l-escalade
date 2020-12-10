@@ -8,6 +8,19 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
         <style>
+            html, body {
+
+                height: 100%;
+            }
+
+            body {
+
+                background-image: url('/Escalade/mountains.png');
+                background-repeat: no-repeat;
+                background-position: bottom;
+                background-size: 5%;
+            }
+
             footer,
             .container {
                 max-width: 960px;

@@ -20,17 +20,17 @@ public class User
 	{
 		F("F"), M("M");
 
-		private final String m_value;
+		private final String value;
 
 		private Sex(String value) /* Une valeur d'enum est comme une classe, elle peut avoir un constructeur et des méthodes : https://stackoverflow.com/questions/13291076/java-enum-why-use-tostring-instead-of-name */
 		{
-			m_value = value;
+			this.value = value;
 		}
 
 		@Override
 		public String toString() /* Pour convertir une valeur d'enum en String */
 		{
-			return m_value;
+			return value;
 		}
 
 		public static Sex parseSex(String value) throws BeanException /* Pour convertir une chaîne en une valeur d'enum */
@@ -54,17 +54,17 @@ public class User
 	{
 		GUEST("GUEST"), USER("USER"), MEMBER("MEMBER");
 
-		private final String m_value;
+		private final String value;
 
 		private Role(String value)
 		{
-			m_value = value;
+			this.value = value;
 		}
 
 		@Override
 		public String toString() /* Pour convertir une valeur d'enum en String */
 		{
-			return m_value;
+			return value;
 		}
 
 		public static Role parseRole(String value) throws BeanException
@@ -91,116 +91,116 @@ public class User
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int m_id;
+	private int id;
 
 	@Column(name = "lastname", unique = false, nullable = false)
-	@Size(min = 1, max = 128, message = "Lastname must be between 1 and 128 characters")
-	private String m_lastName;
+	@Size(min = 1, max = 128, message = "Le nom de famille doit être compris entre 1 et 128 caractères")
+	private String lastName;
 
 	@Column(name = "firstname", unique = false, nullable = false)
-	@Size(min = 1, max = 128, message = "Firstname must be between 1 and 128 characters")
-	private String m_firstName;
+	@Size(min = 1, max = 128, message = "Le prénom doit être compris entre 1 et 128 caractères")
+	private String firstName;
 
 	@Column(name = "login", unique = true, nullable = false)
-	@Size(min = 4, max = 128, message = "Login must be between 4 and 128 characters")
-	private String m_login;
+	@Size(min = 4, max = 128, message = "Le login doit être compris entre 4 et 128 caractères")
+	private String login;
 
 	@Column(name = "password", unique = false, nullable = false)
-	@Size(min = 6, max = 128, message = "Password must be between 4 and 128 characters")
-	private String m_password;
+	@Size(min = 6, max = 128, message = "Le mot de passe doit être compris entre 4 et 128 caractères")
+	private String password;
 
 	@Column(name = "sex", unique = false, nullable = false)
-	private Sex m_sex;
+	private Sex sex;
 
 	@Column(name = "birthdate", unique = false, nullable = false)
-	@Past(message = "Birthdate must be in the past")
-	private Date m_birthdate;
+	@Past(message = "La dated de naissance est forcément dans le passé :-)")
+	private Date birthdate;
 
 	@Column(name = "phone", unique = false, nullable = false)
-	@Size(min = 10, max = 16, message = "Phone number must be between 10 and 16 characters")
-	private String m_phone;
+	@Size(min = 10, max = 16, message = "Le numéro de téléphone doit être compris entre 10 et 16 caractères")
+	private String phone;
 
 	@Column(name = "email", unique = true, nullable = false)
-	@Email(message = "Email should be valid")
-	private String m_email;
+	@Email(message = "L'email doit être valide")
+	private String email;
 
 	@Column(name = "role", unique = false, nullable = false)
-	private Role m_role;
+	private Role role;
 
 	@Column(name = "custom", unique = false, nullable = true)
-	private String m_custom;
+	private String custom;
 
 	@CreationTimestamp
 	@Column(name = "created", unique = false, nullable = false)
-	private Date m_created;
+	private Date created;
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
 	public int getId()
 	{
-		return m_id;
+		return id;
 	}
 
 	public void setId(int id)
 	{
-		m_id = id;
+		this.id = id;
 	}
 
 	public String getLastName()
 	{
-		return m_lastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName)
 	{
-		m_lastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getFirstName()
 	{
-		return m_firstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName)
 	{
-		m_firstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getLogin()
 	{
-		return m_login;
+		return login;
 	}
 
 	public void setLogin(String login)
 	{
-		m_login = login;
+		this.login = login;
 	}
 
 	public String getPassword()
 	{
-		return m_password;
+		return password;
 	}
 
 	public void setPassword(String password)
 	{
-		m_password = password;
+		this.password = password;
 	}
 
 	public Sex getSex()
 	{
-		return m_sex;
+		return sex;
 	}
 
 	public void setSex(Sex sex)
 	{
-		m_sex = sex;
+		this.sex = sex;
 	}
 
 	public String getBirthdate()
 	{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-		return simpleDateFormat.format(m_birthdate);
+		return simpleDateFormat.format(birthdate);
 	}
 
 	public void setBirthdate(String birthdate) throws BeanException
@@ -209,7 +209,7 @@ public class User
 
 		try
 		{
-			m_birthdate = simpleDateFormat.parse(birthdate);
+			this.birthdate = simpleDateFormat.parse(birthdate);
 		}
 		catch(ParseException e)
 		{
@@ -219,49 +219,49 @@ public class User
 
 	public String getPhone()
 	{
-		return m_phone;
+		return phone;
 	}
 
 	public void setPhone(String phone)
 	{
-		m_phone = phone;
+		this.phone = phone;
 	}
 
 	public String getEmail()
 	{
-		return m_email;
+		return email;
 	}
 
 	public void setEmail(String email)
 	{
-		m_email = email;
+		this.email = email;
 	}
 
 	public Role getRole()
 	{
-		return m_role;
+		return role;
 	}
 
 	public void setRole(Role role)
 	{
-		m_role = role;
+		this.role = role;
 	}
 
 	public String getCustom()
 	{
-		return m_custom;
+		return custom;
 	}
 
 	public void setCustom(String custom)
 	{
-		m_custom = custom;
+		this.custom = custom;
 	}
 
 	public String getCreated() throws BeanException
 	{
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-		return simpleDateFormat.format(m_created);
+		return simpleDateFormat.format(created);
 	}
 
 	public void setCreated(String created) throws BeanException
@@ -270,7 +270,7 @@ public class User
 
 		try
 		{
-			m_created = simpleDateFormat.parse(created);
+			this.created = simpleDateFormat.parse(created);
 		}
 		catch(ParseException e)
 		{
