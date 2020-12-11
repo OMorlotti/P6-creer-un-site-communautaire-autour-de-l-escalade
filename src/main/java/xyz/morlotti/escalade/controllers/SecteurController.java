@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.morlotti.escalade.models.BeanException;
 import xyz.morlotti.escalade.models.beans.Secteur;
+import xyz.morlotti.escalade.models.beans.Spot;
 import xyz.morlotti.escalade.models.daos.SecteurDAO;
-
 
 @Controller
 public class SecteurController
@@ -43,15 +43,13 @@ public class SecteurController
 	@RequestMapping(path = "/secteur", method = RequestMethod.POST)
 	public String addSecteur(
 		@RequestParam("name") String name,
-		@RequestParam("spotfk") String spotfk,
-
+		@RequestParam("spotfk") Spot spotFK,
 		Model model) throws BeanException
-
 	{
 		Secteur secteur = new Secteur();
 
 		secteur.setName(name);
-		secteur.setSpotFK(spotfk);
+		secteur.setSpotFK(spotFK);
 
 		secteurDAO.add(secteur);
 
@@ -64,14 +62,13 @@ public class SecteurController
 	public String updateSecteur(
 		@PathVariable(value = "id") final int id,
 		@RequestParam("name") String name,
-		@RequestParam("spotfk") String spotfk,
+		@RequestParam("spotfk") Spot spotFK,
 		Model model) throws BeanException
-
-		{
+	{
 		Secteur secteur = secteurDAO.get(id);
 
 		secteur.setName(name);
-		secteur.setSpotFK(spotfk);
+		secteur.setSpotFK(spotFK);
 
 		secteurDAO.update(secteur);
 

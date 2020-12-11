@@ -1,22 +1,26 @@
 package xyz.morlotti.escalade.models.beans;
 
-import org.hibernate.annotations.CreationTimestamp;
-import xyz.morlotti.escalade.models.BeanException;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-@Entity(name = "TOPO")
+import org.hibernate.annotations.CreationTimestamp;
+
+import xyz.morlotti.escalade.models.BeanException;
+
 @Table(name = "TOPO")
+@Entity(name = "TOPO")
 public class Topo
 {
+	/*----------------------------------------------------------------------------------------------------------------*/
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
 	@Column(name = "name", unique = false, nullable = false)
 	@Size(min = 1, max = 128, message = "Le nom du Topo doit contenir entre 1 et 128 caractères")
@@ -30,20 +34,22 @@ public class Topo
 	@Size(min = 1, max = 128, message = "La ville ne doit pas excéder 128 caractères")
 	private String city;
 
-	@Column(name = "postalCode", unique = false, nullable = false)
+	@Column(name = "postalcode", unique = false, nullable = false)
 	@Size(min = 2, max = 11, message = "Le code postal ne doit pas excéder 11 caractères")
 	private String postalCode;
 
 	@CreationTimestamp
-	@Column(name = "dateparution", nullable = false)
+	@Column(name = "releasedate", unique = false, nullable = false)
 	private Date releaseDate;
 
-	@Column(name = "isAvailable", nullable = false)
+	@Column(name = "isavailable", unique = false, nullable = false)
 	private boolean isAvailable;
 
 	@ManyToOne
-	@JoinColumn(name = "userfk", table = "USER")
+	@JoinColumn(name = "userfk")
 	private User userFK;
+
+	/*----------------------------------------------------------------------------------------------------------------*/
 
 	public Integer getId()
 	{
@@ -55,42 +61,42 @@ public class Topo
 		this.id = id;
 	}
 
-	public String getName() throws BeanException
+	public String getName()
 	{
 		return name;
 	}
 
-	public void setName(String name) throws BeanException
+	public void setName(String name)
 	{
 		this.name = name;
 	}
 
-	public String getDescription() throws BeanException
+	public String getDescription()
 	{
 		return description;
 	}
 
-	public void setDescription(String description) throws BeanException
+	public void setDescription(String description)
 	{
 		this.description = description;
 	}
 
-	public String getCity(String city) throws BeanException
+	public String getCity(String city)
 	{
 		return this.city;
 	}
 
-	public void setCity(String city) throws BeanException
+	public void setCity(String city)
 	{
 		this.city = city;
 	}
 
-	public String getPostalCode() throws BeanException
+	public String getPostalCode()
 	{
 		return postalCode;
 	}
 
-	public void setPostalCode(String postalCode) throws BeanException
+	public void setPostalCode(String postalCode)
 	{
 		this.postalCode = postalCode;
 	}
@@ -116,33 +122,25 @@ public class Topo
 		}
 	}
 
-	public boolean getAvailable()
+	public boolean isAvailable()
 	{
 		return isAvailable;
 	}
 
-	public void setAvailable(boolean isAvailable)
+	public void isAvailable(boolean isAvailable)
 	{
 		this.isAvailable = isAvailable;
 	}
 
-	public User getUserFK() throws BeanException
+	public User getUserFK()
 	{
-		if(userFK == null)
-		{
-			throw new BeanException("L'identifiant d'Utilisateur est vide");
-		}
-
 		return userFK;
 	}
 
-	public void setUserFK (User userFK) throws BeanException
+	public void setUserFK(User userFK)
 	{
-		if(userFK == null)
-		{
-			throw new BeanException("L'identifiant d'Utilisateur est vide");
-		}
-
 		this.userFK = userFK;
 	}
+
+	/*----------------------------------------------------------------------------------------------------------------*/
 }

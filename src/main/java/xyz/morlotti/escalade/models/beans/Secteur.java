@@ -1,15 +1,14 @@
 package xyz.morlotti.escalade.models.beans;
 
-import xyz.morlotti.escalade.models.BeanException;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
-@Entity(name = "SECTEUR")
 @Table(name = "SECTEUR")
-
+@Entity(name = "SECTEUR")
 public class Secteur
 {
+	/*----------------------------------------------------------------------------------------------------------------*/
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +18,11 @@ public class Secteur
 	@Size(min = 1, max = 128, message = "Le nom du secteur doit être compris entre 1 et 128 caractères")
 	private String name;
 
-	@OneToMany
-	@JoinColumn(name = "spotfk", table = "SPOT")
-	private String spotFK;
+	@ManyToOne
+	@JoinColumn(name = "spotfk")
+	private Spot spotFK;
 
-
+	/*----------------------------------------------------------------------------------------------------------------*/
 
 	public Integer getId()
 	{
@@ -35,23 +34,25 @@ public class Secteur
 		this.id = id;
 	}
 
-	public String getName() throws BeanException
+	public String getName()
 	{
 		return name;
 	}
 
-	public void setName(String name) throws BeanException
+	public void setName(String name)
 	{
 		this.name = name;
 	}
 
-	public String getSpotFK() throws BeanException
+	public Spot getSpotFK()
 	{
 		return spotFK;
 	}
 
-	public void setSpotFK(String spotFK) throws BeanException
+	public void setSpotFK(Spot spotFK)
 	{
 		this.spotFK = spotFK;
 	}
+
+	/*----------------------------------------------------------------------------------------------------------------*/
 }

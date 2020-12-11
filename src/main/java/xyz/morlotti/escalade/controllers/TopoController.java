@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import xyz.morlotti.escalade.models.BeanException;
 import xyz.morlotti.escalade.models.beans.Topo;
+import xyz.morlotti.escalade.models.beans.User;
 import xyz.morlotti.escalade.models.daos.TopoDAO;
-
 
 @Controller
 public class TopoController
 {
     @Autowired
-    private TopoDAO userDAO;
+    private TopoDAO topoDAO;
 
     @RequestMapping(path = "/topos", method = RequestMethod.GET)
     public String showTopos(Model model) throws Exception
     {
         model.addAttribute("title", "Topos");
 
-        model.addAttribute("topos", TopoDAO.list());
+        model.addAttribute("topos", topoDAO.list());
 
         return "showTopos";
     }
@@ -34,7 +34,7 @@ public class TopoController
     {
         model.addAttribute("title", "Topo");
 
-        model.addAttribute("topo", TopoDAO.get(id));
+        model.addAttribute("topo", topoDAO.get(id));
 
         return "showTopo";
     }
@@ -43,14 +43,14 @@ public class TopoController
 
     @RequestMapping(path = "/topo", method = RequestMethod.POST)
     public String addTopo(
-            @RequestParam("name") String name,
-            @RequestParam("description") String description,
-            @RequestParam("city") String city,
-            @RequestParam("postalCode") String postalCode,
-            @RequestParam("releaseDate") String releaseDate,
-            @RequestParam("isAvailable") boolean isAvailable,
-            @RequestParam("userFK") String userFK,
-            Model model) throws BeanException
+        @RequestParam("name") String name,
+        @RequestParam("description") String description,
+        @RequestParam("city") String city,
+        @RequestParam("postalCode") String postalCode,
+        @RequestParam("releaseDate") String releaseDate,
+        @RequestParam("isAvailable") boolean isAvailable,
+        @RequestParam("userFK") User userFK,
+        Model model) throws BeanException
     {
         Topo topo = new Topo();
 
@@ -59,10 +59,10 @@ public class TopoController
         topo.setCity(city);
         topo.setPostalCode(postalCode);
         topo.setReleaseDate(releaseDate);
-        topo.isAvailable;
+        topo.isAvailable(isAvailable);
         topo.setUserFK(userFK);
 
-        TopoDAO.add(topo);
+        topoDAO.add(topo);
 
         model.addAttribute("title", "Topo ajouté");
 
@@ -71,28 +71,27 @@ public class TopoController
 
     @RequestMapping(path = "/topo/update/{id}", method = RequestMethod.POST)
     public String updateTopo(
-            @PathVariable(value = "id") final int id,
-            @RequestParam("name") String name,
-            @RequestParam("description") String description,
-            @RequestParam("city") String city,
-            @RequestParam("postalCode") String postalCode,
-            @RequestParam("releaseDate") String releaseDate,
-            @RequestParam("isAvailable") boolean isAvailable,
-            @RequestParam("userFK") String userFK,
-            Model model) throws BeanException
+        @PathVariable(value = "id") final int id,
+        @RequestParam("name") String name,
+        @RequestParam("description") String description,
+        @RequestParam("city") String city,
+        @RequestParam("postalCode") String postalCode,
+        @RequestParam("releaseDate") String releaseDate,
+        @RequestParam("isAvailable") boolean isAvailable,
+        @RequestParam("userFK") User userFK,
+        Model model) throws BeanException
     {
-        Topo topo = TopoDAO.get(id);
+        Topo topo = topoDAO.get(id);
 
         topo.setName(name);
         topo.setDescription(description);
         topo.setCity(city);
         topo.setPostalCode(postalCode);
         topo.setReleaseDate(releaseDate);
-        topo.isAvailable();
+        topo.isAvailable(isAvailable);
         topo.setUserFK(userFK);
 
-
-        TopoDAO.update(userFK);
+        topoDAO.update(topo);
 
         model.addAttribute("title", "Topo modifié");
 
@@ -108,7 +107,7 @@ public class TopoController
     @RequestMapping(path = "/topo/delete/{id}", method = RequestMethod.GET)
     public String deleteTopo(@PathVariable(value = "id") final int id, Model model)
     {
-        TopoDAO.delete(id);
+        topoDAO.delete(id);
 
         model.addAttribute("title", "Topo supprimé");
 

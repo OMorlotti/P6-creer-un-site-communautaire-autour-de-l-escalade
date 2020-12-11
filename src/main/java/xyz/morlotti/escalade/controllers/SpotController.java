@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import xyz.morlotti.escalade.models.BeanException;
 import xyz.morlotti.escalade.models.beans.Spot;
+import xyz.morlotti.escalade.models.beans.Topo;
+import xyz.morlotti.escalade.models.beans.User;
 import xyz.morlotti.escalade.models.daos.SpotDAO;
-
 
 @Controller
 public class SpotController
@@ -42,16 +42,14 @@ public class SpotController
 
     @RequestMapping(path = "/spot", method = RequestMethod.POST)
     public String addSpot(
-            @RequestParam("name") String name,
-            @RequestParam("userFK") String userFK,
-            @RequestParam("topoFK") String topoFK,
-            @RequestParam("departement") String departement,
-            @RequestParam("latitude") String latitude,
-            @RequestParam("longitude") String longitude,
-            @RequestParam("isOfficial") boolean isOfficial,
-
-            Model model) throws BeanException
-
+        @RequestParam("name") String name,
+        @RequestParam("userFK") User userFK,
+        @RequestParam("topoFK") Topo topoFK,
+        @RequestParam("departement") String departement,
+        @RequestParam("latitude") String latitude,
+        @RequestParam("longitude") String longitude,
+        @RequestParam("isOfficial") boolean isOfficial,
+        Model model)
     {
         Spot spot = new Spot();
 
@@ -61,8 +59,7 @@ public class SpotController
         spot.setDepartement(departement);
         spot.setLatitude(latitude);
         spot.setLongitude(longitude);
-        spot.isOfficial();
-
+        spot.isOfficial(isOfficial);
 
         spotDAO.add(spot);
 
@@ -73,21 +70,25 @@ public class SpotController
 
     @RequestMapping(path = "/spot/update/{id}", method = RequestMethod.POST)
     public String updateSpot(
-            @PathVariable(value = "id") final int id,
-            @RequestParam("name") String name,
-            @RequestParam("userFK") String userFK,
-            @RequestParam("topoFK") String topoFK,
-            @RequestParam("departement") String departement,
-            @RequestParam("latitude") String latitude,
-            @RequestParam("longitude") String longitude,
-            @RequestParam("isOfficial") boolean isOfficial,
-            Model model) throws BeanException
-
+        @PathVariable(value = "id") final int id,
+        @RequestParam("name") String name,
+        @RequestParam("userFK") User userFK,
+        @RequestParam("topoFK") Topo topoFK,
+        @RequestParam("departement") String departement,
+        @RequestParam("latitude") String latitude,
+        @RequestParam("longitude") String longitude,
+        @RequestParam("isOfficial") boolean isOfficial,
+        Model model)
     {
         Spot spot = spotDAO.get(id);
 
         spot.setName(name);
-        spot.setSpotFK(spotFK);
+        spot.setUserFK(userFK);
+        spot.setTopoFK(topoFK);
+        spot.setDepartement(departement);
+        spot.setLatitude(latitude);
+        spot.setLongitude(longitude);
+        spot.isOfficial(isOfficial);
 
         spotDAO.update(spot);
 
