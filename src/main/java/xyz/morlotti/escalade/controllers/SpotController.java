@@ -11,12 +11,20 @@ import xyz.morlotti.escalade.models.beans.Spot;
 import xyz.morlotti.escalade.models.beans.Topo;
 import xyz.morlotti.escalade.models.beans.User;
 import xyz.morlotti.escalade.models.daos.SpotDAO;
+import xyz.morlotti.escalade.models.daos.TopoDAO;
+import xyz.morlotti.escalade.models.daos.UserDAO;
 
 @Controller
 public class SpotController
 {
     @Autowired
     private SpotDAO spotDAO;
+
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private TopoDAO topoDAO;
 
     @RequestMapping(path = "/spots", method = RequestMethod.GET)
     public String showSpots(Model model) throws Exception
@@ -25,17 +33,25 @@ public class SpotController
 
         model.addAttribute("spots", spotDAO.list());
 
+        model.addAttribute("users", userDAO.list());
+
+        model.addAttribute("topos", topoDAO.list());
+
         return "showSpots";
     }
 
     @RequestMapping(path = "/spot/{id}", method = RequestMethod.GET)
-    public String showSpot(@PathVariable(value = "id") final int id, Model model)
+    public String showSpot(@PathVariable(value = "id") final int id, Model model) throws Exception
     {
         model.addAttribute("title", "spot");
 
         model.addAttribute("spot", spotDAO.get(id));
 
-        return "showSpot";
+        model.addAttribute("users", userDAO.list());
+
+        model.addAttribute("topos", topoDAO.list());
+
+        return "showUpdateSpot";
     }
 
     // @Valid @ModelAttribute Secteur secteur
@@ -43,23 +59,26 @@ public class SpotController
     @RequestMapping(path = "/spot", method = RequestMethod.POST)
     public String addSpot(
         @RequestParam("name") String name,
-        @RequestParam("userFK") User userFK,
-        @RequestParam("topoFK") Topo topoFK,
+        @RequestParam("userFK") int userFK,
+        @RequestParam("topoFK") int topoFK,
         @RequestParam("departement") String departement,
         @RequestParam("latitude") String latitude,
         @RequestParam("longitude") String longitude,
         @RequestParam("isOfficial") boolean isOfficial,
         Model model)
     {
+        User user = userDAO.get(userFK);
+        Topo topo = topoDAO.get(topoFK);
+
         Spot spot = new Spot();
 
         spot.setName(name);
-        spot.setUserFK(userFK);
-        spot.setTopoFK(topoFK);
+        spot.setUserFK(user);
+        spot.setTopoFK(topo);
         spot.setDepartement(departement);
         spot.setLatitude(latitude);
         spot.setLongitude(longitude);
-        spot.isOfficial(isOfficial);
+        spot.setIsOfficial(isOfficial);
 
         spotDAO.add(spot);
 
@@ -72,23 +91,26 @@ public class SpotController
     public String updateSpot(
         @PathVariable(value = "id") final int id,
         @RequestParam("name") String name,
-        @RequestParam("userFK") User userFK,
-        @RequestParam("topoFK") Topo topoFK,
+        @RequestParam("userFK") int userFK,
+        @RequestParam("topoFK") int topoFK,
         @RequestParam("departement") String departement,
         @RequestParam("latitude") String latitude,
         @RequestParam("longitude") String longitude,
         @RequestParam("isOfficial") boolean isOfficial,
-        Model model)
+        Model model) throws Exception
     {
+        User user = userDAO.get(userFK);
+        Topo topo = topoDAO.get(topoFK);
+
         Spot spot = spotDAO.get(id);
 
         spot.setName(name);
-        spot.setUserFK(userFK);
-        spot.setTopoFK(topoFK);
+        spot.setUserFK(user);
+        spot.setTopoFK(topo);
         spot.setDepartement(departement);
         spot.setLatitude(latitude);
         spot.setLongitude(longitude);
-        spot.isOfficial(isOfficial);
+        spot.setIsOfficial(isOfficial);
 
         spotDAO.update(spot);
 
@@ -100,7 +122,11 @@ public class SpotController
 
         model.addAttribute("spot", spot);
 
-        return "showSpot";
+        model.addAttribute("users", userDAO.list());
+
+        model.addAttribute("topos", topoDAO.list());
+
+        return "showUpdateSpot";
     }
 
     @RequestMapping(path = "/spot/delete/{id}", method = RequestMethod.GET)

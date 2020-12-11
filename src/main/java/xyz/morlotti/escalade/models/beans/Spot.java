@@ -113,12 +113,12 @@ public class Spot
 		this.longitude = longitude;
 	}
 
-	public boolean isOfficial()
+	public boolean getIsOfficial()
 	{
 		return isOfficial;
 	}
 
-	public void isOfficial(boolean isOfficial)
+	public void setIsOfficial(boolean isOfficial)
 	{
 		this.isOfficial = isOfficial;
 	}
