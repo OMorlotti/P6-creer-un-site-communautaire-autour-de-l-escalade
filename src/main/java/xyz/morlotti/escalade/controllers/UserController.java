@@ -32,7 +32,7 @@ public class UserController
 
 		model.addAttribute("user", m_userDAO.get(id));
 
-		return "showUser";
+		return "showUpdateUser";
 	}
 
 	// @Valid @ModelAttribute User user
@@ -106,7 +106,7 @@ public class UserController
 
 		model.addAttribute("user", user);
 
-		return "showUser";
+		return "showUpdateUser";
 	}
 
 	@RequestMapping(path = "/user/delete/{id}", method = RequestMethod.GET)

@@ -71,7 +71,7 @@
     <tr>
         <td><spring:out value="${ user.firstName }" /></td>
         <td><spring:out value="${ user.lastName }" /></td>
-        <td><a href="/Escalade/user/<spring:out value="${ user.id }" />">Editer</a></td>
+        <td><a href="/Escalade/user/<spring:out value="${ user.id }" />">Voir/Editer</a></td>
         <td>
         <td><a href="/Escalade/user/delete/<spring:out value="${ user.id }" />">Supprimer</a></td>
 

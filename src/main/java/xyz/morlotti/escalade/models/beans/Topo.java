@@ -81,9 +81,9 @@ public class Topo
 		this.description = description;
 	}
 
-	public String getCity(String city)
+	public String getCity()
 	{
-		return this.city;
+		return city;
 	}
 
 	public void setCity(String city)
@@ -101,16 +101,16 @@ public class Topo
 		this.postalCode = postalCode;
 	}
 
-	public String releaseDate()
+	public String getReleaseDate()
 	{
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		return simpleDateFormat.format(releaseDate);
 	}
 
 	public void setReleaseDate(String releaseDate) throws BeanException
 	{
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		try
 		{
@@ -122,12 +122,12 @@ public class Topo
 		}
 	}
 
-	public boolean isAvailable()
+	public boolean getIsAvailable()
 	{
 		return isAvailable;
 	}
 
-	public void isAvailable(boolean isAvailable)
+	public void setIsAvailable(boolean isAvailable)
 	{
 		this.isAvailable = isAvailable;
 	}

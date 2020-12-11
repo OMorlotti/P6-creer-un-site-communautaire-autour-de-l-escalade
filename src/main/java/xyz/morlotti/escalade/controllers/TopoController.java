@@ -12,12 +12,16 @@ import xyz.morlotti.escalade.models.BeanException;
 import xyz.morlotti.escalade.models.beans.Topo;
 import xyz.morlotti.escalade.models.beans.User;
 import xyz.morlotti.escalade.models.daos.TopoDAO;
+import xyz.morlotti.escalade.models.daos.UserDAO;
 
 @Controller
 public class TopoController
 {
     @Autowired
     private TopoDAO topoDAO;
+
+    @Autowired
+    private UserDAO userDAO;
 
     @RequestMapping(path = "/topos", method = RequestMethod.GET)
     public String showTopos(Model model) throws Exception
@@ -26,17 +30,21 @@ public class TopoController
 
         model.addAttribute("topos", topoDAO.list());
 
+        model.addAttribute("users", userDAO.list());
+
         return "showTopos";
     }
 
     @RequestMapping(path = "/topo/{id}", method = RequestMethod.GET)
-    public String showTopo(@PathVariable(value = "id") final int id, Model model)
+    public String showTopo(@PathVariable(value = "id") final int id, Model model) throws Exception
     {
         model.addAttribute("title", "Topo");
 
         model.addAttribute("topo", topoDAO.get(id));
 
-        return "showTopo";
+        model.addAttribute("users", userDAO.list());
+
+        return "showUpdateTopo";
     }
 
     // @Valid @ModelAttribute User user
@@ -46,12 +54,14 @@ public class TopoController
         @RequestParam("name") String name,
         @RequestParam("description") String description,
         @RequestParam("city") String city,
-        @RequestParam("postalCode") String postalCode,
-        @RequestParam("releaseDate") String releaseDate,
-        @RequestParam("isAvailable") boolean isAvailable,
-        @RequestParam("userFK") User userFK,
+        @RequestParam("postalcode") String postalCode,
+        @RequestParam("releasedate") String releaseDate,
+        @RequestParam("isavailable") boolean isAvailable,
+        @RequestParam("userfk") int userFK,
         Model model) throws BeanException
     {
+        User user = userDAO.get(userFK);
+
         Topo topo = new Topo();
 
         topo.setName(name);
@@ -59,12 +69,14 @@ public class TopoController
         topo.setCity(city);
         topo.setPostalCode(postalCode);
         topo.setReleaseDate(releaseDate);
-        topo.isAvailable(isAvailable);
-        topo.setUserFK(userFK);
+        topo.setIsAvailable(isAvailable);
+        topo.setUserFK(user);
 
         topoDAO.add(topo);
 
         model.addAttribute("title", "Topo ajouté");
+
+        model.addAttribute("name", name);
 
         return "addTopo";
     }
@@ -75,12 +87,14 @@ public class TopoController
         @RequestParam("name") String name,
         @RequestParam("description") String description,
         @RequestParam("city") String city,
-        @RequestParam("postalCode") String postalCode,
-        @RequestParam("releaseDate") String releaseDate,
-        @RequestParam("isAvailable") boolean isAvailable,
-        @RequestParam("userFK") User userFK,
-        Model model) throws BeanException
+        @RequestParam("postalcode") String postalCode,
+        @RequestParam("releasedate") String releaseDate,
+        @RequestParam("isavailable") boolean isAvailable,
+        @RequestParam("userfk") int userFK,
+        Model model) throws Exception
     {
+        User user = userDAO.get(userFK);
+
         Topo topo = topoDAO.get(id);
 
         topo.setName(name);
@@ -88,8 +102,8 @@ public class TopoController
         topo.setCity(city);
         topo.setPostalCode(postalCode);
         topo.setReleaseDate(releaseDate);
-        topo.isAvailable(isAvailable);
-        topo.setUserFK(userFK);
+        topo.setIsAvailable(isAvailable);
+        topo.setUserFK(user);
 
         topoDAO.update(topo);
 
@@ -99,9 +113,11 @@ public class TopoController
 
         model.addAttribute("message_type", "success");
 
-        model.addAttribute("user", userFK);
+        model.addAttribute("topo", topo);
 
-        return "showTopo";
+        model.addAttribute("users", userDAO.list());
+
+        return "showUpdateTopo";
     }
 
     @RequestMapping(path = "/topo/delete/{id}", method = RequestMethod.GET)

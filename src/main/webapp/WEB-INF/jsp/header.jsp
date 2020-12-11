@@ -43,12 +43,15 @@
 
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link" href="/Escalade/">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/Escalade/users">Users</a>
-                  </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/users">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/topos">Topos</a>
+                    </li>
                 </ul>
             </div>
         </nav>
