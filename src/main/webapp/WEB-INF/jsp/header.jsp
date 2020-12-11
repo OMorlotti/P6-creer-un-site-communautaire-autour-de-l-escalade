@@ -52,6 +52,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Escalade/topos">Topos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/spots">Spots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/secteurs">Secteurs</a>
+                    </li>
                 </ul>
             </div>
         </nav>
