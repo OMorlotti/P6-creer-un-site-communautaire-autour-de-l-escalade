@@ -58,6 +58,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Escalade/secteurs">Secteurs BEURK</a
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/voies">Voies BEURK BIS</a
+                    </li>
                 </ul>
             </div>
         </nav>
