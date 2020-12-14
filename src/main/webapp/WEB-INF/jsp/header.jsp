@@ -56,7 +56,7 @@
                         <a class="nav-link" href="/Escalade/spots">Spots</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/secteurs">Secteurs</a>
+                        <a class="nav-link" href="/Escalade/secteurs">Secteurs BEURK</a
                     </li>
                 </ul>
             </div>

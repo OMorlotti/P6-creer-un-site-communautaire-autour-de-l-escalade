@@ -70,10 +70,7 @@
         <td><spring:out value="${ topo.postalCode }" /></td>
         <td><spring:if test="${ topo.isAvailable == 'true' }">disponible</spring:if><spring:if test="${ topo.isAvailable == 'false' }">indisponible</spring:if></td>
         <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir/Editer</a></td>
-        <td>
         <td><a href="/Escalade/topo/delete/<spring:out value="${ topo.id }" />">Supprimer</a></td>
-
-        </td>
     </tr>
     </spring:forEach>
 </table>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import xyz.morlotti.escalade.models.beans.Spot;
 import xyz.morlotti.escalade.models.beans.Topo;
 import xyz.morlotti.escalade.models.beans.User;
+import xyz.morlotti.escalade.models.daos.SecteurDAO;
 import xyz.morlotti.escalade.models.daos.SpotDAO;
 import xyz.morlotti.escalade.models.daos.TopoDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;
@@ -35,8 +36,6 @@ public class SpotController
 
         model.addAttribute("users", userDAO.list());
 
-        model.addAttribute("topos", topoDAO.list());
-
         return "showSpots";
     }
 
@@ -59,12 +58,12 @@ public class SpotController
     @RequestMapping(path = "/spot", method = RequestMethod.POST)
     public String addSpot(
         @RequestParam("name") String name,
-        @RequestParam("userFK") int userFK,
-        @RequestParam("topoFK") int topoFK,
+        @RequestParam("userfk") int userFK,
+        @RequestParam("topofk") int topoFK,
         @RequestParam("departement") String departement,
         @RequestParam("latitude") String latitude,
         @RequestParam("longitude") String longitude,
-        @RequestParam("isOfficial") boolean isOfficial,
+        @RequestParam("isofficial") boolean isOfficial,
         Model model)
     {
         User user = userDAO.get(userFK);
@@ -91,12 +90,12 @@ public class SpotController
     public String updateSpot(
         @PathVariable(value = "id") final int id,
         @RequestParam("name") String name,
-        @RequestParam("userFK") int userFK,
-        @RequestParam("topoFK") int topoFK,
+        @RequestParam("userfk") int userFK,
+        @RequestParam("topofk") int topoFK,
         @RequestParam("departement") String departement,
         @RequestParam("latitude") String latitude,
         @RequestParam("longitude") String longitude,
-        @RequestParam("isOfficial") boolean isOfficial,
+        @RequestParam("isofficial") boolean isOfficial,
         Model model) throws Exception
     {
         User user = userDAO.get(userFK);

@@ -12,9 +12,9 @@ public class Spot
 	@Id
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
-	@Column(name = "nom", unique = false, nullable = false)
+	@Column(name = "name", unique = false, nullable = false)
 	@Size(min = 1, max = 128, message = "Le nom du Spot doit être compris entre 1 et 128 caractères")
 	private String name;
 
@@ -43,12 +43,12 @@ public class Spot
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
-	public String getId()
+	public int getId()
 	{
 		return id;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}

@@ -1,6 +1,6 @@
 <%@ include file="../jsp/header.jsp" %>
 
-<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#spotform">Ajouter un Spot</button>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#spotform">Ajouter un spot</button>
 
 <form class="collapse" method="POST" action="/Escalade/spot" id="spotform">
 
@@ -17,6 +17,7 @@
                 <spring:forEach var="user" items="${ users }">
                     <option value="<spring:out value="${ user.id }" />">
                         <spring:out value="${ user.login }" />
+                        -
                         <spring:out value="${ user.firstName }" />
                         <spring:out value="${ user.lastName }" />
                     </option>
@@ -28,7 +29,7 @@
         <label class="col-sm-2 col-form-label" for="topofk">Topo :</label>
         <div class="col-sm-10">
             <select class="custom-select custom-select-sm" name="topofk" id="topofk">
-                <spring:forEach var="topofk" items="${ topos }">
+                <spring:forEach var="topo" items="${ topos }">
                     <option value="<spring:out value="${ topo.id }" />">
                         <spring:out value="${ topo.name }" />
                     </option>
@@ -59,7 +60,7 @@
          <div class="col-sm-10">
              <select class="custom-select custom-select-sm" name="isofficial" id="isofficial">
                  <option value="0">Spot non officiel</option>
-                 <option value="1">Site officiel</option>
+                 <option value="1">Spot officiel</option>
              </select>
          </div>
     </div>
@@ -72,15 +73,12 @@
     <spring:forEach var="spot" items="${ spots }">
     <tr>
         <td><spring:out value="${ spot.name }" /></td>
-        <td><spring:out value="${ spot.nom }" /></td>
-        <td><spring:out value="${ topo.departement }" /></td>
-        <td><spring:out value="${ topo.userFK.login }" /></td>
+        <td><spring:out value="${ spot.userFK.login }" /></td>
+        <td><spring:out value="${ spot.topoFK.name }" /></td>
+        <td><spring:out value="${ spot.departement }" /></td>
         <td><spring:if test="${ spot.isOfficial == 'true' }">Officiel</spring:if><spring:if test="${ spot.isOfficial == 'false' }">Non officiel</spring:if></td>
         <td><a href="/Escalade/spot/<spring:out value="${ spot.id }" />">Voir/Editer</a></td>
-        <td>
         <td><a href="/Escalade/spot/delete/<spring:out value="${ spot.id }" />">Supprimer</a></td>
-
-        </td>
     </tr>
     </spring:forEach>
 </table>
