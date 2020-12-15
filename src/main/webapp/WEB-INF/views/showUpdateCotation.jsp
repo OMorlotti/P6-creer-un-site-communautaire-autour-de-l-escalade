@@ -1,6 +1,6 @@
-<%@ include file="../jsp/headerFrame.jsp" %>
+<%@ include file="../jsp/header.jsp" %>
 
-<form method="POST" action="/Escalade/cotation/update/<spring:out value="${ secteur.id }" />">
+<form method="POST" action="/Escalade/cotation/update/<spring:out value="${ cotation.id }" />">
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="name">Nom :</label>
@@ -13,4 +13,4 @@
 
 </form>
 
-<%@ include file="../jsp/footerFrame.jsp" %>
+<%@ include file="../jsp/footer.jsp" %>

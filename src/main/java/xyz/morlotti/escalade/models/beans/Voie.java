@@ -1,6 +1,7 @@
 package xyz.morlotti.escalade.models.beans;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Table(name = "VOIE")
@@ -14,9 +15,9 @@ public class Voie
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@Min(value = 0)
 	@Column(name = "height", unique = false, nullable = false)
-	@Size(min = 0, max = 9999, message = "La hauteur doit être comprise entre 0 et 9999 mètres")
-	private int height;
+	private float height;
 
 	@ManyToOne
 	@JoinColumn(name = "secteurfk")
@@ -34,12 +35,12 @@ public class Voie
 		this.id = id;
 	}
 
-	public int getHeight()
+	public float getHeight()
 	{
 		return height;
 	}
 
-	public void setHeight(int height)
+	public void setHeight(float height)
 	{
 		this.height = height;
 	}

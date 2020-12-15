@@ -1,10 +1,11 @@
 package xyz.morlotti.escalade.models.beans;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
-@Table(name = "LONGUEUR")
-@Entity(name = "LONGUEUR")
+@Table(name = "LENGTH")
+@Entity(name = "LENGTH")
 public class Length
 {
 	/*----------------------------------------------------------------------------------------------------------------*/
@@ -18,14 +19,13 @@ public class Length
 	@JoinColumn(name = "voiefk")
 	private Voie voieFK;
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "cotationfk")
 	private Cotation cotationFK;
 
+	@Min(value = 0)
 	@Column(name = "numberOfSpit", unique = false, nullable = false)
-	@Size(min = 1, max = 128, message = "Le nombre de spits doit être compris 1 et 128")
 	private int numberOfSpit;
-
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 

@@ -43,7 +43,7 @@ public class SectorController
 
 		model.addAttribute("spots", spotDAO.list());
 
-		return "showSector";
+		return "showUpdateSector";
 	}
 
 	// @Valid @ModelAttribute Secteur secteur
@@ -92,11 +92,11 @@ public class SectorController
 
 		model.addAttribute("message_type", "success");
 
-		model.addAttribute("sector", sector);
+		model.addAttribute("secteur", sector);
 
 		model.addAttribute("spots", spotDAO.list());
 
-		return "showSector";
+		return "showUpdateSector";
 	}
 
 	@RequestMapping(path = "/secteur/delete/{id}", method = RequestMethod.GET)

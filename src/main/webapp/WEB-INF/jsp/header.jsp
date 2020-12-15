@@ -27,14 +27,18 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+
+            thead td {
+                font-weight: bold;
+            }
         </style>
 
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-1 py-0">
             <a class="navbar-brand" href="/Escalade">
-                Escalade
+                <img src="/Escalade/mountains.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy"> Escalade
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar">
@@ -56,16 +60,7 @@
                         <a class="nav-link" href="/Escalade/spots">Spots</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/secteurs">Secteurs BEURK</a
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/voies">Voies BEURK BIS</a
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/longueurs">Longueurs BEURK TER</a
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/cotations">Cotations BEURK QUATER</a
+                        <a class="nav-link" href="/Escalade/cotations">Cotations</a
                     </li>
                 </ul>
             </div>

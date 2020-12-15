@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.morlotti.escalade.models.BeanException;
 import xyz.morlotti.escalade.models.beans.Cotation;
-import xyz.morlotti.escalade.models.beans.Length;
-import xyz.morlotti.escalade.models.beans.Voie;
 import xyz.morlotti.escalade.models.daos.CotationDAO;
 import xyz.morlotti.escalade.models.daos.LengthDAO;
 import xyz.morlotti.escalade.models.daos.VoieDAO;
@@ -19,20 +17,12 @@ import xyz.morlotti.escalade.models.daos.VoieDAO;
 public class CotationController
 {
     @Autowired
-    private LengthDAO lengthDAO;
-
-    @Autowired
-    private VoieDAO voieDAO;
-
-    @Autowired
     private CotationDAO cotationDAO;
 
     @RequestMapping(path = "/cotations", method = RequestMethod.GET)
     public String showCotations(Model model) throws Exception
     {
         model.addAttribute("title", "Cotations");
-
-        model.addAttribute("cotations", cotationDAO.list());
 
         model.addAttribute("cotations", cotationDAO.list());
 
@@ -45,8 +35,6 @@ public class CotationController
         model.addAttribute("title", "Cotation");
 
         model.addAttribute("cotation", cotationDAO.get(id));
-
-        model.addAttribute("cotations", voieDAO.list());
 
         return "showUpdateCotation";
     }
@@ -62,12 +50,11 @@ public class CotationController
 
         cotation.setName(name);
 
-
-        cotationDAO.add(name);
+        cotationDAO.add(cotation);
 
         model.addAttribute("title", "Cotation ajoutée");
 
-        return "addLength";
+        return "addCotation";
     }
 
     @RequestMapping(path = "/cotation/update/{id}", method = RequestMethod.POST)
@@ -76,14 +63,11 @@ public class CotationController
         @RequestParam("name") String name,
         Model model) throws Exception
     {
-        Cotation cotation = cotationDAO.get(cotationFK);
-
         Cotation cotation = cotationDAO.get(id);
 
         cotation.setName(name);
 
-
-        cotationDAO.update(name);
+        cotationDAO.update(cotation);
 
         model.addAttribute("title", "Cotation modifiée");
 
@@ -92,8 +76,6 @@ public class CotationController
         model.addAttribute("message_type", "success");
 
         model.addAttribute("cotation", cotation);
-
-        model.addAttribute("cotations", cotationDAO.list());
 
         return "showUpdateCotation";
     }

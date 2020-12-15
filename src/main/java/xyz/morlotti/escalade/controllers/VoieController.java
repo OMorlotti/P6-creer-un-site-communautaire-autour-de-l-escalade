@@ -50,7 +50,7 @@ public class VoieController
 
     @RequestMapping(path = "/voie", method = RequestMethod.POST)
     public String addVoie(
-        @RequestParam("height") int height,
+        @RequestParam("height") float height,
         @RequestParam("secteurfk") int secteurFK,
         Model model) throws BeanException
     {
@@ -73,7 +73,7 @@ public class VoieController
     @RequestMapping(path = "/voie/update/{id}", method = RequestMethod.POST)
     public String updateVoie(
         @PathVariable(value = "id") final int id,
-        @RequestParam("height") int height,
+        @RequestParam("height") float height,
         @RequestParam("secteurfk") int secteurfk,
         Model model) throws Exception
     {

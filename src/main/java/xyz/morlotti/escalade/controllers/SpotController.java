@@ -35,6 +35,8 @@ public class SpotController
 
         model.addAttribute("users", userDAO.list());
 
+        model.addAttribute("topos", topoDAO.list());
+
         return "showSpots";
     }
 

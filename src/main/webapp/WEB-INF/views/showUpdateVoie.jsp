@@ -3,9 +3,9 @@
 <form method="POST" action="/Escalade/voie/update/<spring:out value="${ voie.id }" />">
 
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="height">Hauteur (en mètre, sans virgule) :</label>
+        <label class="col-sm-2 col-form-label" for="height">Hauteur [mètres] :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="height" id="height" value="<spring:out value="${ height.name }" />" />
+            <input class="form-control form-control-sm" type="text" name="height" id="height" value="<spring:out value="${ voie.height }" />" />
         </div>
     </div>
     <div class="form-group row">
@@ -24,5 +24,9 @@
     <button class="btn btn-primary" type="submit">Envoyer</button>
 
 </form>
+
+<hr />
+
+<iframe src="/Escalade/longueurs" style="width: 100%; height: 600px; border: none;"></iframe>
 
 <%@ include file="../jsp/footerFrame.jsp" %>

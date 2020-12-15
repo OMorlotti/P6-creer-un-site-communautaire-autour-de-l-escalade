@@ -6,7 +6,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import xyz.morlotti.escalade.models.beans.Length;
-import xyz.morlotti.escalade.models.beans.Sector;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -53,7 +52,7 @@ public class LengthDAO
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query query = currentSession.createQuery("SELECT u FROM LONGUEUR u");
+		Query query = currentSession.createQuery("SELECT u FROM LENGTH u");
 
 		return query.list();
 	}

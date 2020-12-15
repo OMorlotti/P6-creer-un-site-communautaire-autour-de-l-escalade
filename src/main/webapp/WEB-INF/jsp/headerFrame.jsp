@@ -19,3 +19,9 @@
     <body>
 
         <div class="container p-2">
+
+            <spring:if test="${ not empty message }">
+            <div class="alert alert-<spring:out value="${ message_type }" />" role="alert">
+                <spring:out value="${ message }" />
+            </div>
+            </spring:if>

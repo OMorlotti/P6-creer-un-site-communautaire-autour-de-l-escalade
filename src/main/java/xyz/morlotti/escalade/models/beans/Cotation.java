@@ -14,10 +14,9 @@ public class Cotation
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "name", unique = false, nullable = false)
-	@Size(min = 1, max = 128, message = "Le nom du secteur doit être compris entre 1 et 128 caractères")
+	@Column(name = "name", unique = true, nullable = false)
+	@Size(min = 1, max = 128, message = "Le nom de la cotation doit être compris entre 1 et 128 caractères")
 	private String name;
-
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
@@ -40,7 +39,6 @@ public class Cotation
 	{
 		this.name = name;
 	}
-
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 }

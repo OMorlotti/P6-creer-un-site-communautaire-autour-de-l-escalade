@@ -25,4 +25,8 @@
 
 </form>
 
+<hr />
+
+<iframe src="/Escalade/voies" style="width: 100%; height: 600px; border: none;"></iframe>
+
 <%@ include file="../jsp/footerFrame.jsp" %>

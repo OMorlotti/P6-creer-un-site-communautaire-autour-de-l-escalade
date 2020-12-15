@@ -12,6 +12,7 @@ import xyz.morlotti.escalade.models.BeanException;
 import xyz.morlotti.escalade.models.beans.Cotation;
 import xyz.morlotti.escalade.models.beans.Length;
 import xyz.morlotti.escalade.models.beans.Voie;
+import xyz.morlotti.escalade.models.daos.CotationDAO;
 import xyz.morlotti.escalade.models.daos.LengthDAO;
 import xyz.morlotti.escalade.models.daos.VoieDAO;
 
@@ -32,9 +33,11 @@ public class LengthController
     {
         model.addAttribute("title", "Longueurs");
 
-        model.addAttribute("longueurs", lengthDAO.list());
+        model.addAttribute("lengths", lengthDAO.list());
 
         model.addAttribute("voies", voieDAO.list());
+
+        model.addAttribute("cotations", cotationDAO.list());
 
         return "showLengths";
     }
@@ -44,9 +47,11 @@ public class LengthController
     {
         model.addAttribute("title", "Longueur");
 
-        model.addAttribute("longueur", lengthDAO.get(id));
+        model.addAttribute("length", lengthDAO.get(id));
 
         model.addAttribute("voies", voieDAO.list());
+
+        model.addAttribute("cotations", cotationDAO.list());
 
         return "showUpdateLength";
     }
@@ -60,10 +65,13 @@ public class LengthController
         @RequestParam("numberofspit") int numberOfSpit,
         Model model) throws BeanException
     {
+        Voie voie = voieDAO.get(voieFK);
+        Cotation cotation = cotationDAO.get(cotationFK);
+
         Length length = new Length();
 
-        length.setVoieFK(voieFK);
-        length.setCotationFK(cotationFK);
+        length.setVoieFK(voie);
+        length.setCotationFK(cotation);
         length.setNumberOfSpit(numberOfSpit);
 
         lengthDAO.add(length);
@@ -88,13 +96,12 @@ public class LengthController
         Model model) throws Exception
     {
         Voie voie = voieDAO.get(voieFK);
-
         Cotation cotation = cotationDAO.get(cotationFK);
 
         Length length = lengthDAO.get(id);
 
-        length.setVoieFK(voieFK);
-        length.setCotationFK(cotationFK);
+        length.setVoieFK(voie);
+        length.setCotationFK(cotation);
         length.setNumberOfSpit(numberOfSpit);
 
         lengthDAO.update(length);
@@ -105,11 +112,13 @@ public class LengthController
 
         model.addAttribute("message_type", "success");
 
-        model.addAttribute("voie", voie);
+        model.addAttribute("length", length);
 
         model.addAttribute("voies", voieDAO.list());
 
-        return "showUpdateVoie";
+        model.addAttribute("cotations", cotationDAO.list());
+
+        return "showUpdateLength";
     }
 
     @RequestMapping(path = "/longueur/delete/{id}", method = RequestMethod.GET)
