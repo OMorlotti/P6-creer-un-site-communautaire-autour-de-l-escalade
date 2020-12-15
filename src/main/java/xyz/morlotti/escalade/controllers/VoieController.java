@@ -8,13 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.morlotti.escalade.models.BeanException;
-import xyz.morlotti.escalade.models.beans.Secteur;
-import xyz.morlotti.escalade.models.beans.Topo;
-import xyz.morlotti.escalade.models.beans.User;
+import xyz.morlotti.escalade.models.beans.Sector;
 import xyz.morlotti.escalade.models.beans.Voie;
-import xyz.morlotti.escalade.models.daos.SecteurDAO;
-import xyz.morlotti.escalade.models.daos.TopoDAO;
-import xyz.morlotti.escalade.models.daos.UserDAO;
+import xyz.morlotti.escalade.models.daos.SectorDAO;
 import xyz.morlotti.escalade.models.daos.VoieDAO;
 
 @Controller
@@ -24,7 +20,7 @@ public class VoieController
     private VoieDAO voieDAO;
 
     @Autowired
-    private SecteurDAO secteurDAO;
+    private SectorDAO secteurDAO;
 
     @RequestMapping(path = "/voies", method = RequestMethod.GET)
     public String showVoies(Model model) throws Exception
@@ -58,7 +54,7 @@ public class VoieController
         @RequestParam("secteurfk") int secteurFK,
         Model model) throws BeanException
     {
-        Secteur secteur = secteurDAO.get(secteurFK);
+        Sector secteur = secteurDAO.get(secteurFK);
 
         Voie voie = new Voie();
 
@@ -81,7 +77,7 @@ public class VoieController
         @RequestParam("secteurfk") int secteurfk,
         Model model) throws Exception
     {
-        Secteur secteur = secteurDAO.get(secteurfk);
+        Sector secteur = secteurDAO.get(secteurfk);
 
         Voie voie = voieDAO.get(id);
 

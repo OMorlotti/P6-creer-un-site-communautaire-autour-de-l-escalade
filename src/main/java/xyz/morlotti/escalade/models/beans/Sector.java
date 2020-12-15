@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 @Table(name = "SECTEUR")
 @Entity(name = "SECTEUR")
-public class Secteur
+public class Sector
 {
 	/*----------------------------------------------------------------------------------------------------------------*/
 

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import xyz.morlotti.escalade.models.beans.Spot;
 import xyz.morlotti.escalade.models.beans.Topo;
 import xyz.morlotti.escalade.models.beans.User;
-import xyz.morlotti.escalade.models.daos.SecteurDAO;
 import xyz.morlotti.escalade.models.daos.SpotDAO;
 import xyz.morlotti.escalade.models.daos.TopoDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;

@@ -8,71 +8,70 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.morlotti.escalade.models.BeanException;
-import xyz.morlotti.escalade.models.beans.Secteur;
+import xyz.morlotti.escalade.models.beans.Sector;
 import xyz.morlotti.escalade.models.beans.Spot;
-import xyz.morlotti.escalade.models.beans.User;
-import xyz.morlotti.escalade.models.daos.SecteurDAO;
+import xyz.morlotti.escalade.models.daos.SectorDAO;
 import xyz.morlotti.escalade.models.daos.SpotDAO;
 
 @Controller
-public class SecteurController
+public class SectorController
 {
 	@Autowired
-	private SecteurDAO secteurDAO;
+	private SectorDAO sectorDAO;
 
 	@Autowired
 	private SpotDAO spotDAO;
 
 	@RequestMapping(path = "/secteurs", method = RequestMethod.GET)
-	public String showSecteurs(Model model) throws Exception
+	public String showSectors(Model model) throws Exception
 	{
 		model.addAttribute("title", "Secteurs");
 
-		model.addAttribute("secteurs", secteurDAO.list());
+		model.addAttribute("secteurs", sectorDAO.list());
 
 		model.addAttribute("spots", spotDAO.list());
 
-		return "showSecteurs";
+		return "showSectors";
 	}
 
 	@RequestMapping(path = "/secteur/{id}", method = RequestMethod.GET)
-	public String showSecteur(@PathVariable(value = "id") final int id, Model model) throws Exception
+	public String showSector(@PathVariable(value = "id") final int id, Model model) throws Exception
 	{
 		model.addAttribute("title", "Secteur");
 
-		model.addAttribute("secteur", secteurDAO.get(id));
+		model.addAttribute("secteur", sectorDAO.get(id));
 
 		model.addAttribute("spots", spotDAO.list());
 
-		return "showSecteur";
+		return "showSector";
 	}
 
 	// @Valid @ModelAttribute Secteur secteur
 
 	@RequestMapping(path = "/secteur", method = RequestMethod.POST)
-	public String addSecteur(
+	public String addSector(
 		@RequestParam("name") String name,
 		@RequestParam("spotfk") int spotFK,
 		Model model) throws BeanException
 	{
 		Spot spot = spotDAO.get(spotFK);
 
-		Secteur secteur = new Secteur();
+		Sector secteur = new Sector();
 
 		secteur.setName(name);
 		secteur.setSpotFK(spot);
 
-		secteurDAO.add(secteur);
+		sectorDAO.add(secteur);
 
 		model.addAttribute("title", "Secteur ajouté");
 
 		model.addAttribute("name", name);
 
-		return "addSecteur";
+		return "addSector";
 	}
 
 	@RequestMapping(path = "/secteur/update/{id}", method = RequestMethod.POST)
-	public String updateSecteur(
+	public String updateSector(
 		@PathVariable(value = "id") final int id,
 		@RequestParam("name") String name,
 		@RequestParam("spotfk") int spotFK,
@@ -80,12 +79,12 @@ public class SecteurController
 	{
 		Spot spot = spotDAO.get(spotFK);
 
-		Secteur secteur = secteurDAO.get(id);
+		Sector sector = sectorDAO.get(id);
 
-		secteur.setName(name);
-		secteur.setSpotFK(spot);
+		sector.setName(name);
+		sector.setSpotFK(spot);
 
-		secteurDAO.update(secteur);
+		sectorDAO.update(sector);
 
 		model.addAttribute("title", "Secteur modifié");
 
@@ -93,22 +92,22 @@ public class SecteurController
 
 		model.addAttribute("message_type", "success");
 
-		model.addAttribute("secteur", secteur);
+		model.addAttribute("sector", sector);
 
 		model.addAttribute("spots", spotDAO.list());
 
-		return "showSecteur";
+		return "showSector";
 	}
 
 	@RequestMapping(path = "/secteur/delete/{id}", method = RequestMethod.GET)
-	public String deleteSecteur(@PathVariable(value = "id") final int id, Model model)
+	public String deleteSector(@PathVariable(value = "id") final int id, Model model)
 	{
-		secteurDAO.delete(id);
+		sectorDAO.delete(id);
 
 		model.addAttribute("title", "Secteur supprimé");
 
 		model.addAttribute("id", id);
 
-		return "deleteSecteur";
+		return "deleteSector";
 	}
 }

@@ -5,7 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.morlotti.escalade.models.beans.Secteur;
+import xyz.morlotti.escalade.models.beans.Cotation;
+import xyz.morlotti.escalade.models.beans.Length;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,46 +14,46 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class SecteurDAO
+public class CotationDAO
 {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void add(Secteur secteur)
+	public void add(Cotation cotation)
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		currentSession.save(secteur);
+		currentSession.save(cotation);
 	}
 
-	public void update (Secteur secteur)
+	public void update (Cotation cotation)
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		currentSession.merge(secteur);
+		currentSession.merge(cotation);
 	}
 
 	public void delete(int id)
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Secteur secteur = currentSession.find(Secteur.class, id);
+		Cotation cotation = currentSession.find(Cotation.class, id);
 
-		currentSession.delete(secteur);
+		currentSession.delete(cotation);
 	}
 
-	public Secteur get(int id)
+	public Cotation get(int id)
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		return currentSession.find(Secteur.class, id);
+		return currentSession.find(Cotation.class, id);
 	}
 
 	public List list() throws Exception
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query query = currentSession.createQuery("SELECT u FROM SECTEUR u");
+		Query query = currentSession.createQuery("SELECT u FROM COTATION u");
 
 		return query.list();
 	}

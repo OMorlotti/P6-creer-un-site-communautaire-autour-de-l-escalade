@@ -20,7 +20,7 @@ public class Voie
 
 	@ManyToOne
 	@JoinColumn(name = "secteurfk")
-	private Secteur secteurFK;
+	private Sector secteurFK;
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
@@ -44,11 +44,11 @@ public class Voie
 		this.height = height;
 	}
 
-	public Secteur getSecteurFK()
+	public Sector getSecteurFK()
 	{
 		return secteurFK;
 	}
-	public void setSecteurFK(Secteur secteurFK)
+	public void setSecteurFK(Sector secteurFK)
 	{
 		this.secteurFK = secteurFK;
 	}

@@ -61,6 +61,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Escalade/voies">Voies BEURK BIS</a
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/longueurs">Longueurs BEURK TER</a
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/cotations">Cotations BEURK QUATER</a
+                    </li>
                 </ul>
             </div>
         </nav>
