@@ -27,6 +27,6 @@
 
 <hr />
 
-<iframe src="/Escalade/longueurs" style="width: 100%; height: 600px; border: none;"></iframe>
+<iframe src="/Escalade/longueurs?voie=<spring:out value="${ voie.id }" />" style="width: 100%; height: 600px; border: none;"></iframe>
 
 <%@ include file="../jsp/footerFrame.jsp" %>

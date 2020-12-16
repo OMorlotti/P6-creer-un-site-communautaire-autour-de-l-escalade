@@ -6,8 +6,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import xyz.morlotti.escalade.models.beans.Sector;
 import xyz.morlotti.escalade.models.beans.Voie;
 
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -52,8 +54,22 @@ public class VoieDAO
     {
         Session currentSession = sessionFactory.getCurrentSession();
 
-        Query query = currentSession.createQuery("SELECT u FROM VOIE u");
+        TypedQuery<Voie> query = currentSession.createQuery("SELECT u FROM VOIE u", Voie.class);
 
-        return query.list();
+        return query.getResultList();
+    }
+
+    public List<Voie> list(int parentSector) throws Exception
+    {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        /* Dans la requête (qui n'est pas vraiment du SQL), on récupère le bean s (de type Sector):
+         * spotFK (via le getter getSpotFK du bean Sector), on compare l'identifiant id (via le getId)
+         * avec parentSpot pour résoudre la foreign key.
+         */
+
+        TypedQuery<Voie> query = currentSession.createQuery("SELECT v FROM VOIE v WHERE s.sectorFK.id = ?1", Voie.class);
+
+        return query.setParameter(1, parentSector).getResultList();
     }
 }

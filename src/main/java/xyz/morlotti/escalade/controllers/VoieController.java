@@ -20,19 +20,26 @@ public class VoieController
     private VoieDAO voieDAO;
 
     @Autowired
-    private SectorDAO secteurDAO;
+    private SectorDAO sectorDAO;
 
     @RequestMapping(path = "/voies", method = RequestMethod.GET)
-    public String showVoies(Model model) throws Exception
-    {
-        model.addAttribute("title", "Voies");
+    public String showVoies(
+    	@RequestParam(name = "sector", required = false) Integer parentSector, // Le post parent est passé dans l'url en ajoutan ?spot=<id>, il est facultatif et dans ce cas, on aura null dans parentSpot
+        Model model) throws Exception
+        {
+            model.addAttribute("title", "Voies");
 
-        model.addAttribute("voies", voieDAO.list());
+            if(parentSector == null) {
+                model.addAttribute("voies", voieDAO.list());
+            }
+            else {
+                model.addAttribute("voies", voieDAO.list(parentSector));
+            }
 
-        model.addAttribute("secteurs", secteurDAO.list());
+            model.addAttribute("sector", sectorDAO.list());
 
-        return "showVoies";
-    }
+            return "showVoies";
+        }
 
     @RequestMapping(path = "/voie/{id}", method = RequestMethod.GET)
     public String showVoie(@PathVariable(value = "id") final int id, Model model) throws Exception
@@ -41,7 +48,7 @@ public class VoieController
 
         model.addAttribute("voie", voieDAO.get(id));
 
-        model.addAttribute("secteurs", secteurDAO.list());
+        model.addAttribute("secteurs", sectorDAO.list());
 
         return "showUpdateVoie";
     }
@@ -54,7 +61,7 @@ public class VoieController
         @RequestParam("secteurfk") int secteurFK,
         Model model) throws BeanException
     {
-        Sector secteur = secteurDAO.get(secteurFK);
+        Sector secteur = sectorDAO.get(secteurFK);
 
         Voie voie = new Voie();
 
@@ -77,7 +84,7 @@ public class VoieController
         @RequestParam("secteurfk") int secteurfk,
         Model model) throws Exception
     {
-        Sector secteur = secteurDAO.get(secteurfk);
+        Sector secteur = sectorDAO.get(secteurfk);
 
         Voie voie = voieDAO.get(id);
 

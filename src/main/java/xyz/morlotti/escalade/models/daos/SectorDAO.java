@@ -57,7 +57,7 @@ public class SectorDAO
 		return query.getResultList();
 	}
 
-	public List list(int parentSpot) throws Exception
+	public List<Sector> list(int parentSpot) throws Exception
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
 
