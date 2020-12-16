@@ -23,11 +23,18 @@ public class SectorController
 	private SpotDAO spotDAO;
 
 	@RequestMapping(path = "/secteurs", method = RequestMethod.GET)
-	public String showSectors(Model model) throws Exception
+	public String showSectors(
+		@RequestParam(name = "spot", required = false) Integer parentSpot, // Le post parent est passé dans l'url en ajoutan ?spot=<id>, il est facultatif et dans ce cas, on aura null dans parentSpot
+		Model model) throws Exception
 	{
 		model.addAttribute("title", "Secteurs");
 
-		model.addAttribute("secteurs", sectorDAO.list());
+		if(parentSpot == null) {
+			model.addAttribute("secteurs", sectorDAO.list());
+		}
+		else {
+			model.addAttribute("secteurs", sectorDAO.list(parentSpot));
+		}
 
 		model.addAttribute("spots", spotDAO.list());
 

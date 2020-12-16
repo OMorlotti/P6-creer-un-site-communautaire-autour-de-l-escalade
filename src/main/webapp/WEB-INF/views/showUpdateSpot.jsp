@@ -67,6 +67,6 @@
 
 <hr />
 
-<iframe src="/Escalade/secteurs" style="width: 100%; height: 600px; border: none;"></iframe>
+<iframe src="/Escalade/secteurs?spot=<spring:out value="${ spot.id }" />" style="width: 100%; height: 600px; border: none;"></iframe>
 
 <%@ include file="../jsp/footer.jsp" %>

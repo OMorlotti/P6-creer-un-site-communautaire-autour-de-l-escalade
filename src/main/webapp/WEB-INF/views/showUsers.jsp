@@ -71,17 +71,26 @@
 </div>
 
 <table class="table table-sm table-striped mt-2">
-    <spring:forEach var="user" items="${ users }">
-    <tr>
-        <td><spring:out value="${ user.firstName }" /></td>
-        <td><spring:out value="${ user.lastName }" /></td>
-        <td><a href="/Escalade/user/<spring:out value="${ user.id }" />">Voir/Editer</a></td>
-        <td>
-        <td><a href="/Escalade/user/delete/<spring:out value="${ user.id }" />">Supprimer</a></td>
-
-        </td>
-    </tr>
-    </spring:forEach>
+    <thead>
+      <tr>
+          <td>Login</td>
+          <td>Prénom</td>
+          <td>Nom de famille</td>
+          <td></td>
+          <td></td>
+      </tr>
+    </thead>
+    <tbody>
+        <spring:forEach var="user" items="${ users }">
+        <tr>
+            <td><spring:out value="${ user.login }" /></td>
+            <td><spring:out value="${ user.firstName }" /></td>
+            <td><spring:out value="${ user.lastName }" /></td>
+            <td><a href="/Escalade/user/<spring:out value="${ user.id }" />">Voir/Editer</a></td>
+            <td><a href="/Escalade/user/delete/<spring:out value="${ user.id }" />">Supprimer</a></td>
+        </tr>
+        </spring:forEach>
+    </tbody>
 </table>
 
 <%@ include file="../jsp/footer.jsp" %>

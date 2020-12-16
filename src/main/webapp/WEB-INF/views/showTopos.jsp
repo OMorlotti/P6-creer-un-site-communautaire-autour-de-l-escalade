@@ -66,17 +66,30 @@
 </div>
 
 <table class="table table-sm table-striped mt-2">
-    <spring:forEach var="topo" items="${ topos }">
-    <tr>
-        <td><spring:out value="${ topo.name }" /></td>
-        <td><spring:out value="${ topo.description }" /></td>
-        <td><spring:out value="${ topo.city }" /></td>
-        <td><spring:out value="${ topo.postalCode }" /></td>
-        <td><spring:if test="${ topo.isAvailable == 'true' }">disponible</spring:if><spring:if test="${ topo.isAvailable == 'false' }">indisponible</spring:if></td>
-        <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir/Editer</a></td>
-        <td><a href="/Escalade/topo/delete/<spring:out value="${ topo.id }" />">Supprimer</a></td>
-    </tr>
-    </spring:forEach>
+    <thead>
+      <tr>
+          <td>Nom</td>
+          <td>Description</td>
+          <td>Ville</td>
+          <td>Code postal</td>
+          <td>Disponibilité</td>
+          <td></td>
+          <td></td>
+      </tr>
+    </thead>
+    <tbody>
+        <spring:forEach var="topo" items="${ topos }">
+        <tr>
+            <td><spring:out value="${ topo.name }" /></td>
+            <td><spring:out value="${ topo.description }" /></td>
+            <td><spring:out value="${ topo.city }" /></td>
+            <td><spring:out value="${ topo.postalCode }" /></td>
+            <td><spring:if test="${ topo.isAvailable == 'true' }">disponible</spring:if><spring:if test="${ topo.isAvailable == 'false' }">indisponible</spring:if></td>
+            <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir/Editer</a></td>
+            <td><a href="/Escalade/topo/delete/<spring:out value="${ topo.id }" />">Supprimer</a></td>
+        </tr>
+        </spring:forEach>
+    </tbody>
 </table>
 
 <%@ include file="../jsp/footer.jsp" %>
