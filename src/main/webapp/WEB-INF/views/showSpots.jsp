@@ -77,7 +77,7 @@
     <thead>
       <tr>
           <td>Nom du spot</td>
-          <td>Login de l'utilisateur</td>
+          <td>Login</td>
           <td>Nom du topo</td>
           <td>Département</td>
           <td></td>

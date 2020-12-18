@@ -62,6 +62,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Escalade/cotations">Cotations</a
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/reservations">Réservations</a
+                    </li>
                 </ul>
             </div>
         </nav>
