@@ -64,4 +64,8 @@
 
 </form>
 
+<hr />
+
+<iframe src="/Escalade/addresses?user=<spring:out value="${ user.id }" />" style="width: 100%; height: 600px; border: none;"></iframe>
+
 <%@ include file="../jsp/footer.jsp" %>

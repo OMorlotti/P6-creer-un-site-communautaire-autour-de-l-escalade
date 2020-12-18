@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.morlotti.escalade.models.beans.Address;
-import xyz.morlotti.escalade.models.beans.Length;
 import xyz.morlotti.escalade.models.beans.User;
 import xyz.morlotti.escalade.models.daos.AddressDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;
@@ -22,36 +21,45 @@ public class AddressController
     @Autowired
     private UserDAO userDAO;
 
-    @RequestMapping(path = "/adresses", method = RequestMethod.GET)
-    public String showAddresses(Model model) throws Exception
+    @RequestMapping(path = "/addresses", method = RequestMethod.GET)
+    public String showAddresses(
+        @RequestParam(name = "user", required = false) Integer parentUser,
+        Model model) throws Exception
     {
         model.addAttribute("title", "Adresses");
 
-        model.addAttribute("adresses", addressDAO.list());
+        if(parentUser != null) {
+            model.addAttribute("addresses", addressDAO.list(parentUser));
+        }
+        else {
+            model.addAttribute("addresses", addressDAO.list());
+        }
 
         model.addAttribute("users", userDAO.list());
 
-        return "showAdresses";
+        return "showAddresses";
     }
 
-    @RequestMapping(path = "/adresse/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/address/{id}", method = RequestMethod.GET)
     public String showAddress(@PathVariable(value = "id") final int id, Model model) throws Exception
     {
         model.addAttribute("title", "adresse");
 
-        model.addAttribute("user", userDAO.get(id));
+        model.addAttribute("address", addressDAO.get(id));
+
+        model.addAttribute("users", userDAO.list());
 
         return "showUpdateAddress";
     }
 
     // @Valid @ModelAttribute Secteur secteur
 
-    @RequestMapping(path = "/adresse", method = RequestMethod.POST)
+    @RequestMapping(path = "/address", method = RequestMethod.POST)
     public String addAddress(
         @RequestParam("userfk") int userFK,
         @RequestParam("street") String street,
-        @RequestParam("streetname") String streetname,
-        @RequestParam("postalcode") String postalcode,
+        @RequestParam("streetname") String streetName,
+        @RequestParam("postalcode") String postalCode,
         @RequestParam("city") String city,
         @RequestParam("country") String country,
         Model model)
@@ -62,8 +70,8 @@ public class AddressController
 
         address.setUserFK(user);
         address.setStreet(street);
-        address.setStreetName(street);
-        address.setPostalCode(postalcode);
+        address.setStreetName(streetName);
+        address.setPostalCode(postalCode);
         address.setCity(city);
         address.setCountry(country);
 
@@ -74,7 +82,7 @@ public class AddressController
         return "addAddress";
     }
 
-    @RequestMapping(path = "/adresse/update/{id}", method = RequestMethod.POST)
+    @RequestMapping(path = "/address/update/{id}", method = RequestMethod.POST)
     public String updateAddress(
         @PathVariable(value = "id") final int id,
         @RequestParam("userfk") int userFK,
@@ -82,7 +90,6 @@ public class AddressController
         @RequestParam("streetname") String streetName,
         @RequestParam("postalcode") String postalCode,
         @RequestParam("city") String city,
-        @RequestParam("longitude") String longitude,
         @RequestParam("country") String country,
         Model model) throws Exception
     {
@@ -92,7 +99,7 @@ public class AddressController
 
         address.setUserFK(user);
         address.setStreet(street);
-        address.setStreetName(street);
+        address.setStreetName(streetName);
         address.setPostalCode(postalCode);
         address.setCity(city);
         address.setCountry(country);
@@ -105,13 +112,14 @@ public class AddressController
 
         model.addAttribute("message_type", "success");
 
-        model.addAttribute("users", userDAO.list());
+        model.addAttribute("address", address);
 
+        model.addAttribute("users", userDAO.list());
 
         return "showUpdateAddress";
     }
 
-    @RequestMapping(path = "/adresse/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/address/delete/{id}", method = RequestMethod.GET)
     public String deleteAddress(@PathVariable(value = "id") final int id, Model model)
     {
         addressDAO.delete(id);

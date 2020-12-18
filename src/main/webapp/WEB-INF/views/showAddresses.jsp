@@ -1,11 +1,24 @@
-<%@ include file="../jsp/header.jsp" %>
+<%@ include file="../jsp/headerFrame.jsp" %>
 
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addressform">Ajouter une adresse</button>
 
 <div class="card mt-1 collapse" id="addressform">
     <div class="card-body">
-        <form method="POST" action="/Escalade/adresse">
+        <form method="POST" action="/Escalade/address">
 
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="user">Utilisateur :</label>
+                <div class="col-sm-10">
+                    <select class="custom-select custom-select-sm" name="userfk" id="user">
+                        <spring:forEach var="user" items="${ users }">
+                            <option value="<spring:out value="${ user.id }" />">
+                                <spring:out value="${ user.firstName }" />
+                                <spring:out value="${ user.lastName }" />
+                            </option>
+                        </spring:forEach>
+                    </select>
+                </div>
+            </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="street">Numéro de voie :</label>
                 <div class="col-sm-10">
@@ -61,11 +74,11 @@
             <td><spring:out value="${ address.streetName }" /></td>
             <td><spring:out value="${ address.postalCode }" /></td>
             <td><spring:out value="${ address.city }" /></td>
-            <td><a href="/Escalade/address/<spring:out value="${ user.id }" />">Voir/Editer</a></td>
+            <td><a href="/Escalade/address/<spring:out value="${ address.id }" />">Voir/Editer</a></td>
             <td><a href="/Escalade/address/delete/<spring:out value="${ address.id }" />">Supprimer</a></td>
         </tr>
         </spring:forEach>
     </tbody>
 </table>
 
-<%@ include file="../jsp/footer.jsp" %>
+<%@ include file="../jsp/footerFrame.jsp" %>

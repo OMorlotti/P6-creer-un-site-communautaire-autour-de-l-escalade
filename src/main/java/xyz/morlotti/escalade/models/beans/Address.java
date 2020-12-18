@@ -82,7 +82,7 @@ public class Address
 		return streetName;
 	}
 
-	public void setStreetName(String streetname)
+	public void setStreetName(String streetName)
 	{
 		this.streetName = streetName;
 	}
@@ -112,7 +112,7 @@ public class Address
 		return country;
 	}
 
-	public void setCountry(String longitude)
+	public void setCountry(String country)
 	{
 		this.country = country;
 	}
