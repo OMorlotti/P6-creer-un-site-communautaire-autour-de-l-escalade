@@ -36,6 +36,15 @@
 </div>
 
 <table class="table table-sm table-striped mt-2">
+    <thead>
+      <tr>
+          <td>Id</td>
+          <td>Nom du secteur</td>
+          <td>Nom du spot</td>
+          <td></td>
+          <td></td>
+      </tr>
+    </thead>
     <spring:forEach var="secteur" items="${ secteurs }">
     <tr>
         <td><spring:out value="${ secteur.id }" /></td>

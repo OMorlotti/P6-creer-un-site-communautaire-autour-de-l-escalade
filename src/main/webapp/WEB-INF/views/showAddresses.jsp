@@ -4,7 +4,7 @@
 
 <div class="card mt-1 collapse" id="addressform">
     <div class="card-body">
-        <form method="POST" action="/Escalade/address">
+        <form method="POST" action="/Escalade/adresse">
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="street">Numéro de voie :</label>
@@ -19,48 +19,21 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="login">Login :</label>
+                <label class="col-sm-2 col-form-label" for="postalcode">Code postal :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="login" id="login" />
+                    <input class="form-control form-control-sm" type="text" name="postalcode" id="postalcode" />
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="password">Mot de passe :</label>
+                <label class="col-sm-2 col-form-label" for="city">Ville :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="password" name="password" id="password" />
+                    <input class="form-control form-control-sm" type="text" name="city" id="city" />
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="sex">Sexe :</label>
+                <label class="col-sm-2 col-form-label" for="country">Pays :</label>
                 <div class="col-sm-10">
-                    <select class="custom-select custom-select-sm" name="sex" id="sex">
-                        <option value="F">Femme</option>
-                        <option value="M">Homme</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="birthdate">Date de naissance :</label>
-                <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="date" name="birthdate" id="birthdate" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="phone">Numéro de téléphone :</label>
-                <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="phone" id="phone" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="email">Email :</label>
-                <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="email" name="email" id="email" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="role">Rôle :</label>
-                <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="role" value="GUEST" id="role" readonly="readonly" />
+                    <input class="form-control form-control-sm" type="text" name="country" id="country" />
                 </div>
             </div>
 
@@ -73,21 +46,23 @@
 <table class="table table-sm table-striped mt-2">
     <thead>
       <tr>
-          <td>Login</td>
-          <td>Prénom</td>
-          <td>Nom de famille</td>
+          <td>N° de voie</td>
+          <td>Nom de voie</td>
+          <td>Code postal</td>
+          <td>Ville</td>
           <td></td>
           <td></td>
       </tr>
     </thead>
     <tbody>
-        <spring:forEach var="user" items="${ users }">
+        <spring:forEach var="address" items="${ addresses }">
         <tr>
-            <td><spring:out value="${ user.login }" /></td>
-            <td><spring:out value="${ user.firstName }" /></td>
-            <td><spring:out value="${ user.lastName }" /></td>
-            <td><a href="/Escalade/user/<spring:out value="${ user.id }" />">Voir/Editer</a></td>
-            <td><a href="/Escalade/user/delete/<spring:out value="${ user.id }" />">Supprimer</a></td>
+            <td><spring:out value="${ address.street }" /></td>
+            <td><spring:out value="${ address.streetName }" /></td>
+            <td><spring:out value="${ address.postalCode }" /></td>
+            <td><spring:out value="${ address.city }" /></td>
+            <td><a href="/Escalade/address/<spring:out value="${ user.id }" />">Voir/Editer</a></td>
+            <td><a href="/Escalade/address/delete/<spring:out value="${ address.id }" />">Supprimer</a></td>
         </tr>
         </spring:forEach>
     </tbody>

@@ -74,6 +74,16 @@
 </div>
 
 <table class="table table-sm table-striped mt-2">
+    <thead>
+      <tr>
+          <td>Nom du spot</td>
+          <td>Login de l'utilisateur</td>
+          <td>Nom du topo</td>
+          <td>Département</td>
+          <td></td>
+          <td></td>
+      </tr>
+    </thead>
     <spring:forEach var="spot" items="${ spots }">
     <tr>
         <td><spring:out value="${ spot.name }" /></td>
