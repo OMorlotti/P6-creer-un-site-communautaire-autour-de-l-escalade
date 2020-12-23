@@ -2,6 +2,7 @@ package xyz.morlotti.escalade.models.daos;
 
 import java.util.*;
 
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -50,12 +51,24 @@ public class UserDAO
         return currentSession.find(User.class, id);
     }
 
+    public User get(String login, String password)
+    {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        TypedQuery<User> query = currentSession.createQuery("SELECT u FROM USER u WHERE u.login = ?1 AND u.password = ?2", User.class);
+
+        return query.setParameter(1, login)
+                    .setParameter(2, password)
+                    .getSingleResult()
+        ;
+    }
+
     public List<User> list() throws Exception
     {
         Session currentSession = sessionFactory.getCurrentSession();
 
-        Query query = currentSession.createQuery("SELECT u FROM USER u");
+        TypedQuery<User> query = currentSession.createQuery("SELECT u FROM USER u", User.class);
 
-        return query.list();
+        return query.getResultList();
     }
 }
