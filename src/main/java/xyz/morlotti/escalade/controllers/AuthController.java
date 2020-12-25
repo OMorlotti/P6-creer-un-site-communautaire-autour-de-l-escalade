@@ -1,41 +1,26 @@
 package xyz.morlotti.escalade.controllers;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.context.annotation.SessionScope;
 import xyz.morlotti.escalade.models.beans.User;
 import xyz.morlotti.escalade.models.daos.UserDAO;
 
 import javax.persistence.NoResultException;
 
 @Controller
-@SessionAttributes(value = "currentUser", types = {User.class})
-public class AuthController
+public class AuthController extends AbstractController
 {
     @Autowired
     private UserDAO userDAO;
 
-    private void setGestUserInfo(User user)
-    {
-        user.setId(0);
-        user.setFirstName("guest");
-        user.setLastName("guest");
-        user.setLogin("guest");
-        user.setPassword("guest");
-        user.setRole(User.Role.GUEST);
-    }
-
-    @ModelAttribute
-    public void addAttributes(Model model)
-    {
-        User user = new User();
-
-        setGestUserInfo(user);
-
-        model.addAttribute("currentUser", user);
-    }
+    /*----------------------------------------------------------------------------------------------------------------*/
 
     @RequestMapping(path = "/login", method = RequestMethod.GET)
     public String loginStep1(Model model) throws Exception
@@ -75,7 +60,7 @@ public class AuthController
 
         User currentUser = (User) model.getAttribute("currentUser");
 
-        setGestUserInfo(currentUser);
+        currentUser.initGuest();
 
         return "logout";
     }

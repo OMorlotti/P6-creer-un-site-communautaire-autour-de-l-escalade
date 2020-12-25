@@ -10,7 +10,7 @@ import xyz.morlotti.escalade.models.daos.UserDAO;
 import xyz.morlotti.escalade.models.BeanException;
 
 @Controller
-public class UserController
+public class UserController extends AbstractController
 {
 	@Autowired
 	private UserDAO m_userDAO;

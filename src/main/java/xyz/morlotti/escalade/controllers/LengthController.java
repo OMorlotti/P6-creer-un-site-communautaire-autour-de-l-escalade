@@ -17,7 +17,7 @@ import xyz.morlotti.escalade.models.daos.LengthDAO;
 import xyz.morlotti.escalade.models.daos.VoieDAO;
 
 @Controller
-public class LengthController
+public class LengthController extends AbstractController
 {
     @Autowired
     private LengthDAO lengthDAO;

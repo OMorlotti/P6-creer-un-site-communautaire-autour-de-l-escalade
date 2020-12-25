@@ -14,7 +14,7 @@ import xyz.morlotti.escalade.models.daos.LengthDAO;
 import xyz.morlotti.escalade.models.daos.VoieDAO;
 
 @Controller
-public class CotationController
+public class CotationController extends AbstractController
 {
     @Autowired
     private CotationDAO cotationDAO;

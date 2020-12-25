@@ -68,7 +68,12 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <spring:choose>
-                        <spring:when test="${currentUser ne null and not (currentUser.id eq 0)}">
+                        <spring:when test="${currentUser.id eq 0}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Escalade/login">S'authentifier</a>
+                            </li>
+                        </spring:when>
+                        <spring:otherwise>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                                     😷 <spring:out value="${ currentUser.firstName }" /> <spring:out value="${ currentUser.lastName }" />
@@ -77,11 +82,6 @@
                                     <a class="dropdown-item" href="/Escalade/user/<spring:out value="${ currentUser.id }" />">Espace personnel</a>
                                     <a class="dropdown-item" href="/Escalade/logout">Déconnecter</a>
                                 </div>
-                            </li>
-                        </spring:when>
-                        <spring:otherwise>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Escalade/login">S'authentifier</a>
                             </li>
                         </spring:otherwise>
                     </spring:choose>

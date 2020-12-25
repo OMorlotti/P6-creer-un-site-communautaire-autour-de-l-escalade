@@ -14,7 +14,7 @@ import xyz.morlotti.escalade.models.daos.SectorDAO;
 import xyz.morlotti.escalade.models.daos.VoieDAO;
 
 @Controller
-public class VoieController
+public class VoieController extends AbstractController
 {
     @Autowired
     private VoieDAO voieDAO;

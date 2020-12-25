@@ -1,5 +1,6 @@
 package xyz.morlotti.escalade.models.beans;
 
+import java.io.Serializable;
 import java.text.*;
 import java.util.*;
 
@@ -8,11 +9,13 @@ import javax.validation.constraints.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.context.annotation.SessionScope;
 import xyz.morlotti.escalade.models.BeanException;
 
 @Table(name = "USER")
 @Entity(name = "USER")
-public class User
+public class User implements Serializable
 {
 	/*----------------------------------------------------------------------------------------------------------------*/
 
@@ -133,6 +136,26 @@ public class User
 	@CreationTimestamp
 	@Column(name = "created", unique = false, nullable = false)
 	private Date created;
+
+	/*----------------------------------------------------------------------------------------------------------------*/
+
+	public void initGuest()
+	{
+		Date currentDate = new Date();
+
+		this.id = 0;
+		this.lastName = "guest";
+		this.firstName = "guest";
+		this.login = "guest";
+		this.password = "guest";
+		this.sex = Sex.M;
+		this.birthdate = currentDate;
+		this.phone = "";
+		this.email = "guest@guest.com";
+		this.role = User.Role.GUEST;
+		this.custom = "";
+		this.created = currentDate;
+	}
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 

@@ -15,7 +15,7 @@ import xyz.morlotti.escalade.models.daos.TopoDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;
 
 @Controller
-public class SpotController
+public class SpotController extends AbstractController
 {
     @Autowired
     private SpotDAO spotDAO;

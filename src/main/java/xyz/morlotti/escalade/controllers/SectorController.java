@@ -14,7 +14,7 @@ import xyz.morlotti.escalade.models.daos.SectorDAO;
 import xyz.morlotti.escalade.models.daos.SpotDAO;
 
 @Controller
-public class SectorController
+public class SectorController extends AbstractController
 {
 	@Autowired
 	private SectorDAO sectorDAO;
