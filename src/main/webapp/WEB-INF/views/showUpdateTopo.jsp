@@ -41,19 +41,28 @@
             </select>
         </div>
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="user">Utilisateur :</label>
-        <div class="col-sm-10">
-            <select class="custom-select custom-select-sm" name="userfk" id="user">
-                <spring:forEach var="user" items="${ users }">
-                    <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == topo.userFK.id }"> selected</spring:if>>
-                        <spring:out value="${ user.firstName }" />
-                        <spring:out value="${ user.lastName }" />
-                    </option>
-                </spring:forEach>
-            </select>
-        </div>
-    </div>
+    <spring:choose>
+        <spring:when test="${currentUser.role eq 'ADMIN'}">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="userfk">Utilisateur :</label>
+                <div class="col-sm-10">
+                    <select class="custom-select custom-select-sm" name="userfk" id="userfk">
+                        <spring:forEach var="user" items="${ users }">
+                            <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == currentUser.id }"> selected</spring:if>>
+                                <spring:out value="${ user.login }" />
+                                -
+                                <spring:out value="${ user.firstName }" />
+                                <spring:out value="${ user.lastName }" />
+                            </option>
+                        </spring:forEach>
+                    </select>
+                </div>
+            </div>
+        </spring:when>
+        <spring:otherwise>
+            <input type="hidden" name="userfk" value="<spring:out value="${ currentUser.id }" />" id="userfk" />
+        </spring:otherwise>
+    </spring:choose>
 
     <button class="btn btn-primary" type="submit">Envoyer</button>
 

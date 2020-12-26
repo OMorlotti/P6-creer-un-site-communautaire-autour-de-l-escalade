@@ -2,7 +2,9 @@
 
 <h4>Liste des secteurs</h4>
 
+<spring:if test="${not (currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#secteurform">Ajouter un secteur</button>
+</spring:if>
 
 <div class="card mt-1 collapse" id="secteurform">
     <div class="card-body">
@@ -41,19 +43,25 @@
           <td>Id</td>
           <td>Nom du secteur</td>
           <td>Nom du spot</td>
+          <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
+          </spring:if>
       </tr>
     </thead>
-    <spring:forEach var="secteur" items="${ secteurs }">
-    <tr>
-        <td><spring:out value="${ secteur.id }" /></td>
-        <td><spring:out value="${ secteur.name }" /></td>
-        <td><spring:out value="${ secteur.spotFK.name }" /></td>
-        <td><a href="/Escalade/secteur/<spring:out value="${ secteur.id }" />" target="_blank">Voir/Editer</a></td>
-        <td><a href="/Escalade/secteur/delete/<spring:out value="${ secteur.id }" />">Supprimer</a></td>
-    </tr>
-    </spring:forEach>
+    <tbody>
+        <spring:forEach var="secteur" items="${ secteurs }">
+        <tr>
+            <td><spring:out value="${ secteur.id }" /></td>
+            <td><spring:out value="${ secteur.name }" /></td>
+            <td><spring:out value="${ secteur.spotFK.name }" /></td>
+            <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
+            <td><a href="/Escalade/secteur/<spring:out value="${ secteur.id }" />" target="_blank">Voir/Editer</a></td>
+            <td><a href="/Escalade/secteur/delete/<spring:out value="${ secteur.id }" />">Supprimer</a></td>
+            </spring:if>
+        </tr>
+        </spring:forEach>
+    </tbody>
 </table>
 
 <%@ include file="../jsp/footerFrame.jsp" %>

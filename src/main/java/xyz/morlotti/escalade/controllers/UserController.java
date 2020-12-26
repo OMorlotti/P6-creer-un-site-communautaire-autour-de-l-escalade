@@ -18,11 +18,22 @@ public class UserController extends AbstractController
 	@RequestMapping(path = "/users", method = RequestMethod.GET)
 	public String showUsers(Model model) throws Exception
 	{
-		model.addAttribute("title", "Utilisateurs");
+		User currentUser = (User) model.getAttribute("currentUser");
 
-		model.addAttribute("users", m_userDAO.list());
+		if(currentUser.getRole() == User.Role.ADMIN // Si on est ADMIN
+		   ||
+		   currentUser.getId() == -1 // Si on est pas connecté
+		) {
+			model.addAttribute("title", "Utilisateurs");
 
-		return "showUsers";
+			model.addAttribute("users", m_userDAO.list());
+
+			return "showUsers";
+		}
+		else
+		{
+			return showUser(currentUser.getId(), model);
+		}
 	}
 
 	@RequestMapping(path = "/user/{id}", method = RequestMethod.GET)
@@ -34,8 +45,6 @@ public class UserController extends AbstractController
 
 		return "showUpdateUser";
 	}
-
-	// @Valid @ModelAttribute User user
 
 	@RequestMapping(path = "/user", method = RequestMethod.POST)
 	public String addUser(

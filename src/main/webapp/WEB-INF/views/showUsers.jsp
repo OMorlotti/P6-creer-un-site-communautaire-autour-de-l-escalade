@@ -60,7 +60,19 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="role">Rôle :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="role" value="GUEST" id="role" readonly="readonly" />
+                    <spring:choose>
+                        <spring:when test="${currentUser.role eq 'ADMIN'}">
+                            <select class="custom-select custom-select-sm" name="role">
+                                <option value="GUEST" selected>Invité</option>
+                                <option value="USER">Utilisateur non membre</option>
+                                <option value="MEMBER">Utilisateur membre</option>
+                                <option value="ADMIN">Administrateur</option>
+                            </select>
+                        </spring:when>
+                        <spring:otherwise>
+                            <input class="form-control form-control-sm" type="text" name="role" value="GUEST" id="role" readonly="readonly" />
+                        </spring:otherwise>
+                    </spring:choose>
                 </div>
             </div>
 
@@ -70,6 +82,9 @@
     </div>
 </div>
 
+<!-- La liste d'utilisateurs n'est affichée que pour les ADMINS -->
+
+<spring:if test="${currentUser.role eq 'ADMIN'}">
 <table class="table table-sm table-striped mt-2">
     <thead>
       <tr>
@@ -92,5 +107,6 @@
         </spring:forEach>
     </tbody>
 </table>
+</spring:if>
 
 <%@ include file="../jsp/footer.jsp" %>

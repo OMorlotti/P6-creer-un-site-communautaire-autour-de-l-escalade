@@ -2,7 +2,9 @@
 
 <h4>Liste des voies</h4>
 
+<spring:if test="${not (currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#voieform">Ajouter une voie</button>
+</spring:if>
 
 <div class="card mt-1 collapse" id="voieform">
     <div class="card-body">
@@ -41,19 +43,25 @@
           <td>Id</td>
           <td>Hauteur de la voie</td>
           <td>Nom du secteur</td>
+          <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
+          </spring:if>
        </tr>
     </thead>
-    <spring:forEach var="voie" items="${ voies }">
-    <tr>
-        <td><spring:out value="${ voie.id }" /></td>
-        <td><spring:out value="${ voie.height }" /></td>
-        <td><spring:out value="${ voie.secteurFK.name }" /></td>
-        <td><a href="/Escalade/voie/<spring:out value="${ voie.id }" />" target="_blank">Voir/Editer</a></td>
-        <td><a href="/Escalade/voie/delete/<spring:out value="${ voie.id }" />">Supprimer</a></td>
-    </tr>
-    </spring:forEach>
+    <tbody>
+        <spring:forEach var="voie" items="${ voies }">
+        <tr>
+            <td><spring:out value="${ voie.id }" /></td>
+            <td><spring:out value="${ voie.height }" /></td>
+            <td><spring:out value="${ voie.secteurFK.name }" /></td>
+            <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
+            <td><a href="/Escalade/voie/<spring:out value="${ voie.id }" />" target="_blank">Voir/Editer</a></td>
+            <td><a href="/Escalade/voie/delete/<spring:out value="${ voie.id }" />">Supprimer</a></td>
+            </spring:if>
+        </tr>
+        </spring:forEach>
+    </tbody>
 </table>
 
 <%@ include file="../jsp/footerFrame.jsp" %>

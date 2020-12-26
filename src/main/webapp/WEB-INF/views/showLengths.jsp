@@ -2,7 +2,9 @@
 
 <h4>Liste des longueurs</h4>
 
+<spring:if test="${not (currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#lengthform">Ajouter une longueur</button>
+</spring:if>
 
 <div class="card mt-1 collapse" id="lengthform">
     <div class="card-body">
@@ -50,15 +52,30 @@
 </div>
 
 <table class="table table-sm table-striped mt-2">
-    <spring:forEach var="length" items="${ lengths }">
-    <tr>
-        <td><spring:out value="${ length.id }" /></td>
-        <td><spring:out value="${ length.voieFK.height }" /></td>
-        <td><spring:out value="${ length.cotationFK.name }" /></td>
-        <td><a href="/Escalade/longueur/<spring:out value="${ length.id }" />" target="_blank">Voir/Editer</a></td>
-        <td><a href="/Escalade/longueur/delete/<spring:out value="${ length.id }" />">Supprimer</a></td>
-    </tr>
-    </spring:forEach>
+    <thead>
+      <tr>
+          <td>Id</td>
+          <td>Hauteur de la voie</td>
+          <td>Cotation</td>
+          <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
+          <td></td>
+          <td></td>
+          </spring:if>
+       </tr>
+    </thead>
+    <tbody>
+        <spring:forEach var="length" items="${ lengths }">
+        <tr>
+            <td><spring:out value="${ length.id }" /></td>
+            <td><spring:out value="${ length.voieFK.height }" /></td>
+            <td><spring:out value="${ length.cotationFK.name }" /></td>
+            <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
+            <td><a href="/Escalade/longueur/<spring:out value="${ length.id }" />" target="_blank">Voir/Editer</a></td>
+            <td><a href="/Escalade/longueur/delete/<spring:out value="${ length.id }" />">Supprimer</a></td>
+            </spring:if>
+        </tr>
+        </spring:forEach>
+    </tbody>
 </table>
 
 <%@ include file="../jsp/footerFrame.jsp" %>

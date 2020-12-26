@@ -1,6 +1,8 @@
 <%@ include file="../jsp/header.jsp" %>
 
+<spring:if test="${not (currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#topoform">Ajouter un topo</button>
+</spring:if>
 
 <div class="card mt-1 collapse" id="topoform">
     <div class="card-body">
@@ -45,19 +47,28 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="user">Utilisateur :</label>
-                <div class="col-sm-10">
-                    <select class="custom-select custom-select-sm" name="userfk" id="user">
-                        <spring:forEach var="user" items="${ users }">
-                            <option value="<spring:out value="${ user.id }" />">
-                                <spring:out value="${ user.firstName }" />
-                                <spring:out value="${ user.lastName }" />
-                            </option>
-                        </spring:forEach>
-                    </select>
-                </div>
-            </div>
+            <spring:choose>
+                <spring:when test="${currentUser.role eq 'ADMIN'}">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="userfk">Utilisateur :</label>
+                        <div class="col-sm-10">
+                            <select class="custom-select custom-select-sm" name="userfk" id="userfk">
+                                <spring:forEach var="user" items="${ users }">
+                                    <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == currentUser.id }"> selected</spring:if>>
+                                        <spring:out value="${ user.login }" />
+                                        -
+                                        <spring:out value="${ user.firstName }" />
+                                        <spring:out value="${ user.lastName }" />
+                                    </option>
+                                </spring:forEach>
+                            </select>
+                        </div>
+                    </div>
+                </spring:when>
+                <spring:otherwise>
+                    <input type="hidden" name="userfk" value="<spring:out value="${ currentUser.id }" />" id="userfk" />
+                </spring:otherwise>
+            </spring:choose>
 
             <button class="btn btn-primary" type="submit">Envoyer</button>
 
@@ -85,8 +96,16 @@
             <td><spring:out value="${ topo.city }" /></td>
             <td><spring:out value="${ topo.postalCode }" /></td>
             <td><spring:if test="${ topo.isAvailable == 'true' }">disponible</spring:if><spring:if test="${ topo.isAvailable == 'false' }">indisponible</spring:if></td>
-            <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir/Editer</a></td>
-            <td><a href="/Escalade/topo/delete/<spring:out value="${ topo.id }" />">Supprimer</a></td>
+            <spring:choose>
+                <spring:when test="${topo.userFK.id eq currentUser.id or currentUser.role eq 'ADMIN'}">
+                    <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir/Editer</a></td>
+                    <td><a href="/Escalade/topo/delete/<spring:out value="${ topo.id }" />">Supprimer</a></td>
+                </spring:when>
+                <spring:otherwise>
+                    <td>-</td>
+                    <td>-</td>
+                </spring:otherwise>
+            </spring:choose>
         </tr>
         </spring:forEach>
     </tbody>

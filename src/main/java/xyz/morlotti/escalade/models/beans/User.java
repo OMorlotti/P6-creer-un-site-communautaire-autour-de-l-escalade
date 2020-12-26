@@ -55,7 +55,7 @@ public class User implements Serializable
 
 	public enum Role
 	{
-		GUEST("GUEST"), USER("USER"), MEMBER("MEMBER");
+		GUEST("GUEST"), USER("USER"), MEMBER("MEMBER"), ADMIN("ADMIN");
 
 		private final String value;
 
@@ -143,7 +143,7 @@ public class User implements Serializable
 	{
 		Date currentDate = new Date();
 
-		this.id = 0;
+		this.id = -1;
 		this.lastName = "guest";
 		this.firstName = "guest";
 		this.login = "guest";

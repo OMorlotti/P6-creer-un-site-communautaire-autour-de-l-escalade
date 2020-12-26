@@ -8,31 +8,40 @@
             <input class="form-control form-control-sm" type="text" name="name" id="name" value="<spring:out value="${ spot.name }" />" />
         </div>
     </div>
+    <spring:choose>
+        <spring:when test="${currentUser.role eq 'ADMIN'}">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="userfk">Utilisateur :</label>
+                <div class="col-sm-10">
+                    <select class="custom-select custom-select-sm" name="userfk" id="userfk">
+                        <spring:forEach var="user" items="${ users }">
+                            <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == currentUser.id }"> selected</spring:if>>
+                                <spring:out value="${ user.login }" />
+                                -
+                                <spring:out value="${ user.firstName }" />
+                                <spring:out value="${ user.lastName }" />
+                            </option>
+                        </spring:forEach>
+                    </select>
+                </div>
+            </div>
+        </spring:when>
+        <spring:otherwise>
+            <input type="hidden" name="userfk" value="<spring:out value="${ currentUser.id }" />" id="userfk" />
+        </spring:otherwise>
+    </spring:choose>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label" for="user">Utilisateur :</label>
+        <label class="col-sm-2 col-form-label" for="topo">Topo :</label>
         <div class="col-sm-10">
-            <select class="custom-select custom-select-sm" name="userfk" id="user">
-                <spring:forEach var="user" items="${ users }">
-                    <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == spot.userFK.id }"> selected</spring:if>>
-                        <spring:out value="${ user.firstName }" />
-                        <spring:out value="${ user.lastName }" />
+            <select class="custom-select custom-select-sm" name="topofk" id="topo">
+                <spring:forEach var="topo" items="${ topos }">
+                    <option value="<spring:out value="${ topo.id }" />"<spring:if test="${ topo.id == spot.topoFK.id }"> selected</spring:if>>
+                        <spring:out value="${ topo.name }" />
                     </option>
                 </spring:forEach>
             </select>
         </div>
     </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="topo">Topo :</label>
-            <div class="col-sm-10">
-                <select class="custom-select custom-select-sm" name="topofk" id="topo">
-                    <spring:forEach var="topo" items="${ topos }">
-                        <option value="<spring:out value="${ topo.id }" />"<spring:if test="${ topo.id == spot.topoFK.id }"> selected</spring:if>>
-                            <spring:out value="${ topo.name }" />
-                        </option>
-                    </spring:forEach>
-                </select>
-            </div>
-        </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="departement">Département :</label>
         <div class="col-sm-10">

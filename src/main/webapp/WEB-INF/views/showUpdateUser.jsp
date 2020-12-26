@@ -56,7 +56,19 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="role">Rôle :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="role" value="GUEST" value="<spring:out value="${ user.role }" />" readonly="readonly" />
+            <spring:choose>
+                <spring:when test="${currentUser.role eq 'ADMIN'}">
+                    <select class="custom-select custom-select-sm" name="role">
+                        <option value="GUEST"<spring:if test="${ user.role == 'GUEST' }"> selected</spring:if>>Invité</option>
+                        <option value="USER"<spring:if test="${ user.role == 'USER' }"> selected</spring:if>>Utilisateur non membre</option>
+                        <option value="MEMBER"<spring:if test="${ user.role == 'MEMBER' }"> selected</spring:if>>Utilisateur membre</option>
+                        <option value="ADMIN"<spring:if test="${ user.role == 'ADMIN' }"> selected</spring:if>>Administrateur</option>
+                    </select>
+                </spring:when>
+                <spring:otherwise>
+                    <input class="form-control form-control-sm" type="text" name="role" value="GUEST" id="role" readonly="readonly" />
+                </spring:otherwise>
+            </spring:choose>
         </div>
     </div>
 

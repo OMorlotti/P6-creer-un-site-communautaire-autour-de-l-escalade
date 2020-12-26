@@ -68,7 +68,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <spring:choose>
-                        <spring:when test="${currentUser.id eq 0}">
+                        <spring:when test="${currentUser.id eq -1}">
                             <li class="nav-item">
                                 <a class="nav-link" href="/Escalade/login">S'authentifier</a>
                             </li>
