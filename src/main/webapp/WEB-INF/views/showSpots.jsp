@@ -1,6 +1,6 @@
 <%@ include file="../jsp/header.jsp" %>
 
-<spring:if test="${not (currentUser.id eq -1)}">
+<spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#spotform">Ajouter un spot</button>
 </spring:if>
 
@@ -15,13 +15,13 @@
                 </div>
             </div>
             <spring:choose>
-                <spring:when test="${currentUser.role eq 'ADMIN'}">
+                <spring:when test="${sessionScope.currentUser.role eq 'ADMIN'}">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="userfk">Utilisateur :</label>
                         <div class="col-sm-10">
                             <select class="custom-select custom-select-sm" name="userfk" id="userfk">
                                 <spring:forEach var="user" items="${ users }">
-                                    <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == currentUser.id }"> selected</spring:if>>
+                                    <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == sessionScope.currentUser.id }"> selected</spring:if>>
                                         <spring:out value="${ user.login }" />
                                         -
                                         <spring:out value="${ user.firstName }" />
@@ -33,7 +33,7 @@
                     </div>
                 </spring:when>
                 <spring:otherwise>
-                    <input type="hidden" name="userfk" value="<spring:out value="${ currentUser.id }" />" id="userfk" />
+                    <input type="hidden" name="userfk" value="<spring:out value="${ sessionScope.currentUser.id }" />" id="userfk" />
                 </spring:otherwise>
             </spring:choose>
             <div class="form-group row">
@@ -90,7 +90,7 @@
           <td>Nom du topo</td>
           <td>Département</td>
           <td>Officiel</td>
-          <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
+          <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
           </spring:if>
@@ -104,7 +104,7 @@
             <td><spring:out value="${ spot.topoFK.name }" /></td>
             <td><spring:out value="${ spot.departement }" /></td>
             <td><spring:if test="${ spot.isOfficial == 'true' }">Officiel</spring:if><spring:if test="${ spot.isOfficial == 'false' }">Non officiel</spring:if></td>
-            <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
+            <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
             <td><a href="/Escalade/spot/<spring:out value="${ spot.id }" />">Voir/Editer</a></td>
             <td><a href="/Escalade/spot/delete/<spring:out value="${ spot.id }" />">Supprimer</a></td>
             </spring:if>

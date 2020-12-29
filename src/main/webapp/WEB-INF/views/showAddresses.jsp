@@ -63,7 +63,7 @@
           <td>Nom de voie</td>
           <td>Code postal</td>
           <td>Ville</td>
-          <spring:if test="${not (currentUser.id eq -1)}">
+          <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
           <td></td>
           <td></td>
           </spring:if>
@@ -76,7 +76,7 @@
             <td><spring:out value="${ address.streetName }" /></td>
             <td><spring:out value="${ address.postalCode }" /></td>
             <td><spring:out value="${ address.city }" /></td>
-            <spring:if test="${not (currentUser.id eq -1)}">
+            <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
             <td><a href="/Escalade/address/<spring:out value="${ address.id }" />">Voir/Editer</a></td>
             <td><a href="/Escalade/address/delete/<spring:out value="${ address.id }" />">Supprimer</a></td>
             </spring:if>

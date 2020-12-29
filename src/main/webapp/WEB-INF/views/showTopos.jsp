@@ -1,6 +1,6 @@
 <%@ include file="../jsp/header.jsp" %>
 
-<spring:if test="${not (currentUser.id eq -1)}">
+<spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#topoform">Ajouter un topo</button>
 </spring:if>
 
@@ -48,13 +48,13 @@
                 </div>
             </div>
             <spring:choose>
-                <spring:when test="${currentUser.role eq 'ADMIN'}">
+                <spring:when test="${sessionScope.currentUser.role eq 'ADMIN'}">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="userfk">Utilisateur :</label>
                         <div class="col-sm-10">
                             <select class="custom-select custom-select-sm" name="userfk" id="userfk">
                                 <spring:forEach var="user" items="${ users }">
-                                    <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == currentUser.id }"> selected</spring:if>>
+                                    <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == sessionScope.currentUser.id }"> selected</spring:if>>
                                         <spring:out value="${ user.login }" />
                                         -
                                         <spring:out value="${ user.firstName }" />
@@ -66,7 +66,7 @@
                     </div>
                 </spring:when>
                 <spring:otherwise>
-                    <input type="hidden" name="userfk" value="<spring:out value="${ currentUser.id }" />" id="userfk" />
+                    <input type="hidden" name="userfk" value="<spring:out value="${ sessionScope.currentUser.id }" />" id="userfk" />
                 </spring:otherwise>
             </spring:choose>
 
@@ -97,7 +97,7 @@
             <td><spring:out value="${ topo.postalCode }" /></td>
             <td><spring:if test="${ topo.isAvailable == 'true' }">disponible</spring:if><spring:if test="${ topo.isAvailable == 'false' }">indisponible</spring:if></td>
             <spring:choose>
-                <spring:when test="${topo.userFK.id eq currentUser.id or currentUser.role eq 'ADMIN'}">
+                <spring:when test="${topo.userFK.id eq sessionScope.currentUser.id or sessionScope.currentUser.role eq 'ADMIN'}">
                     <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir/Editer</a></td>
                     <td><a href="/Escalade/topo/delete/<spring:out value="${ topo.id }" />">Supprimer</a></td>
                 </spring:when>

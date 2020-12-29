@@ -1,6 +1,6 @@
 <%@ include file="../jsp/header.jsp" %>
 
-<spring:if test="${not (currentUser.id eq -1)}">
+<spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#cotationform">Ajouter une cotation</button>
 </spring:if>
 
@@ -26,7 +26,7 @@
         <tr>
             <td>Identifiant</td>
             <td>Nom</td>
-            <spring:if test="${not (currentUser.id eq -1)}">
+            <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
             <td></td>
             <td></td>
             </spring:if>
@@ -37,7 +37,7 @@
         <tr>
             <td><spring:out value="${ cotation.id }" /></td>
             <td><spring:out value="${ cotation.name }" /></td>
-            <spring:if test="${not (currentUser.id eq -1)}">
+            <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
             <td><a href="/Escalade/cotation/<spring:out value="${ cotation.id }" />">Voir/Editer</a></td>
             <td><a href="/Escalade/cotation/delete/<spring:out value="${ cotation.id }" />">Supprimer</a></td>
             </spring:if>

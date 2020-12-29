@@ -17,7 +17,7 @@ import xyz.morlotti.escalade.models.daos.TopoDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;
 
 @Controller
-public class BookingController extends AbstractController
+public class BookingController
 {
     @Autowired
     private BookingDAO bookingDAO;

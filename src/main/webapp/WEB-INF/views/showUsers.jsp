@@ -61,7 +61,7 @@
                 <label class="col-sm-2 col-form-label" for="role">Rôle :</label>
                 <div class="col-sm-10">
                     <spring:choose>
-                        <spring:when test="${currentUser.role eq 'ADMIN'}">
+                        <spring:when test="${sessionScope.currentUser.role eq 'ADMIN'}">
                             <select class="custom-select custom-select-sm" name="role">
                                 <option value="GUEST" selected>Invité</option>
                                 <option value="USER">Utilisateur non membre</option>
@@ -84,7 +84,7 @@
 
 <!-- La liste d'utilisateurs n'est affichée que pour les ADMINS -->
 
-<spring:if test="${currentUser.role eq 'ADMIN'}">
+<spring:if test="${sessionScope.currentUser.role eq 'ADMIN'}">
 <table class="table table-sm table-striped mt-2">
     <thead>
       <tr>

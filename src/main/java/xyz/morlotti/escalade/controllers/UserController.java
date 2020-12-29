@@ -9,16 +9,18 @@ import xyz.morlotti.escalade.models.beans.User;
 import xyz.morlotti.escalade.models.daos.UserDAO;
 import xyz.morlotti.escalade.models.BeanException;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
-public class UserController extends AbstractController
+public class UserController
 {
 	@Autowired
 	private UserDAO m_userDAO;
 
 	@RequestMapping(path = "/users", method = RequestMethod.GET)
-	public String showUsers(Model model) throws Exception
+	public String showUsers(HttpSession httpSession, Model model) throws Exception
 	{
-		User currentUser = (User) model.getAttribute("currentUser");
+		User currentUser = (User) httpSession.getAttribute("currentUser");
 
 		if(currentUser.getRole() == User.Role.ADMIN // Si on est ADMIN
 		   ||

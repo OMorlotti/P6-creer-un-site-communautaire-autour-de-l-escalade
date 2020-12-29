@@ -15,7 +15,7 @@ import xyz.morlotti.escalade.models.daos.TopoDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;
 
 @Controller
-public class TopoController extends AbstractController
+public class TopoController
 {
     @Autowired
     private TopoDAO topoDAO;

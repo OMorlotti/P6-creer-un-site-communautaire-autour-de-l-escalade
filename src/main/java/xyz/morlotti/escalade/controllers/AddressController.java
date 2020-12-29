@@ -13,7 +13,7 @@ import xyz.morlotti.escalade.models.daos.AddressDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;
 
 @Controller
-public class AddressController extends AbstractController
+public class AddressController
 {
     @Autowired
     private AddressDAO addressDAO;

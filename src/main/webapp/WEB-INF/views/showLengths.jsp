@@ -2,7 +2,7 @@
 
 <h4>Liste des longueurs</h4>
 
-<spring:if test="${not (currentUser.id eq -1)}">
+<spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#lengthform">Ajouter une longueur</button>
 </spring:if>
 
@@ -57,7 +57,7 @@
           <td>Id</td>
           <td>Hauteur de la voie</td>
           <td>Cotation</td>
-          <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
+          <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
           </spring:if>
@@ -69,7 +69,7 @@
             <td><spring:out value="${ length.id }" /></td>
             <td><spring:out value="${ length.voieFK.height }" /></td>
             <td><spring:out value="${ length.cotationFK.name }" /></td>
-            <spring:if test="${currentUser.role eq 'MEMBER' or currentUser.role eq 'ADMIN'}">
+            <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
             <td><a href="/Escalade/longueur/<spring:out value="${ length.id }" />" target="_blank">Voir/Editer</a></td>
             <td><a href="/Escalade/longueur/delete/<spring:out value="${ length.id }" />">Supprimer</a></td>
             </spring:if>

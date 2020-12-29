@@ -57,7 +57,7 @@
         <label class="col-sm-2 col-form-label" for="role">Rôle :</label>
         <div class="col-sm-10">
             <spring:choose>
-                <spring:when test="${currentUser.role eq 'ADMIN'}">
+                <spring:when test="${sessionScope.currentUser.role eq 'ADMIN'}">
                     <select class="custom-select custom-select-sm" name="role">
                         <option value="GUEST"<spring:if test="${ user.role == 'GUEST' }"> selected</spring:if>>Invité</option>
                         <option value="USER"<spring:if test="${ user.role == 'USER' }"> selected</spring:if>>Utilisateur non membre</option>

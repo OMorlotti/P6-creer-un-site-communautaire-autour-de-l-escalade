@@ -9,13 +9,13 @@
         </div>
     </div>
     <spring:choose>
-        <spring:when test="${currentUser.role eq 'ADMIN'}">
+        <spring:when test="${sessionScope.currentUser.role eq 'ADMIN'}">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="userfk">Utilisateur :</label>
                 <div class="col-sm-10">
                     <select class="custom-select custom-select-sm" name="userfk" id="userfk">
                         <spring:forEach var="user" items="${ users }">
-                            <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == currentUser.id }"> selected</spring:if>>
+                            <option value="<spring:out value="${ user.id }" />"<spring:if test="${ user.id == sessionScope.currentUser.id }"> selected</spring:if>>
                                 <spring:out value="${ user.login }" />
                                 -
                                 <spring:out value="${ user.firstName }" />
@@ -27,7 +27,7 @@
             </div>
         </spring:when>
         <spring:otherwise>
-            <input type="hidden" name="userfk" value="<spring:out value="${ currentUser.id }" />" id="userfk" />
+            <input type="hidden" name="userfk" value="<spring:out value="${ sessionScope.currentUser.id }" />" id="userfk" />
         </spring:otherwise>
     </spring:choose>
     <div class="form-group row">
