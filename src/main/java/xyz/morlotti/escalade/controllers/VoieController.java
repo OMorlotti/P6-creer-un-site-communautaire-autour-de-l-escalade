@@ -53,68 +53,72 @@ public class VoieController
         return "showUpdateVoie";
     }
 
-    // @Valid @ModelAttribute User user
-
     @RequestMapping(path = "/voie", method = RequestMethod.POST)
     public String addVoie(
         @RequestParam("height") float height,
-        @RequestParam("secteurfk") int secteurFK,
-        Model model) throws BeanException
+        @RequestParam("sectorfk") int parentSectorId,
+        Model model) throws Exception
     {
-        Sector secteur = sectorDAO.get(secteurFK);
+        Sector sector = sectorDAO.get(parentSectorId);
 
         Voie voie = new Voie();
 
         voie.setHeight(height);
-        voie.setSecteurFK(secteur);
+        voie.setSectorFK(sector);
 
         voieDAO.add(voie);
 
-        model.addAttribute("title", "Voie ajoutée");
+        /**/
 
-        model.addAttribute("height", height);
+        model.addAttribute("message", "Voie ajoutée avec succès !");
 
-        return "addVoie";
+        model.addAttribute("message_type", "success");
+
+        return showVoies(parentSectorId, model);
     }
 
     @RequestMapping(path = "/voie/update/{id}", method = RequestMethod.POST)
     public String updateVoie(
         @PathVariable(value = "id") final int id,
         @RequestParam("height") float height,
-        @RequestParam("secteurfk") int secteurfk,
+        @RequestParam("sectorfk") int sectorFK,
         Model model) throws Exception
     {
-        Sector secteur = sectorDAO.get(secteurfk);
+        Sector sector = sectorDAO.get(sectorFK);
 
         Voie voie = voieDAO.get(id);
 
+        int parentSectortId = voie.getSectorFK().getId();
+
         voie.setHeight(height);
-        voie.setSecteurFK(secteur);
+        voie.setSectorFK(sector);
 
         voieDAO.update(voie);
 
-        model.addAttribute("title", "Voie modifiée");
+        /**/
 
-        model.addAttribute("message", "Voie modifiée avec succès !");
+        model.addAttribute("message", "Secteur ajouté avec succès !");
 
         model.addAttribute("message_type", "success");
 
-        model.addAttribute("voie", voie);
-
-        model.addAttribute("voies", voieDAO.list());
-
-        return "showUpdateVoie";
+        return showVoies(parentSectorId, model);
     }
 
     @RequestMapping(path = "/voie/delete/{id}", method = RequestMethod.GET)
-    public String deleteVoie(@PathVariable(value = "id") final int id, Model model)
+    public String deleteVoie(@PathVariable(value = "id") final int id, Model model) throws Exception
     {
+        Voie voie = voieDAO.get(id);
+
+        int parentSectorId = voie.getSectorFK().getId();
+
         voieDAO.delete(id);
 
-        model.addAttribute("title", "Voie supprimée");
+        /**/
 
-        model.addAttribute("id", id);
+        model.addAttribute("message", "Secteur " + id + " supprimé avec succès !");
 
-        return "deleteVoie";
+        model.addAttribute("message_type", "success");
+
+        return showVoies(parentSectorId, model);
     }
 }

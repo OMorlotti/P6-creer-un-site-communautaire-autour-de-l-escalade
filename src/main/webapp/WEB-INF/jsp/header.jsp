@@ -60,10 +60,13 @@
                         <a class="nav-link" href="/Escalade/spots">Spots</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/sectors">Secteurs</a
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/Escalade/cotations">Cotations</a
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/reservations">Réservations</a
+                        <a class="nav-link" href="/Escalade/bookings">Réservations</a
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -94,5 +97,8 @@
             <spring:if test="${ not empty message }">
             <div class="alert alert-<spring:out value="${ message_type }" />" role="alert">
                 <spring:out value="${ message }" />
+                <button class="close" type="button" data-dismiss="alert">
+                    &times;
+                </button>
             </div>
             </spring:if>

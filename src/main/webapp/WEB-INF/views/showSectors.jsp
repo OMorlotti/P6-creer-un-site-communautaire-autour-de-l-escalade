@@ -3,12 +3,12 @@
 <h4>Liste des secteurs</h4>
 
 <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
-<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#secteurform">Ajouter un secteur</button>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#sectorform">Ajouter un secteur</button>
 </spring:if>
 
-<div class="card mt-1 collapse" id="secteurform">
+<div class="card mt-1 collapse" id="sectorform">
     <div class="card-body">
-        <form method="POST" action="/Escalade/secteur">
+        <form method="POST" action="/Escalade/sector">
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="name">Nom :</label>
@@ -50,14 +50,14 @@
       </tr>
     </thead>
     <tbody>
-        <spring:forEach var="secteur" items="${ secteurs }">
+        <spring:forEach var="sector" items="${ sectors }">
         <tr>
-            <td><spring:out value="${ secteur.id }" /></td>
-            <td><spring:out value="${ secteur.name }" /></td>
-            <td><spring:out value="${ secteur.spotFK.name }" /></td>
+            <td><spring:out value="${ sector.id }" /></td>
+            <td><spring:out value="${ sector.name }" /></td>
+            <td><spring:out value="${ sector.spotFK.name }" /></td>
             <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
-            <td><a href="/Escalade/secteur/<spring:out value="${ secteur.id }" />" target="_blank">Voir/Editer</a></td>
-            <td><a href="/Escalade/secteur/delete/<spring:out value="${ secteur.id }" />">Supprimer</a></td>
+            <td><a href="/Escalade/sector/<spring:out value="${ sector.id }" />" target="_blank">Voir/Editer</a></td>
+            <td><a href="/Escalade/sector/delete/<spring:out value="${ secteur.id }" />">Supprimer</a></td>
             </spring:if>
         </tr>
         </spring:forEach>

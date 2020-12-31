@@ -2,12 +2,9 @@ package xyz.morlotti.escalade.models.daos;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import xyz.morlotti.escalade.models.beans.Address;
-import xyz.morlotti.escalade.models.beans.Sector;
-import xyz.morlotti.escalade.models.beans.Spot;
 
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -73,4 +70,3 @@ public class AddressDAO
         return query.setParameter(1, parentUser).getResultList();
     }
 }
-

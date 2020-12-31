@@ -23,5 +23,8 @@
             <spring:if test="${ not empty message }">
             <div class="alert alert-<spring:out value="${ message_type }" />" role="alert">
                 <spring:out value="${ message }" />
+                <button class="close" type="button" data-dismiss="alert">
+                    &times;
+                </button>
             </div>
             </spring:if>

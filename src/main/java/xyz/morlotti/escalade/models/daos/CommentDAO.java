@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import xyz.morlotti.escalade.models.beans.Address;
 import xyz.morlotti.escalade.models.beans.Comment;
 
 import javax.persistence.TypedQuery;
@@ -18,7 +17,7 @@ public class CommentDAO
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(String comment)
+    public void add(Comment comment)
     {
         Session currentSession = sessionFactory.getCurrentSession();
 
@@ -52,7 +51,7 @@ public class CommentDAO
     {
         Session currentSession = sessionFactory.getCurrentSession();
 
-        TypedQuery<Comment> query = currentSession.createQuery("SELECT u FROM COMMENT u",Comment.class);
+        TypedQuery<Comment> query = currentSession.createQuery("SELECT u FROM COMMENT u", Comment.class);
 
         return query.getResultList();
     }
@@ -71,4 +70,3 @@ public class CommentDAO
         return query.setParameter(1, parentSpot).getResultList();
     }
 }
-

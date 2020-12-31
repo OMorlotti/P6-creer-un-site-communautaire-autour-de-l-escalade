@@ -1,6 +1,6 @@
 <%@ include file="../jsp/headerFrame.jsp" %>
 
-<form method="POST" action="/Escalade/secteur/update/<spring:out value="${ secteur.id }" />">
+<form method="POST" action="/Escalade/sector/update/<spring:out value="${ sector.id }" />">
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="name">Nom :</label>
@@ -13,7 +13,7 @@
         <div class="col-sm-10">
             <select class="custom-select custom-select-sm" name="spotfk" id="spot">
                 <spring:forEach var="spot" items="${ spots }">
-                    <option value="<spring:out value="${ spot.id }" />"<spring:if test="${ spot.id == secteur.spotFK.id }"> selected</spring:if>>
+                    <option value="<spring:out value="${ spot.id }" />"<spring:if test="${ spot.id == sector.spotFK.id }"> selected</spring:if>>
                         <spring:out value="${ spot.name }" />
                     </option>
                 </spring:forEach>

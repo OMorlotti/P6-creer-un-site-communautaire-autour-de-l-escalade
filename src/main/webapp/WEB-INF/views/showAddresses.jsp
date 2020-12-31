@@ -1,6 +1,8 @@
 <%@ include file="../jsp/headerFrame.jsp" %>
 
+<spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addressform">Ajouter une adresse</button>
+</spring:if>
 
 <div class="card mt-1 collapse" id="addressform">
     <div class="card-body">

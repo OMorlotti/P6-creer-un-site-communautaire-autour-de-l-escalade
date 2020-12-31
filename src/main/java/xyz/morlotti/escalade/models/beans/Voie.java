@@ -20,8 +20,8 @@ public class Voie
 	private float height;
 
 	@ManyToOne
-	@JoinColumn(name = "secteurfk")
-	private Sector secteurFK;
+	@JoinColumn(name = "sectorfk")
+	private Sector sectorFK;
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
@@ -45,13 +45,13 @@ public class Voie
 		this.height = height;
 	}
 
-	public Sector getSecteurFK()
+	public Sector getSectorFK()
 	{
-		return secteurFK;
+		return sectorFK;
 	}
-	public void setSecteurFK(Sector secteurFK)
+	public void setSectorFK(Sector sectorFK)
 	{
-		this.secteurFK = secteurFK;
+		this.sectorFK = sectorFK;
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------*/

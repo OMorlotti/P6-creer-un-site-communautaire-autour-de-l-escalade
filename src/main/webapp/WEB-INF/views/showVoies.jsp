@@ -17,14 +17,14 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="secteurfk">Secteur :</label>
+                <label class="col-sm-2 col-form-label" for="sectorfk">Secteur :</label>
                 <div class="col-sm-10">
-                    <select class="custom-select custom-select-sm" name="secteurfk" id="secteur">
-                        <spring:forEach var="secteur" items="${ secteurs }">
-                            <option value="<spring:out value="${ secteur.id }" />">
-                                <spring:out value="${ secteur.id }" />
+                    <select class="custom-select custom-select-sm" name="sectofk" id="sector">
+                        <spring:forEach var="sector" items="${ sectors }">
+                            <option value="<spring:out value="${ sector.id }" />">
+                                <spring:out value="${ sector.id }" />
                                 -
-                                <spring:out value="${ secteur.name }" />
+                                <spring:out value="${ sector.name }" />
                             </option>
                         </spring:forEach>
                     </select>
