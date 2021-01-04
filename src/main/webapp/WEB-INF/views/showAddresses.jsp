@@ -1,5 +1,7 @@
 <%@ include file="../jsp/headerFrame.jsp" %>
 
+<h4>Liste de mes adresses</h4>
+
 <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addressform">Ajouter une adresse</button>
 </spring:if>
@@ -8,19 +10,8 @@
     <div class="card-body">
         <form method="POST" action="/Escalade/address">
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="user">Utilisateur :</label>
-                <div class="col-sm-10">
-                    <select class="custom-select custom-select-sm" name="userfk" id="user">
-                        <spring:forEach var="user" items="${ users }">
-                            <option value="<spring:out value="${ user.id }" />">
-                                <spring:out value="${ user.firstName }" />
-                                <spring:out value="${ user.lastName }" />
-                            </option>
-                        </spring:forEach>
-                    </select>
-                </div>
-            </div>
+            <input type="hidden" name="userfk" value="<spring:out value="${ user.id }" />" />
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="street">Numéro de voie :</label>
                 <div class="col-sm-10">
@@ -52,7 +43,9 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary" type="submit">Envoyer</button>
+            <div class="text-right">
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+            </div>
 
         </form>
     </div>

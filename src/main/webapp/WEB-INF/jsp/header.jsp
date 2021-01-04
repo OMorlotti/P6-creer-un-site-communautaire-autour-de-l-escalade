@@ -8,19 +8,6 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
         <style>
-            html, body {
-
-                height: 100%;
-            }
-
-            body {
-
-                background-image: url('/Escalade/mountains.png');
-                background-repeat: no-repeat;
-                background-position: bottom;
-                background-size: 5%;
-            }
-
             footer,
             .container {
                 max-width: 1024px;
@@ -33,8 +20,15 @@
             }
         </style>
 
+        <script>
+          function resizeIframe(obj)
+          {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+          }
+        </script>
+
     </head>
-    <body>
+    <body style="background: url('/Escalade/mountains.jpg') no-repeat center center fixed; background-size: cover;">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-1 py-0">
             <a class="navbar-brand" href="/Escalade">
@@ -48,28 +42,25 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/users">Users</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/Escalade/topos">Topos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Escalade/spots">Spots</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/sectors">Secteurs</a
+                        <a class="nav-link" href="/Escalade/cotations">Cotations</a
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/cotations">Cotations</a
+                        <span class="nav-link">|</span>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/Escalade/bookings">Réservations</a
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Escalade/users">Users</a>
+                    </li>
                     <spring:choose>
                         <spring:when test="${sessionScope.currentUser.id eq -1}">
                             <li class="nav-item">
@@ -92,7 +83,7 @@
             </div>
         </nav>
 
-        <div class="container p-2">
+        <div class="container p-2" style="background-color: white;">
 
             <spring:if test="${ not empty message }">
             <div class="alert alert-<spring:out value="${ message_type }" />" role="alert">

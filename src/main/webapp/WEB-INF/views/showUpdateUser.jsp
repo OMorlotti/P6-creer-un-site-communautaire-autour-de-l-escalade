@@ -72,16 +72,22 @@
         </div>
     </div>
 
-    <button class="btn btn-primary" type="submit">Envoyer</button>
+    <div class="text-right">
+        <button class="btn btn-primary" type="submit">Envoyer</button>
+    </div>
 
 </form>
 
 <hr />
 
-<iframe src="/Escalade/topos?user=<spring:out value="${ user.id }" />" style="width: 100%; height: 600px; border: none;"></iframe>
+<a href="/Escalade/topos?user=<spring:out value="${ user.id }" />">➜ Voir mes topos</a>
 
 <hr />
 
-<iframe src="/Escalade/addresses?user=<spring:out value="${ user.id }" />" style="width: 100%; height: 600px; border: none;"></iframe>
+<a href="/Escalade/spots?user=<spring:out value="${ user.id }" />">➜ Voir mes spots</a>
+
+<hr />
+
+<iframe src="/Escalade/addresses?user=<spring:out value="${ user.id }" />" style="width: 100%; height: 600px; border: none;" onload="resizeIframe(this)"></iframe>
 
 <%@ include file="../jsp/footer.jsp" %>

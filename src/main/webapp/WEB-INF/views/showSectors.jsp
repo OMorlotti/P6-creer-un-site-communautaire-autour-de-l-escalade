@@ -21,7 +21,7 @@
                 <div class="col-sm-10">
                     <select class="custom-select custom-select-sm" name="spotfk" id="spot">
                         <spring:forEach var="spot" items="${ spots }">
-                            <option value="<spring:out value="${ spot.id }" />">
+                            <option value="<spring:out value="${ spot.id }" />"<spring:if test="${ spot.id == parentSpotId }"> selected</spring:if>>
                                 <spring:out value="${ spot.id }" />
                                 -
                                 <spring:out value="${ spot.name }" />
@@ -31,7 +31,9 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary" type="submit">Envoyer</button>
+            <div class="text-right">
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+            </div>
 
         </form>
     </div>
@@ -55,10 +57,16 @@
             <td><spring:out value="${ sector.id }" /></td>
             <td><spring:out value="${ sector.name }" /></td>
             <td><spring:out value="${ sector.spotFK.name }" /></td>
-            <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
-            <td><a href="/Escalade/sector/<spring:out value="${ sector.id }" />" target="_blank">Voir/Editer</a></td>
-            <td><a href="/Escalade/sector/delete/<spring:out value="${ secteur.id }" />">Supprimer</a></td>
-            </spring:if>
+            <spring:choose>
+                <spring:when test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
+                    <td><a href="/Escalade/sector/<spring:out value="${ sector.id }" />" target="_blank">Voir/Editer</a></td>
+                    <td><a href="/Escalade/sector/delete/<spring:out value="${ secteur.id }" />">Supprimer</a></td>
+                </spring:when>
+                <spring:otherwise>
+                    <td><a href="/Escalade/sector/<spring:out value="${ sector.id }" />">Voir</a></td>
+                    <td>-</td>
+                </spring:otherwise>
+            </spring:choose>
         </tr>
         </spring:forEach>
     </tbody>

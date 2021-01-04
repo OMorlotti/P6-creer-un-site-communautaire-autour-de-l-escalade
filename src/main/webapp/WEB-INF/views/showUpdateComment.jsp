@@ -11,9 +11,11 @@
         </div>
     </div>
 
-    <div class="text-right">
-        <button class="btn btn-primary" type="submit">Envoyer</button>
-    </div>
+    <spring:if test="${!(sessionScope.currentUser.id eq -1)}">
+        <div class="text-right">
+            <button class="btn btn-primary" type="submit">Envoyer</button>
+        </div>
+    </spring:if>
 
 </form>
 

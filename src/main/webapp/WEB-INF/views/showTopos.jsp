@@ -70,7 +70,9 @@
                 </spring:otherwise>
             </spring:choose>
 
-            <button class="btn btn-primary" type="submit">Envoyer</button>
+            <div class="text-right">
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+            </div>
 
         </form>
     </div>

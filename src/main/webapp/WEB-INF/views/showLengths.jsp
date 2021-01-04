@@ -15,7 +15,7 @@
                 <div class="col-sm-10">
                     <select class="custom-select custom-select-sm" name="voiefk" id="voie">
                         <spring:forEach var="voie" items="${ voies }">
-                            <option value="<spring:out value="${ voie.id }" />">
+                            <option value="<spring:out value="${ voie.id }" />"<spring:if test="${ voie.id == parentVoieId }"> selected</spring:if>>
                                 <spring:out value="${ voie.id }" />
                                 -
                                 <spring:out value="${ voie.height }" />
@@ -39,13 +39,15 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="numberofspit">Nombre de spit :</label>
+                <label class="col-sm-2 col-form-label" for="numberofspit">Nombre de spits :</label>
                 <div class="col-sm-10">
                     <input class="form-control form-control-sm" type="text" name="numberofspit" id="numberofspit" />
                 </div>
             </div>
 
-            <button class="btn btn-primary" type="submit">Envoyer</button>
+            <div class="text-right">
+                <button class="btn btn-primary" type="submit">Envoyer</button>
+            </div>
 
         </form>
     </div>
@@ -57,6 +59,7 @@
           <td>Id</td>
           <td>Hauteur de la voie</td>
           <td>Cotation</td>
+          <td>Nombre de spits</td>
           <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
@@ -69,6 +72,7 @@
             <td><spring:out value="${ length.id }" /></td>
             <td><spring:out value="${ length.voieFK.height }" /></td>
             <td><spring:out value="${ length.cotationFK.name }" /></td>
+            <td><spring:out value="${ length.numberOfSpits }" /></td>
             <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
             <td><a href="/Escalade/longueur/<spring:out value="${ length.id }" />" target="_blank">Voir/Editer</a></td>
             <td><a href="/Escalade/longueur/delete/<spring:out value="${ length.id }" />">Supprimer</a></td>

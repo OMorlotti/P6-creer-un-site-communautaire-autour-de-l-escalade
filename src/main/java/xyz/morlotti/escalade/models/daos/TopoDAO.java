@@ -5,8 +5,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import xyz.morlotti.escalade.models.beans.Address;
 import xyz.morlotti.escalade.models.beans.Topo;
 
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -51,8 +53,17 @@ public class TopoDAO
     {
         Session currentSession = sessionFactory.getCurrentSession();
 
-        Query query = currentSession.createQuery("SELECT u FROM TOPO u");
+        Query query = currentSession.createQuery("SELECT t FROM TOPO t");
 
         return query.list();
+    }
+
+    public List<Topo> list(int parentUser) throws Exception
+    {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        TypedQuery<Topo> query = currentSession.createQuery("SELECT t FROM TOPO t WHERE t.userFK.id = ?1", Topo.class);
+
+        return query.setParameter(1, parentUser).getResultList();
     }
 }

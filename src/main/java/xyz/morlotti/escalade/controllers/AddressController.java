@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.morlotti.escalade.models.beans.Address;
 import xyz.morlotti.escalade.models.beans.User;
+import xyz.morlotti.escalade.models.beans.Voie;
 import xyz.morlotti.escalade.models.daos.AddressDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;
 
@@ -23,19 +24,14 @@ public class AddressController
 
     @RequestMapping(path = "/addresses", method = RequestMethod.GET)
     public String showAddresses(
-        @RequestParam(name = "user", required = false) Integer parentUser,
+        @RequestParam(name = "user") Integer parentUser,
         Model model) throws Exception
     {
         model.addAttribute("title", "Adresses");
 
-        if(parentUser != null) {
-            model.addAttribute("addresses", addressDAO.list(parentUser));
-        }
-        else {
-            model.addAttribute("addresses", addressDAO.list());
-        }
+        model.addAttribute("addresses", addressDAO.list(parentUser));
 
-        model.addAttribute("users", userDAO.list());
+        model.addAttribute("user", userDAO.get(parentUser));
 
         return "showAddresses";
     }
@@ -62,7 +58,7 @@ public class AddressController
         @RequestParam("postalcode") String postalCode,
         @RequestParam("city") String city,
         @RequestParam("country") String country,
-        Model model)
+        Model model) throws Exception
     {
         User user = userDAO.get(userFK);
 
@@ -77,15 +73,18 @@ public class AddressController
 
         addressDAO.add(address);
 
-        model.addAttribute("title", "Adresse ajoutée");
+        /**/
 
-        return "addAddress";
+        model.addAttribute("message", "Adresse ajoutée avec succès !");
+
+        model.addAttribute("message_type", "success");
+
+        return showAddresses(userFK, model);
     }
 
     @RequestMapping(path = "/address/update/{id}", method = RequestMethod.POST)
     public String updateAddress(
         @PathVariable(value = "id") final int id,
-        @RequestParam("userfk") int userFK,
         @RequestParam("street") String street,
         @RequestParam("streetname") String streetName,
         @RequestParam("postalcode") String postalCode,
@@ -93,11 +92,10 @@ public class AddressController
         @RequestParam("country") String country,
         Model model) throws Exception
     {
-        User user = userDAO.get(userFK);
-
         Address address = addressDAO.get(id);
 
-        address.setUserFK(user);
+        int parentUserId = address.getUserFK().getId();
+
         address.setStreet(street);
         address.setStreetName(streetName);
         address.setPostalCode(postalCode);
@@ -106,28 +104,30 @@ public class AddressController
 
         addressDAO.update(address);
 
-        model.addAttribute("title", "Adresse modifiée");
+        /**/
 
-        model.addAttribute("message", "Adresse modifiée avec succès !");
+        model.addAttribute("message", "Adresse " + parentUserId + " modifiée avec succès !");
 
         model.addAttribute("message_type", "success");
 
-        model.addAttribute("address", address);
-
-        model.addAttribute("users", userDAO.list());
-
-        return "showUpdateAddress";
+        return showAddresses(parentUserId, model);
     }
 
     @RequestMapping(path = "/address/delete/{id}", method = RequestMethod.GET)
-    public String deleteAddress(@PathVariable(value = "id") final int id, Model model)
+    public String deleteAddress(@PathVariable(value = "id") final int id, Model model) throws Exception
     {
+        Address address = addressDAO.get(id);
+
+        int parentUserId = address.getUserFK().getId();
+
         addressDAO.delete(id);
 
-        model.addAttribute("title", "Adresse supprimée");
+        /**/
 
-        model.addAttribute("id", id);
+        model.addAttribute("message", "Adresse " + id + " supprimée avec succès !");
 
-        return "deleteAddress";
+        model.addAttribute("message_type", "success");
+
+        return showAddresses(parentUserId, model);
     }
 }

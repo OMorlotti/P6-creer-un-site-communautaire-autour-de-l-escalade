@@ -13,7 +13,18 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+
+            thead td {
+                font-weight: bold;
+            }
         </style>
+
+        <script>
+          function resizeIframe(obj)
+          {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+          }
+        </script>
 
     </head>
     <body>

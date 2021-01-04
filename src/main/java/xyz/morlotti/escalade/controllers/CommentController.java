@@ -55,12 +55,12 @@ public class CommentController
 
     @RequestMapping(path = "/comment", method = RequestMethod.POST)
     public String addComment(
-        @RequestParam("spotfk") int parentSpotId,
+        @RequestParam("spotfk") int spotFK,
         @RequestParam("comment") String comment,
         HttpSession session,
         Model model) throws Exception
     {
-        Spot spot = spotDAO.get(parentSpotId);
+        Spot spot = spotDAO.get(spotFK);
 
         User user = (User) session.getAttribute("currentUser");
 
@@ -78,7 +78,7 @@ public class CommentController
 
         model.addAttribute("message_type", "success");
 
-        return showComments(parentSpotId, model);
+        return showComments(spotFK, model);
     }
 
     @RequestMapping(path = "/comment/update/{id}", method = RequestMethod.POST)

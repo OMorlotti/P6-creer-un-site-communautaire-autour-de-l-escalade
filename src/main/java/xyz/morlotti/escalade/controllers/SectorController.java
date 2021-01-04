@@ -36,6 +36,7 @@ public class SectorController
 			model.addAttribute("sectors", sectorDAO.list(parentSpot));
 		}
 
+		model.addAttribute("parentSpotId", parentSpot);
 		model.addAttribute("spots", spotDAO.list());
 
 		return "showSectors";
@@ -56,10 +57,10 @@ public class SectorController
 	@RequestMapping(path = "/sector", method = RequestMethod.POST)
 	public String addSector(
 		@RequestParam("name") String name,
-		@RequestParam("spotfk") int parentSpotId,
+		@RequestParam("spotfk") int spotFK,
 		Model model) throws Exception
 	{
-		Spot spot = spotDAO.get(parentSpotId);
+		Spot spot = spotDAO.get(spotFK);
 
 		Sector secteur = new Sector();
 
@@ -74,7 +75,7 @@ public class SectorController
 
 		model.addAttribute("message_type", "success");
 
-		return showSectors(parentSpotId, model);
+		return showSectors(spotFK, model);
 	}
 
 	@RequestMapping(path = "/sector/update/{id}", method = RequestMethod.POST)
@@ -86,9 +87,9 @@ public class SectorController
 	{
 		Spot spot = spotDAO.get(spotFK);
 
-		Sector sector = sectorDAO.get(id);
+		int parentSpotId = spot.getId();
 
-		int parentSpotId = sector.getSpotFK().getId();
+		Sector sector = sectorDAO.get(id);
 
 		sector.setName(name);
 		sector.setSpotFK(spot);

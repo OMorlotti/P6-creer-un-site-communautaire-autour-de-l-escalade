@@ -49,6 +49,14 @@
         <!--*********************************************************************************************************-->
 
         <dependency>
+            <groupId>org.simplejavamail</groupId>
+            <artifactId>simple-java-mail</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+
+        <!--*********************************************************************************************************-->
+
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>5.3.1</version>

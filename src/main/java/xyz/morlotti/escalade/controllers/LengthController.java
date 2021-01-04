@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import xyz.morlotti.escalade.models.BeanException;
 import xyz.morlotti.escalade.models.beans.Cotation;
 import xyz.morlotti.escalade.models.beans.Length;
 import xyz.morlotti.escalade.models.beans.Voie;
@@ -29,12 +28,20 @@ public class LengthController
     private CotationDAO cotationDAO;
 
     @RequestMapping(path = "/longueurs", method = RequestMethod.GET)
-    public String showLengths(Model model) throws Exception
+    public String showLengths(
+        @RequestParam(name = "voie", required = false) Integer parentVoie, // Le post parent est passé dans l'url en ajoutan ?spot=<id>, il est facultatif et dans ce cas, on aura null dans parentSpot
+        Model model) throws Exception
     {
         model.addAttribute("title", "Longueurs");
 
-        model.addAttribute("lengths", lengthDAO.list());
+        if(parentVoie == null) {
+            model.addAttribute("lengths", lengthDAO.list());
+        }
+        else {
+            model.addAttribute("lengths", lengthDAO.list(parentVoie));
+        }
 
+        model.addAttribute("parentVoieId", parentVoie);
         model.addAttribute("voies", voieDAO.list());
 
         model.addAttribute("cotations", cotationDAO.list());
@@ -63,7 +70,7 @@ public class LengthController
         @RequestParam("voiefk") int voieFK,
         @RequestParam("cotationfk") int cotationFK,
         @RequestParam("numberofspit") int numberOfSpit,
-        Model model) throws BeanException
+        Model model) throws Exception
     {
         Voie voie = voieDAO.get(voieFK);
         Cotation cotation = cotationDAO.get(cotationFK);
@@ -72,19 +79,17 @@ public class LengthController
 
         length.setVoieFK(voie);
         length.setCotationFK(cotation);
-        length.setNumberOfSpit(numberOfSpit);
+        length.setNumberOfSpits(numberOfSpit);
 
         lengthDAO.add(length);
 
-        model.addAttribute("title", "Longueur ajoutée");
+        /**/
 
-        model.addAttribute("voie", voieFK);
+        model.addAttribute("message", "Voie ajoutée avec succès !");
 
-        model.addAttribute("cotation", cotationFK);
+        model.addAttribute("message_type", "success");
 
-        model.addAttribute("numberOfSpit", numberOfSpit);
-
-        return "addLength";
+        return showLengths(voieFK, model);
     }
 
     @RequestMapping(path = "/longueur/update/{id}", method = RequestMethod.POST)
@@ -98,38 +103,40 @@ public class LengthController
         Voie voie = voieDAO.get(voieFK);
         Cotation cotation = cotationDAO.get(cotationFK);
 
+        int parentVoieId = voie.getId();
+
         Length length = lengthDAO.get(id);
 
         length.setVoieFK(voie);
         length.setCotationFK(cotation);
-        length.setNumberOfSpit(numberOfSpit);
+        length.setNumberOfSpits(numberOfSpit);
 
         lengthDAO.update(length);
 
-        model.addAttribute("title", "Longueur modifiée");
+        /**/
 
-        model.addAttribute("message", "Longueur modifiée avec succès !");
+        model.addAttribute("message", "Voie " + id + " modifiée avec succès !");
 
         model.addAttribute("message_type", "success");
 
-        model.addAttribute("length", length);
-
-        model.addAttribute("voies", voieDAO.list());
-
-        model.addAttribute("cotations", cotationDAO.list());
-
-        return "showUpdateLength";
+        return showLengths(parentVoieId, model);
     }
 
     @RequestMapping(path = "/longueur/delete/{id}", method = RequestMethod.GET)
-    public String deleteLength(@PathVariable(value = "id") final int id, Model model)
+    public String deleteLength(@PathVariable(value = "id") final int id, Model model) throws Exception
     {
+        Length length = lengthDAO.get(id);
+
+        int parentVoieId = length.getVoieFK().getId();
+
         lengthDAO.delete(id);
 
-        model.addAttribute("title", "Longueur supprimée");
+        /**/
 
-        model.addAttribute("id", id);
+        model.addAttribute("message", "Voie " + id + " supprimé avec succès !");
 
-        return "deleteLength";
+        model.addAttribute("message_type", "success");
+
+        return showLengths(parentVoieId, model);
     }
 }

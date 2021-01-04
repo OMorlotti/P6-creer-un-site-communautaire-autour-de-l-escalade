@@ -24,11 +24,18 @@ public class TopoController
     private UserDAO userDAO;
 
     @RequestMapping(path = "/topos", method = RequestMethod.GET)
-    public String showTopos(Model model) throws Exception
+    public String showTopos(
+        @RequestParam(name = "user", required = false) Integer parentUser,
+        Model model) throws Exception
     {
         model.addAttribute("title", "Topos");
 
-        model.addAttribute("topos", topoDAO.list());
+        if(parentUser != null) {
+            model.addAttribute("topos", topoDAO.list(parentUser));
+        }
+        else {
+            model.addAttribute("topos", topoDAO.list());
+        }
 
         model.addAttribute("users", userDAO.list());
 

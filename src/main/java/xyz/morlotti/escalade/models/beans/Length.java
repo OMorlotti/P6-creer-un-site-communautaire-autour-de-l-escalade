@@ -2,7 +2,6 @@ package xyz.morlotti.escalade.models.beans;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
 @Table(name = "LENGTH")
 @Entity(name = "LENGTH")
@@ -24,8 +23,8 @@ public class Length
 	private Cotation cotationFK;
 
 	@Min(value = 0)
-	@Column(name = "numberOfSpit", unique = false, nullable = false)
-	private int numberOfSpit;
+	@Column(name = "numberOfSpits", unique = false, nullable = false)
+	private int numberOfSpits;
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
@@ -39,7 +38,7 @@ public class Length
 		this.id = id;
 	}
 
-	public Voie getvoieFK()
+	public Voie getVoieFK()
 	{
 		return voieFK;
 	}
@@ -59,14 +58,14 @@ public class Length
 		this.cotationFK = cotationFK;
 	}
 
-	public int getNumberOfSpit()
+	public int getNumberOfSpits()
 	{
-		return numberOfSpit;
+		return numberOfSpits;
 	}
 
-	public void setNumberOfSpit(int numberOfSpit)
+	public void setNumberOfSpits(int numberOfSpits)
 	{
-		this.numberOfSpit = numberOfSpit;
+		this.numberOfSpits = numberOfSpits;
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------*/

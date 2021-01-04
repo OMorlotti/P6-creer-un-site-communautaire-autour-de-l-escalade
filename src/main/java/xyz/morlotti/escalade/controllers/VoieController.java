@@ -36,7 +36,8 @@ public class VoieController
                 model.addAttribute("voies", voieDAO.list(parentSector));
             }
 
-            model.addAttribute("sector", sectorDAO.list());
+            model.addAttribute("parentSectorId", parentSector);
+            model.addAttribute("sectors", sectorDAO.list());
 
             return "showVoies";
         }
@@ -48,7 +49,7 @@ public class VoieController
 
         model.addAttribute("voie", voieDAO.get(id));
 
-        model.addAttribute("secteurs", sectorDAO.list());
+        model.addAttribute("sectors", sectorDAO.list());
 
         return "showUpdateVoie";
     }
@@ -56,10 +57,10 @@ public class VoieController
     @RequestMapping(path = "/voie", method = RequestMethod.POST)
     public String addVoie(
         @RequestParam("height") float height,
-        @RequestParam("sectorfk") int parentSectorId,
+        @RequestParam("sectorfk") int sectorFK,
         Model model) throws Exception
     {
-        Sector sector = sectorDAO.get(parentSectorId);
+        Sector sector = sectorDAO.get(sectorFK);
 
         Voie voie = new Voie();
 
@@ -74,7 +75,7 @@ public class VoieController
 
         model.addAttribute("message_type", "success");
 
-        return showVoies(parentSectorId, model);
+        return showVoies(sectorFK, model);
     }
 
     @RequestMapping(path = "/voie/update/{id}", method = RequestMethod.POST)
@@ -86,9 +87,9 @@ public class VoieController
     {
         Sector sector = sectorDAO.get(sectorFK);
 
-        Voie voie = voieDAO.get(id);
+        int parentSectorId = sector.getId();
 
-        int parentSectorId = voie.getSectorFK().getId();
+        Voie voie = voieDAO.get(id);
 
         voie.setHeight(height);
         voie.setSectorFK(sector);

@@ -27,11 +27,18 @@ public class SpotController
     private TopoDAO topoDAO;
 
     @RequestMapping(path = "/spots", method = RequestMethod.GET)
-    public String showSpots(Model model) throws Exception
+    public String showSpots(
+        @RequestParam(name = "user", required = false) Integer parentUser,
+        Model model) throws Exception
     {
         model.addAttribute("title", "Spots");
 
-        model.addAttribute("spots", spotDAO.list());
+        if(parentUser != null) {
+            model.addAttribute("spots", spotDAO.list(parentUser));
+        }
+        else {
+            model.addAttribute("spots", spotDAO.list());
+        }
 
         model.addAttribute("users", userDAO.list());
 

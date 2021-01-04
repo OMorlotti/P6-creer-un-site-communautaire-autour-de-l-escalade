@@ -68,7 +68,7 @@ public class VoieDAO
          * avec parentSpot pour résoudre la foreign key.
          */
 
-        TypedQuery<Voie> query = currentSession.createQuery("SELECT v FROM VOIE v WHERE s.sectorFK.id = ?1", Voie.class);
+        TypedQuery<Voie> query = currentSession.createQuery("SELECT v FROM VOIE v WHERE v.sectorFK.id = ?1", Voie.class);
 
         return query.setParameter(1, parentSector).getResultList();
     }

@@ -6,7 +6,9 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import xyz.morlotti.escalade.models.beans.Spot;
+import xyz.morlotti.escalade.models.beans.Topo;
 
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -51,9 +53,17 @@ public class SpotDAO
     {
         Session currentSession = sessionFactory.getCurrentSession();
 
-        Query query = currentSession.createQuery("SELECT u FROM SPOT u");
+        Query query = currentSession.createQuery("SELECT s FROM SPOT s");
 
         return query.list();
     }
-}
 
+    public List<Spot> list(int parentUser) throws Exception
+    {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        TypedQuery<Spot> query = currentSession.createQuery("SELECT s FROM SPOT s WHERE s.userFK.id = ?1", Spot.class);
+
+        return query.setParameter(1, parentUser).getResultList();
+    }
+}

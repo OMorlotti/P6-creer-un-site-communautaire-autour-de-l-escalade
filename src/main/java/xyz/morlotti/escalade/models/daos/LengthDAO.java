@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import xyz.morlotti.escalade.models.beans.Length;
 import xyz.morlotti.escalade.models.beans.Sector;
+import xyz.morlotti.escalade.models.beans.Voie;
 
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -50,12 +51,26 @@ public class LengthDAO
 		return currentSession.find(Length.class, id);
 	}
 
-	public List list() throws Exception
+	public List<Length> list() throws Exception
 	{
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		Query query = currentSession.createQuery("SELECT u FROM LENGTH u");
+		TypedQuery<Length> query = currentSession.createQuery("SELECT u FROM LENGTH u", Length.class);
 
-		return query.list();
+		return query.getResultList();
+	}
+
+	public List<Length> list(int parentVoie) throws Exception
+	{
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		/* Dans la requête (qui n'est pas vraiment du SQL), on récupère le bean s (de type Sector):
+		 * spotFK (via le getter getSpotFK du bean Sector), on compare l'identifiant id (via le getId)
+		 * avec parentSpot pour résoudre la foreign key.
+		 */
+
+		TypedQuery<Length> query = currentSession.createQuery("SELECT l FROM LENGTH l WHERE l.voieFK.id = ?1", Length.class);
+
+		return query.setParameter(1, parentVoie).getResultList();
 	}
 }

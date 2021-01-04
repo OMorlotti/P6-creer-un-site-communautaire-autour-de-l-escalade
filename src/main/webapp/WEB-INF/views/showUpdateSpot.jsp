@@ -71,17 +71,19 @@
     </div>
 
     <spring:if test="${spot.userFK.id eq sessionScope.currentUser.id or sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
-        <button class="btn btn-primary" type="submit">Envoyer</button>
+        <div class="text-right">
+            <button class="btn btn-primary" type="submit">Envoyer</button>
+        </div>
     </spring:if>
 
 </form>
 
 <hr />
 
-<iframe src="/Escalade/comments?spot=<spring:out value="${ spot.id }" />" style="width: 100%; height: 600px; border: none;"></iframe>
+<iframe src="/Escalade/comments?spot=<spring:out value="${ spot.id }" />" style="width: 100%; height: 600px; border: none;" onload="resizeIframe(this)"></iframe>
 
 <hr />
 
-<iframe src="/Escalade/sectors?spot=<spring:out value="${ spot.id }" />" style="width: 100%; height: 600px; border: none;"></iframe>
+<iframe src="/Escalade/sectors?spot=<spring:out value="${ spot.id }" />" style="width: 100%; height: 600px; border: none;" onload="resizeIframe(this)"></iframe>
 
 <%@ include file="../jsp/footer.jsp" %>
