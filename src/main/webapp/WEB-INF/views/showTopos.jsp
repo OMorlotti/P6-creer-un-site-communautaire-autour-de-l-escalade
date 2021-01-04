@@ -102,7 +102,7 @@
                     <td><a href="/Escalade/topo/delete/<spring:out value="${ topo.id }" />">Supprimer</a></td>
                 </spring:when>
                 <spring:otherwise>
-                    <td>-</td>
+                    <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir</a></td>
                     <td>-</td>
                 </spring:otherwise>
             </spring:choose>

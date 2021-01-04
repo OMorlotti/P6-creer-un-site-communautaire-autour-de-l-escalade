@@ -88,7 +88,7 @@ public class VoieController
 
         Voie voie = voieDAO.get(id);
 
-        int parentSectortId = voie.getSectorFK().getId();
+        int parentSectorId = voie.getSectorFK().getId();
 
         voie.setHeight(height);
         voie.setSectorFK(sector);

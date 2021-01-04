@@ -18,7 +18,9 @@
             </div>
 
             <button class="btn btn-primary" type="submit">Se connecter</button>
-
+            <a href="/Escalade/remind-password">
+                Mot de passe oublié
+            </a>
         </form>
     </div>
 </div>

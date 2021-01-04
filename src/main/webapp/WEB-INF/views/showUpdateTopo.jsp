@@ -64,7 +64,9 @@
         </spring:otherwise>
     </spring:choose>
 
-    <button class="btn btn-primary" type="submit">Envoyer</button>
+    <spring:if test="${topo.userFK.id eq sessionScope.currentUser.id or sessionScope.currentUser.role eq 'ADMIN'}">
+        <button class="btn btn-primary" type="submit">Envoyer</button>
+    </spring:if>
 
 </form>
 

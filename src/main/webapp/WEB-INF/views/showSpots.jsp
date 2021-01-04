@@ -104,10 +104,16 @@
             <td><spring:out value="${ spot.topoFK.name }" /></td>
             <td><spring:out value="${ spot.departement }" /></td>
             <td><spring:if test="${ spot.isOfficial == 'true' }">Officiel</spring:if><spring:if test="${ spot.isOfficial == 'false' }">Non officiel</spring:if></td>
-            <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
-            <td><a href="/Escalade/spot/<spring:out value="${ spot.id }" />">Voir/Editer</a></td>
-            <td><a href="/Escalade/spot/delete/<spring:out value="${ spot.id }" />">Supprimer</a></td>
-            </spring:if>
+            <spring:choose>
+                <spring:when test="${spot.userFK.id eq sessionScope.currentUser.id or sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
+                    <td><a href="/Escalade/spot/<spring:out value="${ spot.id }" />">Voir/Editer</a></td>
+                    <td><a href="/Escalade/spot/delete/<spring:out value="${ spot.id }" />">Supprimer</a></td>
+                </spring:when>
+                <spring:otherwise>
+                    <td><a href="/Escalade/spot/<spring:out value="${ spot.id }" />">Voir</a></td>
+                    <td>-</td>
+                </spring:otherwise>
+            </spring:choose>
         </tr>
         </spring:forEach>
     </tbody>

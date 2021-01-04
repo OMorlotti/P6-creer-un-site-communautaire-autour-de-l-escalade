@@ -51,12 +51,46 @@ public class AuthController
         }
     }
 
+    @RequestMapping(path = "/remind-password", method = RequestMethod.GET)
+    public String remindPasswordStep1(Model model) throws Exception
+    {
+        model.addAttribute("title", "Authentification");
+
+        return "remindPasswordStep1";
+    }
+
+    @RequestMapping(path = "/remind-password", method = RequestMethod.POST)
+    public String remindPasswordStep2(
+        @RequestParam("email") String email,
+        HttpSession httpSession, Model model) throws Exception
+    {
+        try
+        {
+            User user = userDAO.get(email);
+
+            /* TODO */
+
+            httpSession.setAttribute ("email", email);
+
+            return "remindPasswordStep2";
+        }
+        catch(NoResultException e)
+        {
+            model.addAttribute("message_type", "danger");
+            model.addAttribute("message", "Email incorrect");
+
+            return "remindPasswordStep1";
+        }
+    }
+
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession httpSession, Model model) throws Exception
     {
         model.addAttribute("title", "Authentification");
 
-        httpSession.invalidate();
+        User user = (User) httpSession.getAttribute ("currentUser");
+
+        user.initGuest();
 
         return "logout";
     }

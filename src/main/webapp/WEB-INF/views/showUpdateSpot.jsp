@@ -70,7 +70,9 @@
         </div>
     </div>
 
-    <button class="btn btn-primary" type="submit">Envoyer</button>
+    <spring:if test="${spot.userFK.id eq sessionScope.currentUser.id or sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
+        <button class="btn btn-primary" type="submit">Envoyer</button>
+    </spring:if>
 
 </form>
 

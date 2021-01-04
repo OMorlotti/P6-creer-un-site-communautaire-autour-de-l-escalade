@@ -51,6 +51,17 @@ public class UserDAO
         return currentSession.find(User.class, id);
     }
 
+    public User get(String email)
+    {
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        TypedQuery<User> query = currentSession.createQuery("SELECT u FROM USER u WHERE u.email = ?1", User.class);
+
+        return query.setParameter(1, email)
+                    .getSingleResult()
+        ;
+    }
+
     public User get(String login, String password)
     {
         Session currentSession = sessionFactory.getCurrentSession();
