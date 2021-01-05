@@ -72,4 +72,15 @@
 
 </form>
 
+<hr />
+
+<h5>L'ont déjà réservés (ordre chronologique)</h5>
+
+<p>
+<spring:forEach var="booking" items="${ bookings }">
+    <span class="badge badge-pill badge-success"><spring:out value="${ booking }" /></span>
+</spring:forEach>
+</p>
+
+
 <%@ include file="../jsp/footer.jsp" %>

@@ -12,42 +12,19 @@ public class EmailSingleton
 {
 	/*----------------------------------------------------------------------------------------------------------------*/
 
-	public static class Attachment
-	{
-		protected final String m_name;
-		protected final String m_mime; // https://fr.wikipedia.org/wiki/Type_de_m%C3%A9dias
-		protected final byte[] m_data;
-
-		public Attachment(String name, String mime, byte[] data)
-		{
-			m_name = name;
-			m_mime = mime;
-			m_data = data;
-		}
-	}
-
-	/*----------------------------------------------------------------------------------------------------------------*/
-
 	private EmailSingleton() {}
 
 	/*----------------------------------------------------------------------------------------------------------------*/
 
 	public static void sendMessage(String from, String to, String cc, String subject, String text) throws Exception
 	{
-		sendMessage(from, to, cc, subject, text, null);
-	}
+		Config config = new Config();
 
-	/*----------------------------------------------------------------------------------------------------------------*/
-
-	public static void sendMessage(String from, String to, String cc, String subject, String text, Attachment[] attachments) throws Exception
-	{
-		ConfigSingleton configSingleton = new ConfigSingleton();
-
-		String host = configSingleton.getEmailHost();
-		String port = configSingleton.getEmailPort();
-		String mode = configSingleton.getEmailMode();
-		String user = configSingleton.getEmailUser();
-		String pass = configSingleton.getEmailPass();
+		String host = config.getEmailHost();
+		String port = config.getEmailPort();
+		String mode = config.getEmailMode();
+		String user = config.getEmailUser();
+		String pass = config.getEmailPass();
 
 		if(host.isEmpty()
 		   ||
@@ -106,21 +83,6 @@ public class EmailSingleton
 		}
 
 		emailBuilder.withSubject(subject).withPlainText(text);
-
-		if(attachments != null)
-		{
-			for(Attachment attachment: attachments)
-			{
-				if(attachment != null)
-				{
-					emailBuilder.withAttachment(
-						attachment.m_name,
-						attachment.m_data,
-						attachment.m_mime
-					);
-				}
-			}
-		}
 
 		/*------------------------------------------------------------------------------------------------------------*/
 

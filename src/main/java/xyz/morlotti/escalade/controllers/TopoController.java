@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import xyz.morlotti.escalade.EmailSingleton;
 import xyz.morlotti.escalade.models.BeanException;
+import xyz.morlotti.escalade.models.beans.Booking;
 import xyz.morlotti.escalade.models.beans.Topo;
 import xyz.morlotti.escalade.models.beans.User;
+import xyz.morlotti.escalade.models.daos.BookingDAO;
 import xyz.morlotti.escalade.models.daos.TopoDAO;
 import xyz.morlotti.escalade.models.daos.UserDAO;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class TopoController
@@ -22,6 +27,9 @@ public class TopoController
 
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private BookingDAO bookingDAO;
 
     @RequestMapping(path = "/topos", method = RequestMethod.GET)
     public String showTopos(
@@ -37,6 +45,7 @@ public class TopoController
             model.addAttribute("topos", topoDAO.list());
         }
 
+        model.addAttribute("parentUser", parentUser);
         model.addAttribute("users", userDAO.list());
 
         return "showTopos";
@@ -50,6 +59,8 @@ public class TopoController
         model.addAttribute("topo", topoDAO.get(id));
 
         model.addAttribute("users", userDAO.list());
+
+        model.addAttribute("bookings", bookingDAO.list(id));
 
         return "showUpdateTopo";
     }
@@ -80,6 +91,12 @@ public class TopoController
         topo.setUserFK(user);
 
         topoDAO.add(topo);
+
+        /**/
+
+        book(isAvailable, user, topo);
+
+        /**/
 
         model.addAttribute("title", "Topo ajouté");
 
@@ -114,6 +131,12 @@ public class TopoController
 
         topoDAO.update(topo);
 
+        /**/
+
+        book(isAvailable, user, topo);
+
+        /**/
+
         model.addAttribute("title", "Topo modifié");
 
         model.addAttribute("message", "Topo modifié avec succès !");
@@ -137,5 +160,50 @@ public class TopoController
         model.addAttribute("id", id);
 
         return "deleteTopo";
+    }
+
+    @RequestMapping(path = "/topo/book/{id}", method = RequestMethod.GET)
+    public String showTopo(
+        @PathVariable(value = "id") final int id,
+        @RequestParam(name = "user", required = false) Integer parentUser,
+        HttpSession httpSession,
+        Model model) throws Exception
+    {
+        model.addAttribute("title", "Topo");
+
+        User user = (User) httpSession.getAttribute ("currentUser");
+
+        Topo topo = topoDAO.get(id);
+
+        EmailSingleton.sendMessage(
+            user.getEmail(),
+            topo.getUserFK().getEmail(),
+            "",
+            "Demande réservation du topo " + topo.getName(),
+            "Bonjour,\nL'utilisateur " + user.getLogin() + " souhaite réserver le topo " + topo.getName() + ".\n" +
+            "Pour donner votre accord, veuillez cliquer ici : http://localhost:8080/Escalade/topo/" + topo.getId() + ".\n" +
+            "Cordialement,\n" + "Les Amis de l'escalade"
+        );
+
+        /**/
+
+        model.addAttribute("message", "Demande réservation du topo " + topo.getName() + " envoyée !");
+
+        model.addAttribute("message_type", "success");
+
+        return showTopos(parentUser, model);
+    }
+
+    private void book(boolean isAvailable, User user, Topo topo)
+    {
+        if(!isAvailable)
+        {
+            Booking booking = new Booking();
+
+            booking.setUserFK(user);
+            booking.setTopoFK(topo);
+
+            bookingDAO.add(booking);
+        }
     }
 }

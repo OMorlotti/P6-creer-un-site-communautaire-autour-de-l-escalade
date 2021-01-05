@@ -97,7 +97,7 @@
             <td><spring:out value="${ topo.description }" /></td>
             <td><spring:out value="${ topo.city }" /></td>
             <td><spring:out value="${ topo.postalCode }" /></td>
-            <td><spring:if test="${ topo.isAvailable == 'true' }">disponible</spring:if><spring:if test="${ topo.isAvailable == 'false' }">indisponible</spring:if></td>
+            <td><spring:if test="${ topo.isAvailable == 'true' }"><a class="btn btn-sm btn-success p-1" href="/Escalade/topo/book/<spring:out value="${ topo.id }" />?user=<spring:out value="${ parentUser }" />">Réserver</a></spring:if><spring:if test="${ topo.isAvailable == 'false' }"><button class="btn btn-sm btn-danger p-1" type="button" disabled>Réserver</span></spring:if></td>
             <spring:choose>
                 <spring:when test="${topo.userFK.id eq sessionScope.currentUser.id or sessionScope.currentUser.role eq 'ADMIN'}">
                     <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir/Editer</a></td>

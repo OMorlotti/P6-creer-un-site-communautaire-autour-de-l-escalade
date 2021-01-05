@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Properties;
 
-public class ConfigSingleton
+public class Config
 {
 	private String email_host = "";
 	private String email_port = "";

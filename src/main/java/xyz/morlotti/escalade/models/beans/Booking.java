@@ -22,9 +22,6 @@ public class Booking
 	@JoinColumn(name = "topofk")
 	private Topo topoFK;
 
-	@Column(name = "isreserved", unique = false, nullable = false)
-	private boolean isReserved;
-
 	/*----------------------------------------------------------------------------------------------------------------*/
 
 	public int getId()
@@ -55,16 +52,6 @@ public class Booking
 	public void setTopoFK(Topo topoFK)
 	{
 		this.topoFK = topoFK;
-	}
-
-	public boolean getIsReserved()
-	{
-		return isReserved;
-	}
-
-	public void setIsReserved(boolean isReserved)
-	{
-		this.isReserved = isReserved;
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------*/

@@ -54,13 +54,15 @@
                         <span class="nav-link">|</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Escalade/bookings">Réservations</a
+                        <a class="nav-link" href="/Escalade/search">🔍 Recherche</a
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    <spring:if test="${sessionScope.currentUser.role eq 'ADMIN'}">
                     <li class="nav-item">
                         <a class="nav-link" href="/Escalade/users">Users</a>
                     </li>
+                    </spring:if>
                     <spring:choose>
                         <spring:when test="${sessionScope.currentUser.id eq -1}">
                             <li class="nav-item">
