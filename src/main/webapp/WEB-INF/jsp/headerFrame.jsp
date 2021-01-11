@@ -27,9 +27,9 @@
         </script>
 
     </head>
-    <body>
+    <body style="background: url('/Escalade/mountains2.png') no-repeat center center fixed; background-size: cover;">
 
-        <div class="container p-2">
+        <div class="container rounded-bottom shadow-lg bg-white p-2">
 
             <spring:if test="${ not empty message }">
             <div class="alert alert-<spring:out value="${ message_type }" />" role="alert">

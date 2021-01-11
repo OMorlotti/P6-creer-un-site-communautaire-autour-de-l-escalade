@@ -1,5 +1,7 @@
 <%@ include file="../jsp/headerFrame.jsp" %>
 
+<h4>Liste des comments</h4>
+
 <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#commentform">Ajouter un commentaire</button>
 </spring:if>

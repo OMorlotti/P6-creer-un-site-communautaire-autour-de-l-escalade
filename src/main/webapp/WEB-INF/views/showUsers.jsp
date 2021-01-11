@@ -1,5 +1,7 @@
 <%@ include file="../jsp/header.jsp" %>
 
+<h4>Liste des utilisateurs</h4>
+
 <spring:if test="${!(sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#userform">Ajouter un utilisateur</button>
 </spring:if>

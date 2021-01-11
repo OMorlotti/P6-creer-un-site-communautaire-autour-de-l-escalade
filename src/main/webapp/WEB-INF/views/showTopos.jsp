@@ -1,5 +1,7 @@
 <%@ include file="../jsp/header.jsp" %>
 
+<h4>Liste des topos</h4>
+
 <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#topoform">Ajouter un topo</button>
 </spring:if>

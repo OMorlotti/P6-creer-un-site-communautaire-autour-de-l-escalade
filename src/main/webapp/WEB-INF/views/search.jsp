@@ -197,14 +197,16 @@
 
 <table class="table table-sm table-striped mt-2">
     <thead>
-      <tr>
-
+        <tr>
+            <td>Spot</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
         <spring:forEach var="spot" items="${ spots }">
         <tr>
-
+            <td><spring:out value="${ spot.name }" /></td>
+            <td><a href="/Escalade/spot/<spring:out value="${ spot.id }" />" target="_blank">voir</td>
         </tr>
         </spring:forEach>
     </tbody>

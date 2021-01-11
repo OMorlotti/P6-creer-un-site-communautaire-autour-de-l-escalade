@@ -28,7 +28,7 @@
         </script>
 
     </head>
-    <body style="background: url('/Escalade/mountains.jpg') no-repeat center center fixed; background-size: cover;">
+    <body style="background: url('/Escalade/mountains2.png') no-repeat center center fixed; background-size: cover;">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-1 py-0">
             <a class="navbar-brand" href="/Escalade">
@@ -88,7 +88,7 @@
             </div>
         </nav>
 
-        <div class="container p-2" style="background-color: white;">
+        <div class="container rounded-bottom shadow-lg bg-white p-2">
 
             <spring:if test="${ not empty message }">
             <div class="alert alert-<spring:out value="${ message_type }" />" role="alert">

@@ -75,8 +75,7 @@ public class SpotDAO
         Set<String> havings = new LinkedHashSet<>(); // Pour mettre dans la partie HAVING
 
         entities.add("SPOT s1");
-        paths.add("1 = 1");
-        paths.add("2 = 2");
+        conds.add("1 = 1");
 
         if(departement != null)
         {
@@ -119,9 +118,13 @@ public class SpotDAO
             conds.add("c.name = :cotation");
         }
 
-        String sql = "SELECT s1 FROM " + String.join(" ", entities) +
-                         " WHERE " + String.join(" AND ", paths) + " AND " + String.join(" AND ", conds) +
-                         (!havings.isEmpty() ? " HAVING " + String.join(" AND ", havings) : "");
+        paths.addAll(conds);
+
+        String sql = "SELECT s1" +
+                     " FROM " + String.join(", ", entities) +
+                     " WHERE " + String.join(" AND ", paths) +
+                     (!havings.isEmpty() ? " HAVING " + String.join(" AND ", havings) : "")
+        ;
 
         Session currentSession = sessionFactory.getCurrentSession();
 
