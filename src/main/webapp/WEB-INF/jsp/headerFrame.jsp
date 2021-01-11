@@ -22,7 +22,9 @@
         <script>
           function resizeIframe(obj)
           {
-            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+            setInterval(function() {
+                obj.style.height = (16 + $(obj.contentWindow.document).find('.container').height()) + 'px';
+            }, 500);
           }
         </script>
 
