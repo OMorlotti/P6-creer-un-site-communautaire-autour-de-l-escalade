@@ -52,20 +52,38 @@ public class TopoController
     }
 
     @RequestMapping(path = "/topo/{id}", method = RequestMethod.GET)
-    public String showTopo(@PathVariable(value = "id") final int id, Model model) throws Exception
+    public String showTopo(
+        @PathVariable(value = "id") final int id,
+        @RequestParam(name = "isavailable", required = false) Boolean isAvailable,
+        @RequestParam(name = "bookuserfk", required = false) Integer bookUserFK,
+        HttpSession httpSession,
+        Model model) throws Exception
     {
         model.addAttribute("title", "Topo");
 
-        model.addAttribute("topo", topoDAO.get(id));
+        Topo topo = topoDAO.get(id);
+
+        if(bookUserFK == null)
+        {
+            User user = (User) httpSession.getAttribute ("currentUser");
+
+            bookUserFK = user.getId();
+        }
+
+        if(isAvailable != null)
+        {
+            topo.setIsAvailable(isAvailable);
+        }
+
+        model.addAttribute("topo", topo);
 
         model.addAttribute("users", userDAO.list());
+        model.addAttribute("bookUserFK", bookUserFK);
 
         model.addAttribute("bookings", bookingDAO.list(id));
 
         return "showUpdateTopo";
     }
-
-    // @Valid @ModelAttribute User user
 
     @RequestMapping(path = "/topo", method = RequestMethod.POST)
     public String addTopo(
@@ -75,10 +93,12 @@ public class TopoController
         @RequestParam("postalcode") String postalCode,
         @RequestParam("releasedate") String releaseDate,
         @RequestParam("isavailable") boolean isAvailable,
+        @RequestParam("bookuserfk") int bookUserFK,
         @RequestParam("userfk") int userFK,
-        Model model) throws BeanException
+        Model model) throws Exception
     {
         User user = userDAO.get(userFK);
+        User bookUser = userDAO.get(bookUserFK);
 
         Topo topo = new Topo();
 
@@ -94,7 +114,7 @@ public class TopoController
 
         /**/
 
-        book(isAvailable, user, topo);
+        book(isAvailable, bookUser, topo);
 
         /**/
 
@@ -114,10 +134,12 @@ public class TopoController
         @RequestParam("postalcode") String postalCode,
         @RequestParam("releasedate") String releaseDate,
         @RequestParam("isavailable") boolean isAvailable,
+        @RequestParam("bookuserfk") int bookUserFK,
         @RequestParam("userfk") int userFK,
         Model model) throws Exception
     {
         User user = userDAO.get(userFK);
+        User bookUser = userDAO.get(bookUserFK);
 
         Topo topo = topoDAO.get(id);
 
@@ -133,7 +155,7 @@ public class TopoController
 
         /**/
 
-        book(isAvailable, user, topo);
+        book(isAvailable, bookUser, topo);
 
         /**/
 
@@ -146,6 +168,7 @@ public class TopoController
         model.addAttribute("topo", topo);
 
         model.addAttribute("users", userDAO.list());
+        model.addAttribute("bookUserFK", bookUserFK);
 
         return "showUpdateTopo";
     }
@@ -163,7 +186,7 @@ public class TopoController
     }
 
     @RequestMapping(path = "/topo/book/{id}", method = RequestMethod.GET)
-    public String showTopo(
+    public String bookTopo(
         @PathVariable(value = "id") final int id,
         @RequestParam(name = "user", required = false) Integer parentUser,
         HttpSession httpSession,
@@ -181,20 +204,51 @@ public class TopoController
             "",
             "Demande réservation du topo " + topo.getName(),
             "Bonjour,\nL'utilisateur " + user.getLogin() + " souhaite réserver le topo " + topo.getName() + ".\n" +
-            "Pour donner votre accord, veuillez cliquer ici : http://localhost:8080/Escalade/topo/" + topo.getId() + ".\n" +
+            "Pour donner votre accord, veuillez cliquer ici : http://localhost:8080/Escalade/topo/" + topo.getId() + "?isavailable=0&bookuserfk=" + user.getId() + ".\n" +
             "Cordialement,\n" + "Les Amis de l'escalade"
         );
 
         /**/
 
-        model.addAttribute("message", "Demande réservation du topo " + topo.getName() + " envoyée !");
+        model.addAttribute("message", "Demande de réservation du topo " + topo.getName() + " envoyée !");
 
         model.addAttribute("message_type", "success");
 
         return showTopos(parentUser, model);
     }
 
-    private void book(boolean isAvailable, User user, Topo topo)
+    @RequestMapping(path = "/topo/notbook/{id}", method = RequestMethod.GET)
+    public String notBookTopo(
+        @PathVariable(value = "id") final int id,
+        @RequestParam(name = "user", required = false) Integer parentUser,
+        HttpSession httpSession,
+        Model model) throws Exception
+    {
+        model.addAttribute("title", "Topo");
+
+        User user = (User) httpSession.getAttribute ("currentUser");
+
+        Topo topo = topoDAO.get(id);
+
+        EmailSingleton.sendMessage(
+            user.getEmail(),
+            topo.getUserFK().getEmail(),
+            "",
+            "Demande réservation du topo " + topo.getName() + " refusée",
+            "Bonjour,\nVotre demande demande de réservation du topo " + topo.getName() + " a été refusée.\n" +
+            "Cordialement,\n" + "Les Amis de l'escalade"
+        );
+
+        /**/
+
+        model.addAttribute("message", "Demande de réservation du topo " + topo.getName() + " refusée !");
+
+        model.addAttribute("message_type", "danger");
+
+        return showTopos(parentUser, model);
+    }
+
+    private void book(boolean isAvailable, User user, Topo topo) throws Exception
     {
         if(!isAvailable)
         {
@@ -204,6 +258,15 @@ public class TopoController
             booking.setTopoFK(topo);
 
             bookingDAO.add(booking);
+
+            EmailSingleton.sendMessage(
+                user.getEmail(),
+                topo.getUserFK().getEmail(),
+                "",
+                "Demande réservation du topo " + topo.getName() + " acceptée !",
+                "Bonjour,\nVotre demande demande de réservation du topo " + topo.getName() + " a été acceptée par " + user.getLogin() + ".\n" +
+                "Cordialement,\n" + "Les Amis de l'escalade"
+            );
         }
     }
 }

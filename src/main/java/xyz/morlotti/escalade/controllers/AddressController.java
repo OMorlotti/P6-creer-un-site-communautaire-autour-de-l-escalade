@@ -48,8 +48,6 @@ public class AddressController
         return "showUpdateAddress";
     }
 
-    // @Valid @ModelAttribute Secteur secteur
-
     @RequestMapping(path = "/address", method = RequestMethod.POST)
     public String addAddress(
         @RequestParam("userfk") int userFK,
