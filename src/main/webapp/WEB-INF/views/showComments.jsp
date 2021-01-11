@@ -31,7 +31,7 @@
           <td>Login</td>
           <td>Commentaire</td>
           <td>Date</td>
-          <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
+          <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
           </spring:if>
@@ -43,7 +43,7 @@
             <td><spring:out value="${ comment.userFK.login }" /></td>
             <td><spring:out value="${ comment.comment }" /></td>
             <td><spring:out value="${ comment.created }" /></td>
-            <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
+            <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
             <td><a href="/Escalade/comment/<spring:out value="${ comment.id }" />">Voir/Editer</a></td>
             <td><a href="/Escalade/comment/delete/<spring:out value="${ comment.id }" />">Supprimer</a></td>
             </spring:if>

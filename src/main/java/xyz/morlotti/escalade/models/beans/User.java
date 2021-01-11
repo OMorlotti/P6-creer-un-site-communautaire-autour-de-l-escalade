@@ -84,6 +84,10 @@ public class User implements Serializable
 			{
 				return MEMBER;
 			}
+			else if("ADMIN".equalsIgnoreCase(value))
+			{
+				return ADMIN;
+			}
 
 			throw new BeanException("Ne peut pas parser la valeur du role");
 		}

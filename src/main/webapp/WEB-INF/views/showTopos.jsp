@@ -85,7 +85,7 @@
           <td>Description</td>
           <td>Ville</td>
           <td>Code postal</td>
-          <td>Disponibilité</td>
+          <td>Disponibilité<sup>1</sup></td>
           <td></td>
           <td></td>
       </tr>
@@ -97,7 +97,14 @@
             <td><spring:out value="${ topo.description }" /></td>
             <td><spring:out value="${ topo.city }" /></td>
             <td><spring:out value="${ topo.postalCode }" /></td>
-            <td><spring:if test="${ topo.isAvailable == 'true' }"><a class="btn btn-sm btn-success p-1" href="/Escalade/topo/book/<spring:out value="${ topo.id }" />?user=<spring:out value="${ parentUser }" />">Réserver</a></spring:if><spring:if test="${ topo.isAvailable == 'false' }"><button class="btn btn-sm btn-danger p-1" type="button" disabled>Réserver</span></spring:if></td>
+            <spring:choose>
+                <spring:when test="${sessionScope.currentUser.id eq -1}">
+                    <td><spring:if test="${ topo.isAvailable == 'true' }">disponible</spring:if><spring:if test="${ topo.isAvailable == 'false' }">non disponible</spring:if></td>
+                </spring:when>
+                <spring:otherwise>
+                    <td><spring:if test="${ topo.isAvailable == 'true' }"><a class="btn btn-sm btn-success p-1" href="/Escalade/topo/book/<spring:out value="${ topo.id }" />?user=<spring:out value="${ parentUser }" />">Réserver</a></spring:if><spring:if test="${ topo.isAvailable == 'false' }"><button class="btn btn-sm btn-danger p-1" type="button" disabled>Réserver</span></spring:if></td>
+                </spring:otherwise>
+            </spring:choose>
             <spring:choose>
                 <spring:when test="${topo.userFK.id eq sessionScope.currentUser.id or sessionScope.currentUser.role eq 'ADMIN'}">
                     <td><a href="/Escalade/topo/<spring:out value="${ topo.id }" />">Voir/Editer</a></td>
@@ -112,5 +119,7 @@
         </spring:forEach>
     </tbody>
 </table>
+
+<div><small>1. Réservation pour les utilisateurs authentifiés seulement</small></div>
 
 <%@ include file="../jsp/footer.jsp" %>

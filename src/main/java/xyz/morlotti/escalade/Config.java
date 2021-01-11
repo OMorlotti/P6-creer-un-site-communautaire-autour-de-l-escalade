@@ -3,6 +3,9 @@ package xyz.morlotti.escalade;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Properties;
 
 public class Config
@@ -18,9 +21,13 @@ public class Config
 	{
 		try
 		{
-			// chargement du fichier escalade.properties
 			Properties p = new Properties();
-			p.load(getClass().getResourceAsStream("/escalade.properties"));
+
+			// chargement du fichier escalade.properties depuis le user.home
+			String home = System.getProperty("user.home");
+			File file = new File(home, "escalade.properties");
+			InputStream inputStream = new FileInputStream(file);
+			p.load(inputStream);
 
 			// lecture des paramètres
 			email_host = p.getProperty("email_host");

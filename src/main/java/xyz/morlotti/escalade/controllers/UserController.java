@@ -93,7 +93,8 @@ public class UserController
 		@RequestParam("birthdate") String birthdate,
 		@RequestParam("phone") String phone,
 		@RequestParam("email") String email,
-		@RequestParam("role") String role, Model model) throws BeanException
+		@RequestParam("role") String role,
+		Model model) throws BeanException
 	{
 		User user = m_userDAO.get(id);
 

@@ -68,6 +68,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/Escalade/login">S'authentifier</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Escalade/users">S'enregistrer</a>
+                            </li>
                         </spring:when>
                         <spring:otherwise>
                             <li class="nav-item dropdown">

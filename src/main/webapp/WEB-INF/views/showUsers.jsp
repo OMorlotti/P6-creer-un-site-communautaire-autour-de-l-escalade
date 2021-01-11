@@ -1,8 +1,10 @@
 <%@ include file="../jsp/header.jsp" %>
 
+<spring:if test="${!(sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#userform">Ajouter un utilisateur</button>
+</spring:if>
 
-<div class="card mt-1 collapse" id="userform">
+<div class="card mt-1<spring:if test="${!(sessionScope.currentUser.id eq -1)}"> collapse</spring:if>" id="userform">
     <div class="card-body">
         <form method="POST" action="/Escalade/user">
 

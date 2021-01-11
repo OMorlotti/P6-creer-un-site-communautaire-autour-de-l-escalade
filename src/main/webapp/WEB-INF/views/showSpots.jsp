@@ -92,10 +92,8 @@
           <td>Nom du topo</td>
           <td>Département</td>
           <td>Officiel</td>
-          <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
-          </spring:if>
       </tr>
     </thead>
     <tbody>

@@ -10,7 +10,7 @@ import xyz.morlotti.escalade.models.beans.Topo;
 
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.*;
 
 @Repository
 @Transactional
@@ -65,5 +65,69 @@ public class SpotDAO
         TypedQuery<Spot> query = currentSession.createQuery("SELECT s FROM SPOT s WHERE s.userFK.id = ?1", Spot.class);
 
         return query.setParameter(1, parentUser).getResultList();
+    }
+
+	public Object get(String departement, Integer nbofsectors, Integer nbofvoies, String cotation)
+    {
+        Set<String> entities = new LinkedHashSet<>(); // Pour mettre dans la partie FROM
+        Set<String> paths = new LinkedHashSet<>(); // Pour mettre dans la partie WHERE (CHEMINS)
+        Set<String> conds = new LinkedHashSet<>(); // Pour mettre dans la partie WHERE (EXPRESSIONS)
+        Set<String> havings = new LinkedHashSet<>(); // Pour mettre dans la partie HAVING
+
+        entities.add("SPOT s1");
+        paths.add("1 = 1");
+        paths.add("2 = 2");
+
+        if(departement != null)
+        {
+            conds.add("s1.departement = `" + departement + "`");
+        }
+
+        if(nbofsectors != null)
+        {
+            entities.add("SECTEUR s2");
+            paths.add("s2.spotFK = s1.id");
+
+            havings.add("COUNT(s2) = `" + nbofsectors + "`");
+        }
+
+        if(nbofvoies != null)
+        {
+            entities.add("SECTEUR s2");
+            paths.add("s2.spotFK = s1.id");
+
+            entities.add("VOIE v");
+            paths.add("v.sectorFK = s2.id");
+
+            havings.add("COUNT(v) = `" + nbofvoies + "`");
+        }
+
+        if(cotation != null)
+        {
+            entities.add("SECTEUR s2");
+            paths.add("s2.spotFK = s1.id");
+
+            entities.add("VOIE v");
+            paths.add("v.sectorFK = s2.id");
+
+            entities.add("LENGTH l"); /* nécessaire pour les jointures cotation->length->voies */
+            paths.add("l.voieFK = v.id");
+            paths.add("l.cotationFK = c.id");
+
+            entities.add("COTATION c");
+
+            conds.add("c.name = `" + cotation + "`");
+        }
+
+        String sql = "SELECT s1 FROM " + String.join(" ", entities) +
+                     " WHERE " + String.join(" AND ", paths) + " AND " + String.join(" AND ", conds) +
+                     (!havings.isEmpty() ? " HAVING " + String.join(" AND ", havings) : "")
+        ;
+
+        Session currentSession = sessionFactory.getCurrentSession();
+
+        TypedQuery<Spot> query = currentSession.createQuery(sql, Spot.class);
+
+        return query.getResultList();
     }
 }
