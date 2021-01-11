@@ -80,7 +80,7 @@ public class SpotDAO
 
         if(departement != null)
         {
-            conds.add("s1.departement = `" + departement + "`");
+            conds.add("s1.departement = :departement");
         }
 
         if(nbofsectors != null)
@@ -88,7 +88,7 @@ public class SpotDAO
             entities.add("SECTEUR s2");
             paths.add("s2.spotFK = s1.id");
 
-            havings.add("COUNT(s2) = `" + nbofsectors + "`");
+            havings.add("COUNT(s2) = :nbofsectors");
         }
 
         if(nbofvoies != null)
@@ -99,7 +99,7 @@ public class SpotDAO
             entities.add("VOIE v");
             paths.add("v.sectorFK = s2.id");
 
-            havings.add("COUNT(v) = `" + nbofvoies + "`");
+            havings.add("COUNT(v) = :nbofvoies");
         }
 
         if(cotation != null)
@@ -116,17 +116,32 @@ public class SpotDAO
 
             entities.add("COTATION c");
 
-            conds.add("c.name = `" + cotation + "`");
+            conds.add("c.name = :cotation");
         }
 
         String sql = "SELECT s1 FROM " + String.join(" ", entities) +
-                     " WHERE " + String.join(" AND ", paths) + " AND " + String.join(" AND ", conds) +
-                     (!havings.isEmpty() ? " HAVING " + String.join(" AND ", havings) : "")
-        ;
+                         " WHERE " + String.join(" AND ", paths) + " AND " + String.join(" AND ", conds) +
+                         (!havings.isEmpty() ? " HAVING " + String.join(" AND ", havings) : "");
 
         Session currentSession = sessionFactory.getCurrentSession();
 
         TypedQuery<Spot> query = currentSession.createQuery(sql, Spot.class);
+
+        if(departement != null) {
+            query.setParameter("departement", departement);
+        }
+
+        if(nbofsectors != null) {
+            query.setParameter("nbofsectors", nbofsectors);
+        }
+
+        if(nbofvoies != null) {
+            query.setParameter("nbofvoies", nbofvoies);
+        }
+
+        if(cotation != null) {
+            query.setParameter("cotation", cotation);
+        }
 
         return query.getResultList();
     }
