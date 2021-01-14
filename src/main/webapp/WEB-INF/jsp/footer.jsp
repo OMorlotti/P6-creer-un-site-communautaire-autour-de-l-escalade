@@ -1,21 +1,21 @@
         </div>
-<!--
-        <footer class="border-top p-2">
+
+        <footer class="container p-2">
 
             <div class="row">
-                <div class="col-md-4">
-                    Escalade
+                <div class="col-md-4 text-center">
+                    <small>© Olivier Morlotti, Tous droits réservés.</small>
                 </div>
-                <div class="col-md-4">
-                    B
+                <div class="col-md-4 text-center">
+                    <small>Les Amis de l'escalade</small>
                 </div>
-                <div class="col-md-4">
-                    C
+                <div class="col-md-4 text-center">
+                    <small>@ Nous contacter</small>
                 </div>
             </div>
 
         </footer>
--->
+
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
