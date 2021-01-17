@@ -1,5 +1,7 @@
 <%@ include file="../jsp/header.jsp" %>
 
+<h4>Détails du spot « <spring:out value="${ spot.name }" /> »</h4>
+
 <form method="POST" action="/Escalade/spot/update/<spring:out value="${ spot.id }" />">
 
     <div class="form-group row">
@@ -45,19 +47,19 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="departement">Département :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="departement" id="departement" value="<spring:out value="${ spot.departement }" />" />
+            <input class="form-control form-control-sm" type="text" name="departement" id="departement" value="<spring:out value="${ spot.departement }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="latitude">Latitude :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="latitude" id="latitude" value="<spring:out value="${ spot.latitude }" />" />
+            <input class="form-control form-control-sm" type="text" name="latitude" id="latitude" value="<spring:out value="${ spot.latitude }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="longitude">Longitude :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="longitude" id="longitude" value="<spring:out value="${ spot.longitude }" />" />
+            <input class="form-control form-control-sm" type="text" name="longitude" id="longitude" value="<spring:out value="${ spot.longitude }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">

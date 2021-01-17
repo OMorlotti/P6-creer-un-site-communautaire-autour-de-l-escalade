@@ -1,11 +1,13 @@
-<%@ include file="../jsp/headerFrame.jsp" %>
+<%@ include file="../jsp/header.jsp" %>
+
+<h4>Détails de la voie « <spring:out value="${ voie.id }" /> »</h4>
 
 <form method="POST" action="/Escalade/voie/update/<spring:out value="${ voie.id }" />">
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="height">Hauteur [mètres] :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="height" id="height" value="<spring:out value="${ voie.height }" />" />
+            <input class="form-control form-control-sm" type="text" name="height" id="height" value="<spring:out value="${ voie.height }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
@@ -31,6 +33,6 @@
 
 <hr />
 
-<iframe src="/Escalade/longueurs?voie=<spring:out value="${ voie.id }" />" style="width: 100%; height: 600px; border: none;" onload="resizeIframe(this)"></iframe>
+<iframe src="/Escalade/lengths?voie=<spring:out value="${ voie.id }" />" style="width: 100%; height: 600px; border: none;" onload="resizeIframe(this)"></iframe>
 
-<%@ include file="../jsp/footerFrame.jsp" %>
+<%@ include file="../jsp/footer.jsp" %>

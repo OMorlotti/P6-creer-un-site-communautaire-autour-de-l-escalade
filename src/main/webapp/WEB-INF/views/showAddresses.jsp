@@ -15,31 +15,31 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="street">Numéro de voie :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="street" id="street" />
+                    <input class="form-control form-control-sm" type="text" name="street" id="street" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="streetname">Nom de voie :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="streetname" id="streetname" />
+                    <input class="form-control form-control-sm" type="text" name="streetname" id="streetname" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="postalcode">Code postal :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="postalcode" id="postalcode" />
+                    <input class="form-control form-control-sm" type="text" name="postalcode" id="postalcode" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="city">Ville :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="city" id="city" />
+                    <input class="form-control form-control-sm" type="text" name="city" id="city" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="country">Pays :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="country" id="country" />
+                    <input class="form-control form-control-sm" type="text" name="country" id="country" required="required" />
                 </div>
             </div>
 
@@ -54,6 +54,7 @@
 <table class="table table-sm table-striped mt-2">
     <thead>
       <tr>
+          <td>#</td>
           <td>N° de voie</td>
           <td>Nom de voie</td>
           <td>Code postal</td>
@@ -67,6 +68,7 @@
     <tbody>
         <spring:forEach var="address" items="${ addresses }">
         <tr>
+            <td><spring:out value="${ address.id }" /></td>
             <td><spring:out value="${ address.street }" /></td>
             <td><spring:out value="${ address.streetName }" /></td>
             <td><spring:out value="${ address.postalCode }" /></td>

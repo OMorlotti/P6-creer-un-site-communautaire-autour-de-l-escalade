@@ -13,31 +13,31 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="name">Nom :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="name" id="name" />
+                    <input class="form-control form-control-sm" type="text" name="name" id="name" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="description">Description :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="description" id="description" />
+                    <input class="form-control form-control-sm" type="text" name="description" id="description" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="city">Ville :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="city" id="city" />
+                    <input class="form-control form-control-sm" type="text" name="city" id="city" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="postalcode">Code postal :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="postalcode" id="postalcode" />
+                    <input class="form-control form-control-sm" type="text" name="postalcode" id="postalcode" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="releasedate">Date de parution :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="date" name="releasedate" id="releasedate" />
+                    <input class="form-control form-control-sm" type="date" name="releasedate" id="releasedate" required="required" />
                 </div>
             </div>
             <div class="form-group row">

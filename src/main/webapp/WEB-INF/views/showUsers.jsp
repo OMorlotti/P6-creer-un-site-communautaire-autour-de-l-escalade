@@ -13,25 +13,25 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="lastname">Nom :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="lastname" id="lastname" />
+                    <input class="form-control form-control-sm" type="text" name="lastname" id="lastname" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="firstname">Prénom :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="firstname" id="firstname" />
+                    <input class="form-control form-control-sm" type="text" name="firstname" id="firstname" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="login">Login :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="login" id="login" />
+                    <input class="form-control form-control-sm" type="text" name="login" id="login" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="password">Mot de passe :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="password" name="password" id="password" />
+                    <input class="form-control form-control-sm" type="password" name="password" id="password" required="required" />
                 </div>
             </div>
             <div class="form-group row">
@@ -46,19 +46,19 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="birthdate">Date de naissance :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="date" name="birthdate" id="birthdate" />
+                    <input class="form-control form-control-sm" type="date" name="birthdate" id="birthdate" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="phone">Numéro de téléphone :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="phone" id="phone" />
+                    <input class="form-control form-control-sm" type="text" name="phone" id="phone" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="email">Email :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="email" name="email" id="email" />
+                    <input class="form-control form-control-sm" type="email" name="email" id="email" required="required" />
                 </div>
             </div>
             <div class="form-group row">
@@ -74,7 +74,7 @@
                             </select>
                         </spring:when>
                         <spring:otherwise>
-                            <input class="form-control form-control-sm" type="text" name="role" value="GUEST" id="role" readonly="readonly" />
+                            <input class="form-control form-control-sm" type="text" name="role" value="GUEST" id="role" readonly="readonly" required="required" />
                         </spring:otherwise>
                     </spring:choose>
                 </div>

@@ -1,6 +1,6 @@
 <%@ include file="../jsp/headerFrame.jsp" %>
 
-<h4>Liste des comments</h4>
+<h4>Liste des commentaires</h4>
 
 <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
 <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#commentform">Ajouter un commentaire</button>
@@ -15,7 +15,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="comment">Commentaire :</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control form-control-sm" rows="3" name="comment" id="comment"></textarea>
+                    <textarea class="form-control form-control-sm" rows="3" name="comment" id="comment" required="required"></textarea>
                 </div>
             </div>
 

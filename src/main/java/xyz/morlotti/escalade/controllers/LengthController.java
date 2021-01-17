@@ -27,7 +27,7 @@ public class LengthController
     @Autowired
     private CotationDAO cotationDAO;
 
-    @RequestMapping(path = "/longueurs", method = RequestMethod.GET)
+    @RequestMapping(path = "/lengths", method = RequestMethod.GET)
     public String showLengths(
         @RequestParam(name = "voie", required = false) Integer parentVoie, // Le post parent est passé dans l'url en ajoutan ?spot=<id>, il est facultatif et dans ce cas, on aura null dans parentSpot
         Model model) throws Exception
@@ -49,7 +49,7 @@ public class LengthController
         return "showLengths";
     }
 
-    @RequestMapping(path = "/longueur/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/length/{id}", method = RequestMethod.GET)
     public String showLength(@PathVariable(value = "id") final int id, Model model) throws Exception
     {
         model.addAttribute("title", "Longueur");
@@ -65,7 +65,7 @@ public class LengthController
 
     // @Valid @ModelAttribute User user
 
-    @RequestMapping(path = "/longueur", method = RequestMethod.POST)
+    @RequestMapping(path = "/length", method = RequestMethod.POST)
     public String addLength(
         @RequestParam("voiefk") int voieFK,
         @RequestParam("cotationfk") int cotationFK,
@@ -92,7 +92,7 @@ public class LengthController
         return showLengths(voieFK, model);
     }
 
-    @RequestMapping(path = "/longueur/update/{id}", method = RequestMethod.POST)
+    @RequestMapping(path = "/length/update/{id}", method = RequestMethod.POST)
     public String updateLength(
         @PathVariable(value = "id") final int id,
         @RequestParam("voiefk") int voieFK,
@@ -122,7 +122,7 @@ public class LengthController
         return showLengths(parentVoieId, model);
     }
 
-    @RequestMapping(path = "/longueur/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/lengthÒ/delete/{id}", method = RequestMethod.GET)
     public String deleteLength(@PathVariable(value = "id") final int id, Model model) throws Exception
     {
         Length length = lengthDAO.get(id);

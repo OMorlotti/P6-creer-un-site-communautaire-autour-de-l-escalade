@@ -13,7 +13,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="name">Nom :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="name" id="name" />
+                    <input class="form-control form-control-sm" type="text" name="name" id="name"required="required" />
                 </div>
             </div>
             <spring:choose>
@@ -53,19 +53,19 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="departement">Département :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="departement" id="departement" />
+                    <input class="form-control form-control-sm" type="text" name="departement" id="departement" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="latitude">Latitude :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="latitude" id="latitude" />
+                    <input class="form-control form-control-sm" type="text" name="latitude" id="latitude" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="longitude">Longitude :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="longitude" id="longitude" />
+                    <input class="form-control form-control-sm" type="text" name="longitude" id="longitude" required="required" />
                 </div>
             </div>
             <div class="form-group row">

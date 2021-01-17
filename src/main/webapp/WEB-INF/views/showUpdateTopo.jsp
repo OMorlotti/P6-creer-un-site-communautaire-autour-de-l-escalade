@@ -1,35 +1,37 @@
 <%@ include file="../jsp/header.jsp" %>
 
+<h4>Détails du topo « <spring:out value="${ topo.name }" /> »</h4>
+
 <form method="POST" action="/Escalade/topo/update/<spring:out value="${ topo.id }" />">
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="name">Nom :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="name" id="name" value="<spring:out value="${ topo.name }" />" />
+            <input class="form-control form-control-sm" type="text" name="name" id="name" value="<spring:out value="${ topo.name }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="description">Description :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="description" id="description" value="<spring:out value="${ topo.description }" />" />
+            <input class="form-control form-control-sm" type="text" name="description" id="description" value="<spring:out value="${ topo.description }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="city">Ville :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="city" id="city" value="<spring:out value="${ topo.city }" />" />
+            <input class="form-control form-control-sm" type="text" name="city" id="city" value="<spring:out value="${ topo.city }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="postalcode">Code postal :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="postalcode" id="postalcode" value="<spring:out value="${ topo.postalCode }" />" />
+            <input class="form-control form-control-sm" type="text" name="postalcode" id="postalcode" value="<spring:out value="${ topo.postalCode }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="releasedate">Date de parution :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="date" name="releasedate" id="releasedate" value="<spring:out value="${ topo.releaseDate }" />" />
+            <input class="form-control form-control-sm" type="date" name="releasedate" id="releasedate" value="<spring:out value="${ topo.releaseDate }" />" required="required" />
         </div>
     </div>
     <div class="row">

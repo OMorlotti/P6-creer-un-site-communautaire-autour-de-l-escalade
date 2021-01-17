@@ -1,4 +1,6 @@
-<%@ include file="../jsp/headerFrame.jsp" %>
+<%@ include file="../jsp/header.jsp" %>
+
+<h4>Détails de la longueur « <spring:out value="${ length.id }" /> »</h4>
 
 <form method="POST" action="/Escalade/voie/update/<spring:out value="${ voie.id }" />">
 
@@ -33,7 +35,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="numberofspit">Nombre de spit :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="numberofspit" id="numberofspit" value="<spring:out value="${ length.numberOfSpit }" />" />
+            <input class="form-control form-control-sm" type="text" name="numberofspit" id="numberofspit" value="<spring:out value="${ length.numberOfSpits }" />" required="required" />
         </div>
     </div>
 
@@ -45,4 +47,4 @@
 
 </form>
 
-<%@ include file="../jsp/footerFrame.jsp" %>
+<%@ include file="../jsp/footer.jsp" %>

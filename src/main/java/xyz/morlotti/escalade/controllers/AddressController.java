@@ -104,7 +104,7 @@ public class AddressController
 
         /**/
 
-        model.addAttribute("message", "Adresse " + parentUserId + " modifiée avec succès !");
+        model.addAttribute("message", "Adresse #" + address.getId() + " modifiée avec succès !");
 
         model.addAttribute("message_type", "success");
 
@@ -122,7 +122,7 @@ public class AddressController
 
         /**/
 
-        model.addAttribute("message", "Adresse " + id + " supprimée avec succès !");
+        model.addAttribute("message", "Adresse #" + id + " supprimée avec succès !");
 
         model.addAttribute("message_type", "success");
 

@@ -1,29 +1,31 @@
 <%@ include file="../jsp/header.jsp" %>
 
+<h4>Détails de l'utilisateur « <spring:out value="${ user.login }" /> »</h4>
+
 <form method="POST" action="/Escalade/user/update/<spring:out value="${ user.id }" />">
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="lastname">Nom :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="lastname" value="<spring:out value="${ user.lastName }" />" />
+            <input class="form-control form-control-sm" type="text" name="lastname" value="<spring:out value="${ user.lastName }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="firstname">Prénom :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="firstname" value="<spring:out value="${ user.firstName }" />" />
+            <input class="form-control form-control-sm" type="text" name="firstname" value="<spring:out value="${ user.firstName }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="login">Login :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="login" value="<spring:out value="${ user.login }" />" />
+            <input class="form-control form-control-sm" type="text" name="login" value="<spring:out value="${ user.login }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="password">Mot de passe :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="password" name="password" value="<spring:out value="${ user.password }" />" />
+            <input class="form-control form-control-sm" type="password" name="password" value="<spring:out value="${ user.password }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
@@ -38,19 +40,19 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="birthdate">Date de naissance :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="date" name="birthdate" value="<spring:out value="${ user.birthdate }" />" />
+            <input class="form-control form-control-sm" type="date" name="birthdate" value="<spring:out value="${ user.birthdate }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="phone">Numéro de téléphone :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="phone" value="<spring:out value="${ user.phone }" />" />
+            <input class="form-control form-control-sm" type="text" name="phone" value="<spring:out value="${ user.phone }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="email">Email :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="email" name="email" value="<spring:out value="${ user.email }" />" />
+            <input class="form-control form-control-sm" type="email" name="email" value="<spring:out value="${ user.email }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
@@ -66,7 +68,7 @@
                     </select>
                 </spring:when>
                 <spring:otherwise>
-                    <input class="form-control form-control-sm" type="text" name="role" value="GUEST" id="role" readonly="readonly" />
+                    <input class="form-control form-control-sm" type="text" name="role" value="GUEST" id="role" readonly="readonly" required="required" />
                 </spring:otherwise>
             </spring:choose>
         </div>

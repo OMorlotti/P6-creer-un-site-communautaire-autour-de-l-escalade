@@ -8,7 +8,7 @@
 
 <div class="card mt-1 collapse" id="lengthform">
     <div class="card-body">
-        <form method="POST" action="/Escalade/longueur" >
+        <form method="POST" action="/Escalade/length" >
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="voiefk">Voie :</label>
@@ -41,7 +41,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="numberofspit">Nombre de spits :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="numberofspit" id="numberofspit" />
+                    <input class="form-control form-control-sm" type="text" name="numberofspit" id="numberofspit" required="required" />
                 </div>
             </div>
 
@@ -60,10 +60,8 @@
           <td>Hauteur de la voie</td>
           <td>Cotation</td>
           <td>Nombre de spits</td>
-          <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
-          </spring:if>
        </tr>
     </thead>
     <tbody>
@@ -73,10 +71,16 @@
             <td><spring:out value="${ length.voieFK.height }" /></td>
             <td><spring:out value="${ length.cotationFK.name }" /></td>
             <td><spring:out value="${ length.numberOfSpits }" /></td>
-            <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
-            <td><a href="/Escalade/longueur/<spring:out value="${ length.id }" />" target="_blank">Voir/Editer</a></td>
-            <td><a href="/Escalade/longueur/delete/<spring:out value="${ length.id }" />">Supprimer</a></td>
-            </spring:if>
+            <spring:choose>
+                <spring:when test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
+                    <td><a href="/Escalade/length/<spring:out value="${ length.id }" />" target="_blank">Voir/Editer</a></td>
+                    <td><a href="/Escalade/length/delete/<spring:out value="${ length.id }" />">Supprimer</a></td>
+                </spring:when>
+                <spring:otherwise>
+                    <td><a href="/Escalade/length/<spring:out value="${ length.id }" />" target="_blank">Voir</a></td>
+                    <td>-</td>
+                </spring:otherwise>
+            </spring:choose>
         </tr>
         </spring:forEach>
     </tbody>

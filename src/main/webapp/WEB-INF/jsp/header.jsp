@@ -24,7 +24,7 @@
           function resizeIframe(obj)
           {
             setInterval(function() {
-                obj.style.height = (16 + $(obj.contentWindow.document).find('.container').height()) + 'px';
+                obj.style.height = (20 + $(obj.contentWindow.document).find('.container').height()) + 'px';
             }, 500);
           }
         </script>

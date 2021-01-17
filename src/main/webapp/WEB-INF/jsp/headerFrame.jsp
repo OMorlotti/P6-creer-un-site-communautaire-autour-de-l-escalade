@@ -23,15 +23,15 @@
           function resizeIframe(obj)
           {
             setInterval(function() {
-                obj.style.height = (16 + $(obj.contentWindow.document).find('.container').height()) + 'px';
+                obj.style.height = (20 + $(obj.contentWindow.document).find('.container').height()) + 'px';
             }, 500);
           }
         </script>
 
     </head>
-    <body style="background: url('/Escalade/mountains2.png') no-repeat center center fixed; background-size: cover;">
+    <body style="background-color: white;">
 
-        <div class="container rounded-bottom shadow-lg bg-white p-2">
+        <div class="container p-2">
 
             <spring:if test="${ not empty message }">
             <div class="alert alert-<spring:out value="${ message_type }" />" role="alert">

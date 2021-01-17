@@ -13,7 +13,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="name">Nom :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="text" name="name" id="name" />
+                    <input class="form-control form-control-sm" type="text" name="name" id="name" required="required" />
                 </div>
             </div>
             <div class="form-group row">
@@ -45,10 +45,8 @@
           <td>Id</td>
           <td>Nom du secteur</td>
           <td>Nom du spot</td>
-          <spring:if test="${sessionScope.currentUser.role eq 'MEMBER' or sessionScope.currentUser.role eq 'ADMIN'}">
           <td></td>
           <td></td>
-          </spring:if>
       </tr>
     </thead>
     <tbody>
@@ -63,7 +61,7 @@
                     <td><a href="/Escalade/sector/delete/<spring:out value="${ secteur.id }" />">Supprimer</a></td>
                 </spring:when>
                 <spring:otherwise>
-                    <td><a href="/Escalade/sector/<spring:out value="${ sector.id }" />">Voir</a></td>
+                    <td><a href="/Escalade/sector/<spring:out value="${ sector.id }" />" target="_blank">Voir</a></td>
                     <td>-</td>
                 </spring:otherwise>
             </spring:choose>

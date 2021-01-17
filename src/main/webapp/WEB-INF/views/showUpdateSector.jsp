@@ -1,11 +1,13 @@
-<%@ include file="../jsp/headerFrame.jsp" %>
+<%@ include file="../jsp/header.jsp" %>
+
+<h4>Détails du secteur « <spring:out value="${ sector.name }" /> »</h4>
 
 <form method="POST" action="/Escalade/sector/update/<spring:out value="${ sector.id }" />">
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="name">Nom :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="text" name="name" id="name" value="<spring:out value="${ sector.name }" />" />
+            <input class="form-control form-control-sm" type="text" name="name" id="name" value="<spring:out value="${ sector.name }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">
@@ -33,4 +35,4 @@
 
 <iframe src="/Escalade/voies?sector=<spring:out value="${ sector.id }" />" style="width: 100%; height: 600px; border: none;" onload="resizeIframe(this)"></iframe>
 
-<%@ include file="../jsp/footerFrame.jsp" %>
+<%@ include file="../jsp/footer.jsp" %>
