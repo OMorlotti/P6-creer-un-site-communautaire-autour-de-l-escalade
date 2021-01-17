@@ -68,10 +68,10 @@
                     <spring:choose>
                         <spring:when test="${sessionScope.currentUser.id eq -1}">
                             <li class="nav-item">
-                                <a class="nav-link" href="/Escalade/login">S'authentifier</a>
+                                <a class="nav-link" href="/Escalade/login">M'authentifier</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/Escalade/users">S'enregistrer</a>
+                                <a class="nav-link" href="/Escalade/users">Me créer un compte</a>
                             </li>
                         </spring:when>
                         <spring:otherwise>
@@ -90,7 +90,7 @@
             </div>
         </nav>
 
-        <div class="container rounded-bottom shadow-lg bg-white p-2">
+        <div class="container shadow-lg bg-white p-2">
 
             <spring:if test="${ not empty message }">
             <div class="alert alert-<spring:out value="${ message_type }" />" role="alert">

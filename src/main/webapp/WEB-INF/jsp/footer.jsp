@@ -1,6 +1,6 @@
         </div>
 
-        <footer class="container p-2">
+        <footer class="container rounded-bottom shadow-lg p-0" style="background-color: rgba(157, 195, 237, 0.25)">
 
             <div class="row">
                 <div class="col-md-4 text-center">

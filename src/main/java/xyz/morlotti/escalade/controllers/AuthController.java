@@ -25,7 +25,7 @@ public class AuthController
     {
         model.addAttribute("title", "Authentification");
 
-        return "loginStep1";
+        return "login";
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
@@ -40,14 +40,14 @@ public class AuthController
 
             httpSession.setAttribute ("currentUser", user);
 
-            return "loginStep2";
+            return "index";
         }
         catch(NoResultException e)
         {
             model.addAttribute("message_type", "danger");
             model.addAttribute("message", "Login ou mot de passe incorrect");
 
-            return "loginStep1";
+            return "login";
         }
     }
 
@@ -92,6 +92,6 @@ public class AuthController
 
         user.initGuest();
 
-        return "logout";
+        return "index";
     }
 }
