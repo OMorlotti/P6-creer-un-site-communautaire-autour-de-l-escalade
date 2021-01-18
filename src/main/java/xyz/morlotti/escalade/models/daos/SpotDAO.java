@@ -67,12 +67,11 @@ public class SpotDAO
         return query.setParameter(1, parentUser).getResultList();
     }
 
-	public Object get(String departement, Integer nbofsectors, Integer nbofvoies, String cotation)
+	public List<Spot> get(String departement, Long nbofsectors, Long nbofvoies, String cotation)
     {
         Set<String> entities = new LinkedHashSet<>(); // Pour mettre dans la partie FROM
         Set<String> paths = new LinkedHashSet<>(); // Pour mettre dans la partie WHERE (CHEMINS)
         Set<String> conds = new LinkedHashSet<>(); // Pour mettre dans la partie WHERE (EXPRESSIONS)
-        Set<String> havings = new LinkedHashSet<>(); // Pour mettre dans la partie HAVING
 
         entities.add("SPOT s1");
         conds.add("1 = 1");
@@ -84,10 +83,7 @@ public class SpotDAO
 
         if(nbofsectors != null)
         {
-            entities.add("SECTEUR s2");
-            paths.add("s2.spotFK = s1.id");
-
-            havings.add("COUNT(s2) = :nbofsectors");
+            conds.add(":nbofsectors = (SELECT COUNT(*) FROM SECTEUR s2 WHERE s2.spotFK.id = s1.id)");
         }
 
         if(nbofvoies != null)
@@ -95,10 +91,7 @@ public class SpotDAO
             entities.add("SECTEUR s2");
             paths.add("s2.spotFK = s1.id");
 
-            entities.add("VOIE v");
-            paths.add("v.sectorFK = s2.id");
-
-            havings.add("COUNT(v) = :nbofvoies");
+            conds.add(":nbofvoies = (SELECT COUNT(*) FROM VOIE v WHERE v.sectorFK.id = s2.id)");
         }
 
         if(cotation != null)
@@ -122,8 +115,7 @@ public class SpotDAO
 
         String sql = "SELECT s1" +
                      " FROM " + String.join(", ", entities) +
-                     " WHERE " + String.join(" AND ", paths) +
-                     (!havings.isEmpty() ? " HAVING " + String.join(" AND ", havings) : "")
+                     " WHERE " + String.join(" AND ", paths)
         ;
 
         Session currentSession = sessionFactory.getCurrentSession();

@@ -39,8 +39,8 @@ public class SearchController
     @RequestMapping(path = "/search", method = RequestMethod.POST)
     public String searchSpot(
         @RequestParam(name = "departement", required = false) String departement,
-        @RequestParam(name = "nbofsectors", required = false) Integer nbofsectors,
-        @RequestParam(name = "nbofvoies", required = false) Integer nbofvoies,
+        @RequestParam(name = "nbofsectors", required = false) Long nbOfSectors,
+        @RequestParam(name = "nbofvoies", required = false) Long nbOfVoies,
         @RequestParam(name = "cotation", required = false) String cotation,
         Model model) throws Exception
     {
@@ -48,7 +48,11 @@ public class SearchController
 
         model.addAttribute("cotations", cotationDAO.list());
 
-        model.addAttribute("spots", spotDAO.get(departement, nbofsectors, nbofvoies, cotation));
+        model.addAttribute("message", "Département : " + departement + ", #secteurs : " + nbOfSectors + ", #voies : " + nbOfVoies + ", cotation : " + cotation);
+
+        model.addAttribute("message_type", "info");
+
+        model.addAttribute("spots", spotDAO.get(departement, nbOfSectors, nbOfVoies, cotation));
 
         return "search";
     }
