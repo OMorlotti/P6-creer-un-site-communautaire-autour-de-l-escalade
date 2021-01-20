@@ -25,7 +25,7 @@ Chaque entité est représentée et initialisée dans une classe du même nom.
   - **Cotation**
   - **Réservation**
 
-### 2 types d'entités "secondaires"" :
+### 2 types d'entités secondaires :
 
   - **Adresse**
   - **Commentaire**
