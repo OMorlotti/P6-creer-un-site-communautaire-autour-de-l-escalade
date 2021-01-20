@@ -84,13 +84,13 @@ Pour MySQL:
 <bean id="dataSource"
       class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
     <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-    <property name="url" value="dbc:mysql://<host>:<port>/<db>?serverTimezone=UTC&useSSL=false" />
+    <property name="url" value="jdbc:mysql://<host>:<port>/<db>?serverTimezone=UTC&useSSL=false" />
     <property name="username" value="<username>" />
     <property name="password" value="<password>" />
 </bean>
 ```
 
-Pour H2
+Pour H2:
 
 ```xml
 <bean id="dataSource"
