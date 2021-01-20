@@ -36,22 +36,22 @@ Le code-source est composé de trois sous-packages principaux :
       - `beans` : contient les classes définissant les entités gérées par la plateforme avec des annotations pour Hibernate
       - `daos` : contient les classes définissant les opérations SQL sur les entités précédemment citées (ajout, modification, suppression, listing général ou particulier)
 
-  - `webapp` : lui même contient `WEB-INF` avec deux sous-dossiers :
+  - `webapp/WEB-INF` : il contient deux sous-dossiers :
       - `jsp ` : contient les fichiers footer, footerFrame, header, headerFrame, et configuration taglibs
       - `views` : contient l'ensemble des autres fichiers jsp
 
-  - `controllers` : contient les classes controllers de chaque entité gérée par la plateforme
+  - `controllers` : il contient les classes controllers de chaque entité gérée par la plateforme
 
 Ainsi que de 2 classes de configuration:
 
   - `Config` et `EmailSingleton` : configure la fonction email de la plateforme.
       - Fichier de configuration : doit être au chemin ~/escalade.properties
-      ```
-      email_host=<smtp serveur>
-      email_port=<smtp port>
-      email_mode=<0 non crypté, 1 SSL, 2 TLS>
-      email_user=<user>
-      email_pass=<password>
+```
+email_host=<smtp serveur>
+email_port=<smtp port>
+email_mode=<0 non crypté, 1 SSL, 2 TLS>
+email_user=<user>
+email_pass=<password>
 ```
 
 Et un filtre de servlet:
@@ -74,9 +74,9 @@ mvn package
 
 ### Utilisation
 
-Copier le ficher *target/escalade-1.0.0.war* généré dans le dossier *webapps* de Tomcat.
+Copier le ficher `target/escalade-1.0.0.war` généré dans le dossier `webapps` de Tomcat.
 
-Démarer en faisant un *bin/catalina.sh run* ou un *service tomcat start* si le Tomcat est installé en tant que service.
+Démarer en faisant un `bin/catalina.sh run` ou un *service tomcat start* si le Tomcat est installé en tant que service.
 
 ## Développé avec
 
