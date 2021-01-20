@@ -72,6 +72,36 @@ mvn -version
 mvn package
 ```
 
+### Base de données
+
+*Les amis de l'escalade* nécessite l'utilisation d'une base de données relationnelle. [MySQL 5](https://www.mysql.com/), [MariaDB 10](https://mariadb.org/) et [H2](https://www.h2database.com/) ont été testés.
+
+La configuration souhaitée dont être renseignée dans le fichier `src/main/resources/hibernateConf.xml`
+
+Pour MySQL:
+
+```xml
+<bean id="dataSource"
+      class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+    <property name="url" value="dbc:mysql://<host>:<port>/<db>?serverTimezone=UTC&useSSL=false" />
+    <property name="username" value="<username>" />
+    <property name="password" value="<password>" />
+</bean>
+```
+
+Pour H2
+
+```xml
+<bean id="dataSource"
+      class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
+    <property name="driverClassName" value="org.h2.Driver" />
+    <property name="url" value="jdbc:h2:~/escalade" />
+    <property name="username" value="sa" />
+    <property name="password" value="sa" />
+</bean>
+```
+
 ### Utilisation
 
 Copier le ficher `target/escalade-1.0.0.war` généré dans le dossier `webapps` de Tomcat.
