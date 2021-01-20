@@ -59,7 +59,7 @@ Et un filtre de servlet:
 
 ### Pré-requis
 
-  * Assurez-vous que [Java 12](https://www.oracle.com/fr/java/technologies/javase-downloads.html), [Maven 3](http://maven.apache.org/) et [Tomcat 9.0](https://tomcat.apache.org/download-90.cgi) sont installés:
+  * Assurez-vous que [Java 12](https://www.oracle.com/fr/java/technologies/javase-downloads.html), [Maven 3](http://maven.apache.org/) et [Tomcat 9](https://tomcat.apache.org/download-90.cgi) sont installés:
 
 ```bash
 java -version
