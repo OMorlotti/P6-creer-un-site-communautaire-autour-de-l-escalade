@@ -81,10 +81,23 @@ La configuration souhaitée dont être renseignée dans le fichier `src/main/res
 Pour MySQL:
 
 ```xml
+<property name="hibernateProperties">
+    <props>
+        <prop key="hibernate.hbm2ddl.auto">
+            update
+        </prop>
+        <prop key="hibernate.dialect">
+            org.hibernate.dialect.MySQL5Dialect
+        </prop>
+    </props>
+</property>
+
+...
+
 <bean id="dataSource"
       class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
     <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-    <property name="url" value="jdbc:mysql://<host>:<port>/<db>?serverTimezone=UTC&useSSL=false" />
+    <property name="url" value="jdbc:mysql://<host>:<port>/<db>?serverTimezone=UTC&amp;useSSL=false" />
     <property name="username" value="<username>" />
     <property name="password" value="<password>" />
 </bean>
@@ -93,6 +106,19 @@ Pour MySQL:
 Pour H2:
 
 ```xml
+<property name="hibernateProperties">
+    <props>
+        <prop key="hibernate.hbm2ddl.auto">
+            update
+        </prop>
+        <prop key="hibernate.dialect">
+            org.hibernate.dialect.H2Dialect
+        </prop>
+    </props>
+</property>
+
+...
+
 <bean id="dataSource"
       class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
     <property name="driverClassName" value="org.h2.Driver" />
@@ -106,7 +132,9 @@ Pour H2:
 
 Copier le ficher `target/escalade-1.0.0.war` généré dans le dossier `webapps` de Tomcat.
 
-Démarer en faisant un `bin/catalina.sh run` ou un *service tomcat start* si le Tomcat est installé en tant que service.
+Démarrer en faisant un `bin/catalina.sh run` ou un *service tomcat start* si le Tomcat est installé en tant que service.
+
+Après inscription, le premier utilisateur devra renseigner la valeur 3 dans la colonne `<DB>.USER.role`, en base de données, pour devenir administrateur de la plateforme.
 
 ## Développé avec
 
