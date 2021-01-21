@@ -113,14 +113,14 @@ public class User implements Serializable
 	private String login;
 
 	@Column(name = "password", unique = false, nullable = false)
-	@Size(min = 6, max = 128, message = "Le mot de passe doit être compris entre 4 et 128 caractères")
+	@Size(min = 6, max = 128, message = "Le mot de passe doit être compris entre 6 et 128 caractères")
 	private String password;
 
 	@Column(name = "sex", unique = false, nullable = false)
 	private Sex sex;
 
 	@Column(name = "birthdate", unique = false, nullable = false)
-	@Past(message = "La dated de naissance est forcément dans le passé :-)")
+	@Past(message = "La date de naissance est forcément dans le passé :-)")
 	private Date birthdate;
 
 	@Column(name = "phone", unique = false, nullable = false)

@@ -40,15 +40,6 @@
                     <input class="form-control form-control-sm" type="date" name="releasedate" id="releasedate" required="required" />
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="isavailable">Disponibilité :</label>
-                <div class="col-sm-10">
-                    <select class="custom-select custom-select-sm" name="isavailable" id="isavailable">
-                        <option value="0">N'est pas disponible</option>
-                        <option value="1">Est disponible</option>
-                    </select>
-                </div>
-            </div>
             <spring:choose>
                 <spring:when test="${sessionScope.currentUser.role eq 'ADMIN'}">
                     <div class="form-group row">

@@ -92,13 +92,10 @@ public class TopoController
         @RequestParam("city") String city,
         @RequestParam("postalcode") String postalCode,
         @RequestParam("releasedate") String releaseDate,
-        @RequestParam("isavailable") boolean isAvailable,
-        @RequestParam("bookuserfk") int bookUserFK,
         @RequestParam("userfk") int userFK,
         Model model) throws Exception
     {
         User user = userDAO.get(userFK);
-        User bookUser = userDAO.get(bookUserFK);
 
         Topo topo = new Topo();
 
@@ -107,14 +104,10 @@ public class TopoController
         topo.setCity(city);
         topo.setPostalCode(postalCode);
         topo.setReleaseDate(releaseDate);
-        topo.setIsAvailable(isAvailable);
+        topo.setIsAvailable(true);
         topo.setUserFK(user);
 
         topoDAO.add(topo);
-
-        /**/
-
-        book(isAvailable, bookUser, topo);
 
         /**/
 
