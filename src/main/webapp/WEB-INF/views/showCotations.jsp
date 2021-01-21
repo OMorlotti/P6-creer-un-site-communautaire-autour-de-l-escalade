@@ -2,7 +2,7 @@
 
 <h4>Liste des cotations</h4>
 
-<spring:if test="${not (sessionScope.currentUser.id eq -1)}">
+<spring:if test="${sessionScope.currentUser.role eq 'ADMIN'}">
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#cotationform">Ajouter une cotation</button>
 </spring:if>
 
@@ -29,7 +29,7 @@
     <thead>
         <tr>
             <td>Cotations</td>
-            <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
+            <spring:if test="${sessionScope.currentUser.role eq 'ADMIN'}">
             <td></td>
             <td></td>
             </spring:if>
@@ -39,7 +39,7 @@
         <spring:forEach var="cotation" items="${ cotations }">
         <tr>
             <td><spring:out value="${ cotation.name }" /></td>
-            <spring:if test="${not (sessionScope.currentUser.id eq -1)}">
+            <spring:if test="${sessionScope.currentUser.role eq 'ADMIN'}">
             <td><a href="/Escalade/cotation/<spring:out value="${ cotation.id }" />">Voir/Editer</a></td>
             <td><a href="/Escalade/cotation/delete/<spring:out value="${ cotation.id }" />">Supprimer</a></td>
             </spring:if>
