@@ -27,7 +27,7 @@ public class Spot
 	private Topo topoFK;
 
 	@Column(name = "departement", unique = false, nullable = false)
-	@Size(min = 1, max = 128, message = "Le nom du département doit être compris entre 1 et 128 caractères")
+	@Size(min = 1, max = 8, message = "Le nom du département doit être compris entre 1 et 8 caractères")
 	private String departement;
 
 	@Column(name = "latitude", unique = false, nullable = false)
