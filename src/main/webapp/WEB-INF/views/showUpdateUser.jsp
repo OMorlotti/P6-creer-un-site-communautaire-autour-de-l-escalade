@@ -25,7 +25,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" for="password">Mot de passe :</label>
         <div class="col-sm-10">
-            <input class="form-control form-control-sm" type="password" name="password" value="<spring:out value="${ user.password }" />" required="required" />
+            <input class="form-control form-control-sm" type="password" name="password" minlength="6" value="<spring:out value="${ user.password }" />" required="required" />
         </div>
     </div>
     <div class="form-group row">

@@ -31,7 +31,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="password">Mot de passe<br />(6 car. mini) :</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-sm" type="password" name="password" id="password" required="required" />
+                    <input class="form-control form-control-sm" type="password" name="password" minlength="6" id="password" required="required" />
                 </div>
             </div>
             <div class="form-group row">
