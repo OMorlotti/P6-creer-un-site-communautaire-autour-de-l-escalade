@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import xyz.morlotti.escalade.EmailSingleton;
 import xyz.morlotti.escalade.models.beans.User;
 import xyz.morlotti.escalade.models.daos.UserDAO;
 
@@ -68,7 +69,14 @@ public class AuthController
         {
             User user = userDAO.get(email);
 
-            /* TODO */
+            EmailSingleton.sendMessage(
+                user.getEmail(),
+                user.getEmail(),
+                "",
+                "Mot de passe Les amis de l'escalade",
+                "Bonjour,\nVotre mot de passe est " + user.getPassword() + ".\n" +
+                      "Cordialement,\n" + "Les Amis de l'escalade"
+            );
 
             httpSession.setAttribute ("email", email);
 
